@@ -353,6 +353,13 @@ body.team-page main {
   z-index: 2;
 }
 
+.team-card--timon {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 260px;
+}
+
 .team-medallion {
   width: clamp(96px, 20vw, 140px);
   height: clamp(96px, 20vw, 140px);
