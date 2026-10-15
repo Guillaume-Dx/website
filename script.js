@@ -77,8 +77,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
     const minSize = 10; // px floor so the title never becomes unreadable
     let size = maxSize;
 
+    // clientWidth includes the container's own padding, but that padding is
+    // not available space for its children — subtract it so we compare
+    // against the title's true available width.
+    const containerStyle = window.getComputedStyle(container);
+    const horizontalPadding =
+      parseFloat(containerStyle.paddingLeft || "0") +
+      parseFloat(containerStyle.paddingRight || "0");
+    const availableWidth = container.clientWidth - horizontalPadding;
+
     // Step down until the text fits within its container's available width.
-    while (title.scrollWidth > container.clientWidth && size > minSize) {
+    while (title.scrollWidth > availableWidth && size > minSize) {
       size -= 1;
       title.style.fontSize = size + "px";
     }
