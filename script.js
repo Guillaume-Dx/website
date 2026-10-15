@@ -21,19 +21,19 @@ document.getElementById("year").textContent = new Date().getFullYear();
     return {
       x: Math.random() * width,
       y: spawnAtBottom ? height + Math.random() * 40 : Math.random() * height,
-      radius: Math.random() * 1.6 + 0.4,
-      speed: Math.random() * 0.35 + 0.12,
-      drift: (Math.random() - 0.5) * 0.25,
+      radius: Math.random() * 2.4 + 0.8,
+      speed: Math.random() * 0.5 + 0.18,
+      drift: (Math.random() - 0.5) * 0.35,
       flicker: Math.random() * Math.PI * 2,
       // mostly warm forge embers, occasional cool "lab" spark
-      color: Math.random() < 0.15 ? "110, 168, 254" : "224, 122, 44"
+      color: Math.random() < 0.18 ? "110, 168, 254" : "224, 122, 44"
     };
   }
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-    const count = Math.min(70, Math.max(24, Math.floor((width * height) / 16000)));
+    const count = Math.min(140, Math.max(50, Math.floor((width * height) / 9000)));
     particles = Array.from({ length: count }, () => randomParticle(false));
   }
 
@@ -61,11 +61,14 @@ document.getElementById("year").textContent = new Date().getFullYear();
         Object.assign(p, randomParticle(true));
       }
 
-      const alpha = 0.3 + Math.sin(p.flicker) * 0.22;
+      const alpha = 0.5 + Math.sin(p.flicker) * 0.35;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.color}, ${Math.max(alpha, 0.08)})`;
+      ctx.fillStyle = `rgba(${p.color}, ${Math.max(alpha, 0.18)})`;
+      ctx.shadowColor = `rgba(${p.color}, 0.9)`;
+      ctx.shadowBlur = p.radius * 3;
       ctx.fill();
+      ctx.shadowBlur = 0;
     });
   }
 

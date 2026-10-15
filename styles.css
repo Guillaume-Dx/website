@@ -19,9 +19,13 @@ html, body {
   padding: 0;
 }
 
+html {
+  background: var(--color-bg);
+}
+
 body {
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-  background: var(--color-bg);
+  background: transparent;
   color: var(--color-text);
   line-height: 1.6;
 }
@@ -112,8 +116,9 @@ a:hover {
 }
 
 .hero h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-size: clamp(1rem, 3.4vw, 3.5rem);
   margin: 0 0 1rem;
+  white-space: nowrap;
 }
 
 .hero .tagline {
@@ -140,11 +145,12 @@ a:hover {
 
 .section {
   padding: 4.5rem 0;
+  background: rgba(15, 17, 21, 0.45);
 }
 
 .section-alt {
-  background: rgba(22, 26, 34, 0.65);
-  backdrop-filter: blur(3px);
+  background: rgba(22, 26, 34, 0.4);
+  backdrop-filter: blur(1.5px);
 }
 
 .section h2 {
@@ -168,4 +174,17 @@ a:hover {
 .site-footer .powered-by {
   margin-top: 0.4rem;
   font-size: 0.85rem;
+}
+
+.site-footer .powered-by a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  vertical-align: middle;
+}
+
+.timon-logo {
+  height: 1.1rem;
+  width: auto;
+  vertical-align: middle;
 }
