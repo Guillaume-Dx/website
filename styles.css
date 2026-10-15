@@ -17,6 +17,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 html {
@@ -28,6 +29,10 @@ body {
   background: transparent;
   color: var(--color-text);
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .container {
@@ -52,6 +57,13 @@ main,
   z-index: 1;
 }
 
+main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 a {
   color: var(--color-accent);
   text-decoration: none;
@@ -62,12 +74,12 @@ a:hover {
 }
 
 .site-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   background: rgba(15, 17, 21, 0.9);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid #262b35;
   z-index: 10;
+  flex: 0 0 auto;
 }
 
 .nav {
@@ -105,14 +117,16 @@ a:hover {
 }
 
 .hero {
-  padding: 9rem 0 7rem;
+  padding: 2rem 0;
   text-align: center;
   background:
     linear-gradient(180deg, rgba(10, 12, 18, 0.45) 0%, rgba(10, 12, 18, 0.8) 100%),
     url("LabToForge_background.png") center 65% / cover no-repeat;
-  min-height: 70vh;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .hero h1 {
@@ -144,8 +158,9 @@ a:hover {
 }
 
 .section {
-  padding: 4.5rem 0;
+  padding: 2rem 0;
   background: rgba(15, 17, 21, 0.45);
+  flex: 0 0 auto;
 }
 
 .section-alt {
@@ -165,10 +180,11 @@ a:hover {
 
 .site-footer {
   border-top: 1px solid #262b35;
-  padding: 2rem 0;
+  padding: 1rem 0;
   text-align: center;
   color: var(--color-muted);
   font-size: 0.9rem;
+  flex: 0 0 auto;
 }
 
 .site-footer .powered-by {
@@ -176,15 +192,9 @@ a:hover {
   font-size: 0.85rem;
 }
 
-.site-footer .powered-by a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  vertical-align: middle;
-}
-
 .timon-logo {
-  height: 0.75rem;
+  height: 1.1rem;
   width: auto;
   vertical-align: middle;
+  margin: 0 0.3rem;
 }
