@@ -60,7 +60,33 @@ document.getElementById("year").textContent = new Date().getFullYear();
     } catch (e) {
       /* localStorage unavailable, ignore */
     }
+
+    fitHeroTitle();
   }
+
+  // Shrink the hero title's font-size, if needed, so it always fits on a
+  // single line regardless of language, viewport width or zoom level.
+  function fitHeroTitle() {
+    const title = document.querySelector(".hero h1");
+    if (!title) return;
+
+    const container = title.parentElement || title;
+    title.style.fontSize = "";
+
+    const maxSize = parseFloat(window.getComputedStyle(title).fontSize);
+    const minSize = 10; // px floor so the title never becomes unreadable
+    let size = maxSize;
+
+    // Step down until the text fits within its container's available width.
+    while (title.scrollWidth > container.clientWidth && size > minSize) {
+      size -= 1;
+      title.style.fontSize = size + "px";
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    window.requestAnimationFrame(fitHeroTitle);
+  });
 
   const savedLang = (() => {
     try {
