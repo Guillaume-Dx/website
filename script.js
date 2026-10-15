@@ -1,6 +1,84 @@
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Language switcher (English / French)
+(function () {
+  const translations = {
+    en: {
+      "meta.title": "Lab to Forge",
+      "meta.description":
+        "Lab to Forge — turning experiments into production-ready tools.",
+      "hero.title":
+        "From the lab to the forge, where ideas become reality.",
+      "hero.text":
+        'Lab to Forge is a space for building, testing ideas in the "lab" at a fast pace, shaping the ones that work into solid, dependable tools in the forge. Every project here moves from rough prototype to something real.',
+      "footer.rights": "Lab to Forge. All rights reserved.",
+      "footer.poweredBy": "Powered by",
+      "footer.agentic": "Agentic Workstation"
+    },
+    fr: {
+      "meta.title": "Lab to Forge",
+      "meta.description":
+        "Lab to Forge — transformer les expérimentations en outils prêts pour la production.",
+      "hero.title":
+        "Du laboratoire à la forge, là où les idées deviennent réalité.",
+      "hero.text":
+        "Lab to Forge est un espace pour construire et tester des idées dans le « labo » à un rythme soutenu, puis façonner celles qui fonctionnent en outils solides et fiables dans la forge. Chaque projet y passe du prototype brut à quelque chose de concret.",
+      "footer.rights": "Lab to Forge. Tous droits réservés.",
+      "footer.poweredBy": "Propulsé par",
+      "footer.agentic": "Station de travail agentique"
+    }
+  };
+
+  function applyLanguage(lang) {
+    const dict = translations[lang] ? lang : "en";
+    const strings = translations[dict];
+
+    document.documentElement.lang = dict;
+    document.title = strings["meta.title"];
+
+    const metaDescription = document.querySelector(
+      'meta[name="description"]'
+    );
+    if (metaDescription) {
+      metaDescription.setAttribute("content", strings["meta.description"]);
+    }
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (strings[key] !== undefined) {
+        el.textContent = strings[key];
+      }
+    });
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.lang === dict);
+    });
+
+    try {
+      localStorage.setItem("lf-lang", dict);
+    } catch (e) {
+      /* localStorage unavailable, ignore */
+    }
+  }
+
+  const savedLang = (() => {
+    try {
+      return localStorage.getItem("lf-lang");
+    } catch (e) {
+      return null;
+    }
+  })();
+
+  const browserLang = (navigator.language || "en").slice(0, 2);
+  const initialLang = savedLang || (browserLang === "fr" ? "fr" : "en");
+  applyLanguage(initialLang);
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+  });
+})();
+
 // Interactive background: drifting embers and sparks
 (function () {
   const canvas = document.getElementById("bg-field");

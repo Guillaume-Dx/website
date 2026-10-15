@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lab to Forge</title>
-  <meta name="description" content="Lab to Forge — turning experiments into production-ready tools." />
+  <meta name="description" content="Lab to Forge — turning experiments into production-ready tools." data-i18n-attr="meta.description" />
   <link rel="icon" href="LabToForge_logo2.png" type="image/png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -18,14 +18,35 @@
         <img class="brand-logo" src="LabToForge_logo2.png" alt="Lab to Forge logo" />
         Lab&nbsp;to&nbsp;Forge
       </a>
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
+          <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+            <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+            <g clip-path="url(#flag-en-t)">
+              <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
+            </g>
+          </svg>
+        </button>
+        <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
+          <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+            <rect width="20" height="30" fill="#0055a4"/>
+            <rect x="20" width="20" height="30" fill="#fff"/>
+            <rect x="40" width="20" height="30" fill="#ef4135"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
   <main>
     <section id="top" class="hero">
       <div class="container">
-        <h1>From the lab to the forge, where ideas become reality.</h1>
-        <p class="hero-text">
+        <h1 data-i18n="hero.title">From the lab to the forge, where ideas become reality.</h1>
+        <p class="hero-text" data-i18n="hero.text">
           Lab to Forge is a space for building, testing ideas in the "lab" at a fast
           pace, shaping the ones that work into solid, dependable tools in the forge.
           Every project here moves from rough prototype to something real.
@@ -37,11 +58,11 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> Lab to Forge. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
       <p class="powered-by">
-        Powered by
+        <span data-i18n="footer.poweredBy">Powered by</span>
         <img class="timon-logo" src="timon-logo.png" alt="Timon logo" />
-        Agentic Workstation
+        <span data-i18n="footer.agentic">Agentic Workstation</span>
       </p>
     </div>
   </footer>
