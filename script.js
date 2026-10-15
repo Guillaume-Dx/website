@@ -38,8 +38,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   }
 
   function draw() {
-    ctx.fillStyle = "#0f1115";
-    ctx.fillRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
 
     particles.forEach((p) => {
       p.y -= p.speed;
