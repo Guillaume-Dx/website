@@ -168,6 +168,24 @@ a:hover {
   color: var(--color-text);
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  flex-shrink: 0;
+}
+
+.site-nav a {
+  color: var(--color-muted);
+  font-weight: 500;
+  font-size: clamp(0.75rem, 2.6vw, 0.95rem);
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  color: var(--color-text);
+}
+
 .hero {
   padding: 2rem 0;
   text-align: center;
@@ -266,4 +284,80 @@ html[lang="fr"] .hero h1 {
   width: auto;
   vertical-align: middle;
   margin: 0 0.3rem;
+}
+
+/* Team page */
+body.team-page {
+  display: block;
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+body.team-page main {
+  flex: none;
+  min-height: 0;
+}
+
+.team-section {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 8vw, 5rem);
+  text-align: center;
+}
+
+.team-section .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-section h1 {
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  margin: 0 0 0.75rem;
+}
+
+.team-intro {
+  color: var(--color-muted);
+  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  max-width: 650px;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.team-card {
+  background: rgba(15, 17, 21, 0.72);
+  backdrop-filter: blur(6px);
+  border: 1px solid #262b35;
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team-medallion {
+  width: clamp(96px, 20vw, 140px);
+  height: clamp(96px, 20vw, 140px);
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.85rem;
+}
+
+.team-card h2 {
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
+  margin: 0 0 0.5rem;
+}
+
+.team-card p {
+  color: var(--color-muted);
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  margin: 0;
 }

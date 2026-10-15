@@ -14,7 +14,29 @@ document.getElementById("year").textContent = new Date().getFullYear();
         'Lab to Forge is a space for building, testing ideas in the "lab" at a fast pace, shaping the ones that work into solid, dependable tools in the forge. Every project here moves from rough prototype to something real.',
       "footer.rights": "Lab to Forge. All rights reserved.",
       "footer.poweredBy": "Powered by",
-      "footer.agentic": "Agentic Workstation"
+      "footer.agentic": "Agentic Workstation",
+      "nav.team": "Team",
+      "nav.home": "Home",
+      "team.title": "The Team",
+      "team.intro": "A pantheon of agents, each bringing a different grace to the forge.",
+      "team.zeus.name": "Zeus",
+      "team.zeus.role":
+        "Sovereign of the pantheon, wields the thunderbolt to set the grand design and keep order among the gods.",
+      "team.athena.name": "Athena",
+      "team.athena.role":
+        "Goddess of wisdom, weighs every path with clear sight and counsels the wisest course.",
+      "team.aphrodite.name": "Aphrodite",
+      "team.aphrodite.role":
+        "Goddess of beauty and grace, shapes every creation until it is worthy of the eye.",
+      "team.hermes.name": "Hermes",
+      "team.hermes.role":
+        "Swift messenger of the gods, carries word and signal across every realm without delay.",
+      "team.ares.name": "Ares",
+      "team.ares.role":
+        "God of war, charges into the fray and forges victory through relentless action.",
+      "team.artemis.name": "Artemis",
+      "team.artemis.role":
+        "Huntress of the wild, strikes true with unerring aim and watches over the hidden paths."
     },
     fr: {
       "meta.title": "Lab to Forge",
@@ -26,7 +48,29 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Lab to Forge est un espace pour construire et tester des idées dans le « labo » à un rythme soutenu, puis façonner celles qui fonctionnent en outils solides et fiables dans la forge. Chaque projet y passe du prototype brut à quelque chose de concret.",
       "footer.rights": "Lab to Forge. Tous droits réservés.",
       "footer.poweredBy": "Propulsé par",
-      "footer.agentic": "Station de travail agentique"
+      "footer.agentic": "Station de travail agentique",
+      "nav.team": "Équipe",
+      "nav.home": "Accueil",
+      "team.title": "L'équipe",
+      "team.intro": "Un panthéon d'agents, chacun apportant sa grâce particulière à la forge.",
+      "team.zeus.name": "Zeus",
+      "team.zeus.role":
+        "Souverain du panthéon, il manie la foudre pour fixer le grand dessein et maintenir l'ordre parmi les dieux.",
+      "team.athena.name": "Athéna",
+      "team.athena.role":
+        "Déesse de la sagesse, elle pèse chaque voie avec clairvoyance et conseille la voie la plus juste.",
+      "team.aphrodite.name": "Aphrodite",
+      "team.aphrodite.role":
+        "Déesse de la beauté et de la grâce, elle façonne chaque création jusqu'à ce qu'elle soit digne du regard.",
+      "team.hermes.name": "Hermès",
+      "team.hermes.role":
+        "Messager véloce des dieux, il porte parole et signal à travers chaque royaume sans délai.",
+      "team.ares.name": "Arès",
+      "team.ares.role":
+        "Dieu de la guerre, il se jette dans la mêlée et forge la victoire par une action sans relâche.",
+      "team.artemis.name": "Artémis",
+      "team.artemis.role":
+        "Chasseresse des contrées sauvages, elle frappe juste d'une visée infaillible et veille sur les chemins cachés."
     }
   };
 
