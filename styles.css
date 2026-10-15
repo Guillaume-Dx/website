@@ -288,45 +288,50 @@ html[lang="fr"] .hero h1 {
 
 /* Team page */
 body.team-page {
-  display: block;
-  height: auto;
+  height: 100vh;
   min-height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 body.team-page main {
-  flex: none;
+  flex: 1 1 auto;
   min-height: 0;
+  display: flex;
 }
 
 .team-section {
-  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 8vw, 5rem);
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: clamp(0.5rem, 2vh, 1.25rem) 0;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .team-section .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .team-section h1 {
-  font-size: clamp(1.4rem, 4vw, 2.6rem);
-  margin: 0 0 0.75rem;
+  font-size: clamp(1.1rem, 3vh, 2rem);
+  margin: 0 0 0.4rem;
 }
 
 .team-intro {
   color: var(--color-muted);
-  font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  font-size: clamp(0.75rem, 1.8vh, 1rem);
   max-width: 650px;
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
   text-align: center;
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1.5vh, 1rem);
   width: 100%;
   max-width: 1000px;
 }
@@ -336,7 +341,7 @@ body.team-page main {
   backdrop-filter: blur(6px);
   border: 1px solid #262b35;
   border-radius: var(--radius);
-  padding: 1.25rem 1rem 1.5rem;
+  padding: clamp(0.5rem, 1.5vh, 1rem) 0.6rem clamp(0.6rem, 1.8vh, 1.1rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -357,15 +362,15 @@ body.team-page main {
   grid-column: 1 / -1;
   justify-self: center;
   width: 100%;
-  max-width: 260px;
+  max-width: 220px;
 }
 
 .team-medallion {
-  width: clamp(96px, 20vw, 140px);
-  height: clamp(96px, 20vw, 140px);
+  width: clamp(48px, 9vh, 110px);
+  height: clamp(48px, 9vh, 110px);
   object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 0.85rem;
+  margin-bottom: clamp(0.3rem, 1vh, 0.85rem);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -375,8 +380,8 @@ body.team-page main {
 }
 
 .team-card h2 {
-  font-size: clamp(1rem, 2.6vw, 1.3rem);
-  margin: 0 0 0.5rem;
+  font-size: clamp(0.85rem, 2.2vh, 1.2rem);
+  margin: 0 0 0.3rem;
   transition: color 0.35s ease;
 }
 
@@ -386,7 +391,7 @@ body.team-page main {
 
 .team-card p {
   color: var(--color-muted);
-  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  font-size: clamp(0.68rem, 1.6vh, 0.88rem);
   margin: 0;
   transform-origin: top center;
   transform-style: preserve-3d;
@@ -408,5 +413,26 @@ body.team-page main {
   100% {
     transform: rotateX(0deg) translateY(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 900px), (max-height: 640px) {
+  body.team-page {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  body.team-page main {
+    display: block;
+  }
+
+  .team-section {
+    display: block;
+    padding: clamp(1rem, 4vh, 2rem) 0;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
