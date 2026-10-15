@@ -8,15 +8,17 @@ framework: plain HTML/CSS/JS, served as static files.
 - `index.html` — single-viewport home page: header (brand, Team link, EN/FR
   language switch), hero.
 - `team.html` — "Team" page presenting the agents (Zeus, Athena, Aphrodite,
-  Hermes, Ares, Artemis) as a grid of cards with circular medallion
-  portraits and a short mythologically-phrased role summary for each.
+  Hermes, Ares, Artemis, Demeter, Hephaistos) as a grid of cards with
+  circular medallion portraits and a short mythologically-phrased role
+  summary for each, based on each agent's real function.
 - `styles.css` — all styling (dark theme, responsive layout).
 - `script.js` — footer year, EN/FR i18n dictionary + language switch,
   starfield background canvas.
 - `background.png`, `logo.png`, `timon-logo.png` — site images.
 - `team-zeus.png`, `team-athena.png`, `team-aphrodite.png`,
-  `team-hermes.png`, `team-ares.png`, `team-artemis.png` — 480×480 circular
-  "medallion" portraits for the Team page. Source photos were taken from
+  `team-hermes.png`, `team-ares.png`, `team-artemis.png`, `team-demeter.png`,
+  `team-hephaistos.png` — 480×480 circular "medallion" portraits for the
+  Team page. Source photos were taken from
   `D:\Timon\Agents`, square-cropped, and framed with a generated gold/bronze
   ring using Pillow, then palette-quantized to keep file size small.
 
@@ -39,7 +41,9 @@ were later removed at the user's request, and the hero now uses
 `background.png` as its background image. All of this remains
 open to revision once reviewed.
 
-The mythological role summary chosen for each team member on `team.html`
-(e.g. Zeus as sovereign/order, Athena as wisdom, Hermes as messenger) is a
-plausible framing based on naming conventions, not a confirmed mapping to
-each agent's actual function — open to correction.
+The mythological role summary for each team member on `team.html` is phrased
+to mirror that agent's real function in the Timon registry (e.g. Zeus =
+orchestrator, Athena/Hephaistos = coder/research, Aphrodite/Ares =
+librarian, Hermes = research, Artemis/Demeter = reviewer). "Hephaistos" is
+a spelling choice for the agent registered as "Hephaestus" — confirm if a
+different transliteration is preferred.

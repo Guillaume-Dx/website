@@ -21,22 +21,28 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.intro": "A pantheon of agents, each bringing a different grace to the forge.",
       "team.zeus.name": "Zeus",
       "team.zeus.role":
-        "Sovereign of the pantheon, wields the thunderbolt to set the grand design and keep order among the gods.",
+        "Sovereign of the pantheon, commands the gods and keeps the grand design on its course.",
       "team.athena.name": "Athena",
       "team.athena.role":
-        "Goddess of wisdom, weighs every path with clear sight and counsels the wisest course.",
+        "Goddess of craft and strategy, forges ideas into working code with a steady, deliberate hand.",
       "team.aphrodite.name": "Aphrodite",
       "team.aphrodite.role":
-        "Goddess of beauty and grace, shapes every creation until it is worthy of the eye.",
+        "Keeper of the sacred archive, gathers and arranges the pantheon's knowledge with grace.",
       "team.hermes.name": "Hermes",
       "team.hermes.role":
-        "Swift messenger of the gods, carries word and signal across every realm without delay.",
+        "Swift messenger of the gods, roams far and wide to gather intelligence and bring it back to the forge.",
       "team.ares.name": "Ares",
       "team.ares.role":
-        "God of war, charges into the fray and forges victory through relentless action.",
+        "God of war, stands guard over the archive and defends its order with unyielding discipline.",
       "team.artemis.name": "Artemis",
       "team.artemis.role":
-        "Huntress of the wild, strikes true with unerring aim and watches over the hidden paths."
+        "Huntress of the wild, tracks every flaw with an unerring eye before a work is loosed into the world.",
+      "team.demeter.name": "Demeter",
+      "team.demeter.role":
+        "Goddess of the harvest, tends each work until it ripens and judges it worthy before it is reaped.",
+      "team.hephaistos.name": "Hephaistos",
+      "team.hephaistos.role":
+        "God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft."
     },
     fr: {
       "meta.title": "Lab to Forge",
@@ -55,22 +61,28 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.intro": "Un panthéon d'agents, chacun apportant sa grâce particulière à la forge.",
       "team.zeus.name": "Zeus",
       "team.zeus.role":
-        "Souverain du panthéon, il manie la foudre pour fixer le grand dessein et maintenir l'ordre parmi les dieux.",
+        "Souverain du panthéon, il commande aux dieux et maintient le grand dessein sur sa trajectoire.",
       "team.athena.name": "Athéna",
       "team.athena.role":
-        "Déesse de la sagesse, elle pèse chaque voie avec clairvoyance et conseille la voie la plus juste.",
+        "Déesse de l'artisanat et de la stratégie, elle forge les idées en code fonctionnel d'une main sûre et méthodique.",
       "team.aphrodite.name": "Aphrodite",
       "team.aphrodite.role":
-        "Déesse de la beauté et de la grâce, elle façonne chaque création jusqu'à ce qu'elle soit digne du regard.",
+        "Gardienne des archives sacrées, elle rassemble et ordonne le savoir du panthéon avec grâce.",
       "team.hermes.name": "Hermès",
       "team.hermes.role":
-        "Messager véloce des dieux, il porte parole et signal à travers chaque royaume sans délai.",
+        "Messager véloce des dieux, il parcourt le monde pour recueillir des renseignements et les rapporter à la forge.",
       "team.ares.name": "Arès",
       "team.ares.role":
-        "Dieu de la guerre, il se jette dans la mêlée et forge la victoire par une action sans relâche.",
+        "Dieu de la guerre, il monte la garde devant les archives et en défend l'ordre avec une discipline inflexible.",
       "team.artemis.name": "Artémis",
       "team.artemis.role":
-        "Chasseresse des contrées sauvages, elle frappe juste d'une visée infaillible et veille sur les chemins cachés."
+        "Chasseresse des contrées sauvages, elle traque la moindre faille d'un œil infaillible avant qu'une œuvre ne soit livrée au monde.",
+      "team.demeter.name": "Déméter",
+      "team.demeter.role":
+        "Déesse des moissons, elle veille sur chaque œuvre jusqu'à maturité et la juge digne avant la récolte.",
+      "team.hephaistos.name": "Héphaïstos",
+      "team.hephaistos.role":
+        "Dieu de la forge, il plonge au plus profond pour extraire le savoir comme il extrayait jadis le minerai pour son art."
     }
   };
 
