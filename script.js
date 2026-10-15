@@ -42,7 +42,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Goddess of the harvest, tends each work until it ripens and judges it worthy before it is reaped.",
       "team.hephaistos.name": "Hephaistos",
       "team.hephaistos.role":
-        "God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft."
+        "God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.",
+      "team.timon.name": "Timon"
     },
     fr: {
       "meta.title": "Lab to Forge",
@@ -82,7 +83,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Déesse des moissons, elle veille sur chaque œuvre jusqu'à maturité et la juge digne avant la récolte.",
       "team.hephaistos.name": "Héphaïstos",
       "team.hephaistos.role":
-        "Dieu de la forge, il plonge au plus profond pour extraire le savoir comme il extrayait jadis le minerai pour son art."
+        "Dieu de la forge, il plonge au plus profond pour extraire le savoir comme il extrayait jadis le minerai pour son art.",
+      "team.timon.name": "Timon"
     }
   };
 

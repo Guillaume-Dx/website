@@ -367,6 +367,15 @@ body.team-page main {
   box-shadow: 0 0 24px rgba(224, 180, 104, 0.55);
 }
 
+.team-card--timon .team-medallion {
+  object-fit: contain;
+  object-position: 30% center;
+  background: radial-gradient(circle, #2a2f3a, #15171c 70%);
+  border: 2px solid rgba(224, 180, 104, 0.45);
+  padding: 1.1rem;
+  box-sizing: border-box;
+}
+
 .team-card h2 {
   font-size: clamp(1rem, 2.6vw, 1.3rem);
   margin: 0 0 0.5rem;
