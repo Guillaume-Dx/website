@@ -341,6 +341,16 @@ body.team-page main {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  perspective: 700px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-10px) scale(1.06);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.45), 0 0 26px rgba(224, 180, 104, 0.3);
+  border-color: rgba(224, 180, 104, 0.6);
+  z-index: 2;
 }
 
 .team-medallion {
@@ -349,15 +359,47 @@ body.team-page main {
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 0.85rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team-card:hover .team-medallion {
+  transform: scale(1.08) rotate(-3deg);
+  box-shadow: 0 0 24px rgba(224, 180, 104, 0.55);
 }
 
 .team-card h2 {
   font-size: clamp(1rem, 2.6vw, 1.3rem);
   margin: 0 0 0.5rem;
+  transition: color 0.35s ease;
+}
+
+.team-card:hover h2 {
+  color: #f0c878;
 }
 
 .team-card p {
   color: var(--color-muted);
   font-size: clamp(0.78rem, 2vw, 0.95rem);
   margin: 0;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+}
+
+.team-card:hover p {
+  animation: team-curl 0.65s ease;
+}
+
+@keyframes team-curl {
+  0% {
+    transform: rotateX(-75deg) translateY(-6px);
+    opacity: 0.35;
+  }
+  55% {
+    transform: rotateX(18deg) translateY(2px);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(0deg) translateY(0);
+    opacity: 1;
+  }
 }
