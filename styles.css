@@ -50,6 +50,14 @@ body {
   pointer-events: none;
 }
 
+#bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 14, 0.45);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .site-header,
 main,
 .site-footer {
