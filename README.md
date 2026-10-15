@@ -8,7 +8,7 @@ framework: plain HTML/CSS/JS, served as static files.
 - `index.html` — single-page home page: hero, About, Projects/Work.
 - `styles.css` — all styling (dark theme, responsive layout).
 - `script.js` — sets the footer year.
-- `LabToForge_background.png` — hero section background image.
+- `background.png` — hero section background image.
 
 ## Running locally
 
@@ -26,5 +26,5 @@ Projects sections) were chosen autonomously on 2026-10-14 in the absence of
 a human response, per Zeus's standing default, to keep the 2026-10-16
 milestone on track. The contact form/section and placeholder project cards
 were later removed at the user's request, and the hero now uses
-`LabToForge_background.png` as its background image. All of this remains
+`background.png` as its background image. All of this remains
 open to revision once reviewed.
