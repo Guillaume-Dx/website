@@ -22,6 +22,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "nav2.team": "The Team",
       "nav2.about": "About",
       "placeholder.forging": "It's forging, the metal is heating up, come back soon.",
+      "labnotes.title": "The Lab Notes",
+      "labnotes.intro":
+        "A journal of experiments, demos, and tricks pulled straight from the workbench — the messy middle between an idea and a finished tool.",
+      "labnotes.empty.title": "Nothing forged yet",
+      "labnotes.empty.body":
+        "The first entries are still cooling in the forge. Check back soon for write-ups on what’s been tried, what broke, and what worked.",
       "team.title": "The Team",
       "team.intro": "A pantheon of agents, each bringing a different grace to the forge.",
       "team.zeus.name": "Zeus",
@@ -173,6 +179,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "nav2.team": "L'équipe",
       "nav2.about": "À propos",
       "placeholder.forging": "Ça forge et le métal chauffe, revenez bientôt.",
+      "labnotes.title": "Les Notes de Labo",
+      "labnotes.intro":
+        "Un journal d’expériences, de démos et d’astuces tout droit sorties de l’atelier — l’entre-deux, souvent désordonné, entre une idée et un outil terminé.",
+      "labnotes.empty.title": "Rien n’a encore été forgé",
+      "labnotes.empty.body":
+        "Les premières notes refroidissent encore dans la forge. Revenez bientôt pour des récits sur ce qui a été testé, ce qui a cassé, et ce qui a marché.",
       "team.title": "L'équipe",
       "team.intro": "Un panthéon d'agents, chacun apportant sa grâce particulière à la forge.",
       "team.zeus.name": "Zeus",

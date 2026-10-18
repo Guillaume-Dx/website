@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body class="labnotes-page">
   <canvas id="bg-field" aria-hidden="true"></canvas>
   <div id="bg-overlay" aria-hidden="true"></div>
 
@@ -60,9 +60,15 @@
   </nav>
 
   <main>
-    <section id="top" class="hero">
+    <section id="top" class="hero labnotes-hero">
       <div class="container">
-        <h1 data-i18n="placeholder.forging">Currently forging...</h1>
+        <h1 data-i18n="labnotes.title">The Lab Notes</h1>
+        <p class="hero-text" data-i18n="labnotes.intro">A journal of experiments, demos, and tricks pulled straight from the workbench &mdash; the messy middle between an idea and a finished tool.</p>
+        <div class="labnotes-empty">
+          <span class="labnotes-empty-icon" aria-hidden="true">&#128211;</span>
+          <h2 data-i18n="labnotes.empty.title">Nothing forged yet</h2>
+          <p data-i18n="labnotes.empty.body">The first entries are still cooling in the forge. Check back soon for write-ups on what&rsquo;s been tried, what broke, and what worked.</p>
+        </div>
       </div>
     </section>
   </main>
