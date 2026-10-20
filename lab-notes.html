@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab to Forge — Lab notes</title>
+  <title>Lab to Forge - Lab notes</title>
   <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
   <link rel="icon" href="logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="labnotes-page">
+<body>
   <canvas id="bg-field" aria-hidden="true"></canvas>
   <div id="bg-overlay" aria-hidden="true"></div>
 
@@ -60,14 +60,31 @@
   </nav>
 
   <main>
-    <section id="top" class="hero labnotes-hero">
+    <section id="top" class="hero about-hero labnotes-hero">
       <div class="container">
-        <h1 data-i18n="labnotes.title">The Lab Notes</h1>
-        <p class="hero-text" data-i18n="labnotes.intro">A journal of experiments, demos, and tricks pulled straight from the workbench &mdash; the messy middle between an idea and a finished tool.</p>
-        <div class="labnotes-empty">
-          <span class="labnotes-empty-icon" aria-hidden="true">&#128211;</span>
-          <h2 data-i18n="labnotes.empty.title">Nothing forged yet</h2>
-          <p data-i18n="labnotes.empty.body">The first entries are still cooling in the forge. Check back soon for write-ups on what&rsquo;s been tried, what broke, and what worked.</p>
+        <h1 data-i18n="labnotes.title">Lab notes</h1>
+        <p class="project-intro" data-i18n="labnotes.intro">Field notes from real engagements, what actually changes when Timon leads the work.</p>
+      </div>
+    </section>
+
+    <section class="about-content labnotes-content">
+      <div class="container labnotes-layout">
+        <aside class="labnotes-dates" aria-label="Lab notes by date">
+          <ul class="labnotes-date-list">
+            <li><a href="#labnote-1"><span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span><span data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</span></a></li>
+          </ul>
+        </aside>
+
+        <div class="labnotes-feed">
+          <article class="project-card labnote-excerpt" id="labnote-1">
+            <div class="labnote-meta">
+              <span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span>
+              <span class="project-stack" data-i18n="labnote1.tags">Multi-agent review · Full codebase access · Risk assessment · Roadmap</span>
+            </div>
+            <h2 data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</h2>
+            <p data-i18n="labnote1.excerpt">A professional project built to strengthen our up-skilling capabilities, submitted to our technical assessment cycles ahead of a pilot. A single prompt was enough for Timon to assemble the right team of agents, parallelize the review, catch a significant gap between the docs and the code, and hand back a risk list and a trustworthy roadmap.</p>
+            <a class="labnote-readmore" href="lab-note-1.html" data-i18n="labnotes.readMore">Read the full note →</a>
+          </article>
         </div>
       </div>
     </section>
