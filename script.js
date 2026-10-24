@@ -194,6 +194,49 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "The other side of autonomy also showed up: an irreversible task, wiping the data store for the new schema, was correctly blocked pending my approval. It only resumed once I had logged an explicit decision. That's the behaviour I expect from a system I'll trust with development, UAT or pre-production data: fast and parallel on review work, slow and blocking on anything that can't be undone.",
       "labnote1.p7":
         "The real win isn't that the agents were clever, it's that I got up-to-date, reliable documentation, a defensible risk assessment and a roadmap I could hand straight to the reviewer, in a fraction of the time a review would have taken me, even with AI assistance in an IDE, all starting from a single prompt. That's the shift Timon brings: a small team that assembles itself for the task, goes and checks before it speaks, and knows when to stop and ask.",
+      "labnote2.date": "Oct 23, 2026",
+      "labnote2.tags":
+        "Multi-project portfolio · Kanban pipelines · Concurrent missions · Self-healing agents",
+      "labnote2.title":
+        "Three weeks, eleven projects: what actually ran on its own",
+      "labnote2.excerpt":
+        "Eleven live projects, from an invoicing app to Timon's own plugin platform, that I carried at once over three weeks. What shipped, how Kanban pipelines and concurrent missions kept it all moving, and how much of its own trouble the framework fixed along the way, without me.",
+      "labnote2.stageScope": "What got built",
+      "labnote2.p1":
+        "Over the last three weeks I stopped feeding Timon one project at a time and let it loose on eleven of them at once: a small invoicing app, a stock-tracking analyst, Timon's own plugin platform, and eight others running in parallel. I didn't sit over any of them full-time. Most of them didn't ask me to.",
+      "labnote2.list1Lead": "An invoicing app for a care professional.",
+      "labnote2.list1": "I had it build a model-driven app that logs client sessions and turns each one into a PDF invoice, sized by session type and length, routed to the professional for a look before it ever reaches the customer. It built the thing, reviewed its own work, fixed what needed fixing, and only stopped me once: a single blocked task where it genuinely needed my call instead of guessing.",
+      "labnote2.list2Lead": "A home-automation hub and dashboard.",
+      "labnote2.list2": "This one started from an empty repository and grew into a working integration across two home-automation protocols, shipped in steady version bumps. At one point it wasn't sure whether its agents were allowed to touch another project's work, so it stopped and asked me instead of assuming.",
+      "labnote2.list3Lead": "A stock-tracking analyst.",
+      "labnote2.list3": "I described the idea in a single sentence and watched a team of six agents, an orchestrator, an analyst, a coder, a reviewer, a writer, assemble itself, wire in a daily scheduled run, and bring me the open questions, a missing second price source, an ambiguous ticker, as explicit choices instead of silent guesses.",
+      "labnote2.list4Lead": "A platform migration for the professional project I audited in my first lab note.",
+      "labnote2.list4": "Four stages to retire a legacy component, each one a dependent task that only started once the previous one had actually closed. No skipping ahead.",
+      "labnote2.list5Lead": "A personal knowledge base.",
+      "labnote2.list5": "Turning a pile of voice notes, transcribed to markdown, into a structured set of notes I can actually explore and connect.",
+      "labnote2.list6Lead": "A companion device app.",
+      "labnote2.list6": "This one hit an open research question mid-build. Rather than guess at an answer, it paused and waited for a real one before picking the build back up.",
+      "labnote2.list7Lead": "An onboarding tour and an onboarding wizard plugin.",
+      "labnote2.list7": "One teaches newcomers how Timon works, the other automates setting up a brand-new project, objectives, roadmap, agent team, Kanban seeding, in one pass, so the next project I start will move faster than this one did.",
+      "labnote2.list8Lead": "Timon's own plugin platform.",
+      "labnote2.list8": "Started from a folder that was genuinely empty, not even a git repo. It created the repository, shipped a first plugin, then several more in parallel, one of them held back behind a go or no-go call I made myself before it shipped.",
+      "labnote2.list9Lead": "A small API module for an existing platform.",
+      "labnote2.list9": "This one was thinner: a single scoped coding task, a set of data-contract classes for an existing platform's API. No team assembled, no back and forth, just a clean, bounded piece of work done and merged.",
+      "labnote2.list10Lead": "This website.",
+      "labnote2.list10": "The one hosting this very note, kept current as the other ten evolve.",
+      "labnote2.stageHow": "How it ran",
+      "labnote2.p2":
+        "Each project lives on its own Kanban board. Tasks are typed, code, research, doc, chore, review, merge, and chained through dependencies, so a merge task only fires once everything it depends on has closed. I watched work move from code to review to merge without ever pushing it forward myself. Across the eleven projects, over a thousand tasks closed that way in three weeks.",
+      "labnote2.p3":
+        "A few boards ran concurrent missions on the same afternoon: separate agents working the invoicing app, the home hub and the plugin platform at once, each in its own worktree so one project's work never blocked another's. Scheduling showed up as recurring workflows, the analyst's daily run among them, firing themselves on a clock instead of waiting on me. Prioritization showed up as blocked tasks with an explicit reason attached, sitting there until I made a call, never silently dropped or guessed at.",
+      "labnote2.stageSelfHeal": "Keeping itself on the rails",
+      "labnote2.p4":
+        "A good part of what made this scale possible wasn't the code the agents wrote, it was how much of their own trouble they sorted out without me. One agent got assigned a model its provider no longer supported and started crash-looping, I found the fix already diagnosed and swapped in, I only had to confirm it. A plugin threw an export error after an update, traced to a stale cached module inside the daemon, cleared by disabling and re-enabling it. A corrupted local lock file kept crashing a mission on every retry, it got narrowed down to two exact files, I only had to delete them. One agent tried to create a project folder in a protected location, and instead of just failing, it escalated the request to an admin-level agent rather than give up.",
+      "labnote2.p5":
+        "Each of these would have cost me an afternoon of log-reading on my own. Here, it cost me a few minutes: read a clear diagnosis, approve a fix.",
+      "labnote2.stageTakeaway": "What this adds up to",
+      "labnote2.p6":
+        "Eleven projects moved forward and more than a thousand tasks closed in three weeks, and I never had to babysit any single one of them. The lesson isn't that the agents can code, it's that the same framework can run many unrelated efforts at once, each at its own pace, bring me only the handful of decisions that genuinely need me, and quietly fix most of what breaks along the way before I even notice.",
       "about.lead": "I build things.",
       "about.line1": "Sometimes useful things.",
       "about.line2": "Sometimes experimental things.",
@@ -400,6 +443,49 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Autre face de l'autonomie mise en évidence : une tâche irréversible, effacer le stockage de données pour le nouveau schéma, a été correctement bloquée en attente de mon approbation. Elle n'a repris qu'une fois que j'ai consigné une décision explicite. C'est le comportement que j'attends d'un système auquel je confierai des données de développement, UAT ou PPE : rapide et parallèle sur le travail de revue, lent et bloquant sur tout ce qui ne peut pas être annulé.",
       "labnote1.p7":
         "Le vrai gain n'est pas que les agents aient été malins, c'est que j'ai obtenu une documentation à jour et fiable, une analyse de risques défendable et une feuille de route à transmettre directement au relecteur, en une fraction du temps qu'une revue m'aurait demandé, même avec l'aide de l'IA dans un IDE, le tout parti d'un seul prompt. C'est ça, le changement que Timon apporte : une petite équipe qui s'assemble elle-même pour la tâche, va vérifier avant de parler, et sait s'arrêter pour demander.",
+      "labnote2.date": "23 oct. 2026",
+      "labnote2.tags":
+        "Portefeuille multi-projets · Pipelines Kanban · Missions concurrentes · Agents auto-réparants",
+      "labnote2.title":
+        "Trois semaines, onze projets : ce qui a vraiment tourné tout seul",
+      "labnote2.excerpt":
+        "Onze projets que j'ai menés de front en trois semaines, d'une application de facturation à la propre plateforme de plugins de Timon. Ce qui a été livré, comment les pipelines Kanban et les missions concurrentes ont tenu la cadence, et la part de ses propres incidents que le cadre a résolue tout seul en chemin, sans moi.",
+      "labnote2.stageScope": "Ce qui a été construit",
+      "labnote2.p1":
+        "Ces trois dernières semaines, j'ai arrêté de nourrir Timon un projet à la fois et je l'ai lâché sur onze projets en même temps : une petite application de facturation, un analyste boursier, la propre plateforme de plugins de Timon, et huit autres chantiers menés en parallèle. Je ne me suis assis sur aucun d'eux à plein temps. La plupart n'en avaient pas besoin.",
+      "labnote2.list1Lead": "Une application de facturation pour un professionnel du soin.",
+      "labnote2.list1": "Je lui ai fait construire une application pilotée par modèle qui enregistre les séances clients et transforme chacune en facture PDF, dimensionnée selon le type et la durée de séance, transmise au professionnel pour un coup d'œil avant d'arriver au client. Elle a construit la chose, relu son propre travail, corrigé ce qu'il fallait corriger, et ne m'a arrêté qu'une fois : une seule tâche bloquée où elle avait vraiment besoin de ma décision plutôt que de deviner.",
+      "labnote2.list2Lead": "Un hub domotique et son tableau de bord.",
+      "labnote2.list2": "Celui-ci est parti d'un dépôt vide et a grandi jusqu'à une intégration fonctionnelle sur deux protocoles domotiques, livrée par versions successives et régulières. À un moment, elle ne savait plus si ses agents avaient le droit de toucher au travail d'un autre projet, alors elle s'est arrêtée pour me demander au lieu de supposer.",
+      "labnote2.list3Lead": "Un analyste de suivi boursier.",
+      "labnote2.list3": "J'ai décrit l'idée en une seule phrase et j'ai regardé une équipe de six agents, un orchestrateur, un analyste, un développeur, un relecteur, un rédacteur, s'assembler seule, câbler une exécution quotidienne planifiée, et me remonter les questions ouvertes, une seconde source de prix manquante, un symbole boursier ambigu, comme des choix explicites plutôt que des suppositions silencieuses.",
+      "labnote2.list4Lead": "Une migration de plateforme pour le projet professionnel audité dans ma première note de labo.",
+      "labnote2.list4": "Quatre étapes pour retirer un composant historique, chacune une tâche dépendante qui ne démarrait qu'une fois la précédente vraiment terminée. Pas moyen de sauter une étape.",
+      "labnote2.list5Lead": "Un second cerveau personnel.",
+      "labnote2.list5": "Transformer un tas de notes vocales, transcrites en markdown, en un ensemble structuré de notes que je peux vraiment explorer et relier entre elles.",
+      "labnote2.list6Lead": "Une application compagnon sur appareil dédié.",
+      "labnote2.list6": "Celle-ci a buté sur une question de recherche ouverte en plein milieu de la construction. Plutôt que de deviner une réponse, elle s'est mise en pause et a attendu une vraie réponse avant de reprendre.",
+      "labnote2.list7Lead": "Une visite guidée d'intégration et un plugin assistant d'intégration.",
+      "labnote2.list7": "L'une apprend aux nouveaux venus comment Timon fonctionne, l'autre automatise la mise en place d'un tout nouveau projet, objectifs, feuille de route, équipe d'agents, amorçage du Kanban, en une seule passe, pour que le prochain projet que je démarre avance plus vite que celui-ci.",
+      "labnote2.list8Lead": "La propre plateforme de plugins de Timon.",
+      "labnote2.list8": "Partie d'un dossier réellement vide, pas même un dépôt git. Elle a créé le dépôt, livré un premier plugin, puis plusieurs autres en parallèle, dont un retenu derrière une décision de feu vert que j'ai moi-même prise avant qu'il ne soit livré.",
+      "labnote2.list9Lead": "Un petit module d'API pour une plateforme existante.",
+      "labnote2.list9": "Celui-là était plus mince : une seule tâche de code bien délimitée, un ensemble de classes de contrat de données pour l'API d'une plateforme existante. Pas d'équipe assemblée, pas d'allers-retours, juste un morceau de travail propre et borné, fait et fusionné.",
+      "labnote2.list10Lead": "Ce site web.",
+      "labnote2.list10": "Celui qui héberge cette note, tenu à jour au fil de l'évolution des dix autres.",
+      "labnote2.stageHow": "Comment ça a tourné",
+      "labnote2.p2":
+        "Chaque projet vit sur son propre tableau Kanban. Les tâches sont typées, code, recherche, documentation, tâche de fond, relecture, fusion, et enchaînées par des dépendances, de sorte qu'une tâche de fusion ne se déclenche qu'une fois tout ce dont elle dépend terminé. J'ai regardé le travail avancer du code à la relecture puis à la fusion sans jamais le pousser moi-même. Sur les onze projets, plus d'un millier de tâches ont été closes ainsi en trois semaines.",
+      "labnote2.p3":
+        "Quelques tableaux ont fait tourner des missions concurrentes le même après-midi : des agents distincts travaillant en même temps sur l'application de facturation, le hub domotique et la plateforme de plugins, chacun dans son propre espace de travail pour qu'aucun projet ne bloque l'autre. La planification s'est traduite par des workflows récurrents, dont l'exécution quotidienne de l'analyste, qui se déclenchent seuls sur une horloge au lieu d'attendre après moi. La priorisation s'est traduite par des tâches bloquées avec une raison explicite, en attente d'une décision, jamais abandonnées ni devinées en silence.",
+      "labnote2.stageSelfHeal": "Se maintenir sur les rails",
+      "labnote2.p4":
+        "Une bonne partie de ce qui a rendu cette échelle possible n'était pas le code écrit par les agents, c'était la part de leurs propres incidents qu'ils ont réglée sans moi. Un agent s'est retrouvé affecté à un modèle que son fournisseur ne prenait plus en charge et s'est mis à tourner en boucle d'erreur, j'ai trouvé le correctif déjà diagnostiqué et prêt à poser, je n'ai eu qu'à le confirmer. Un plugin a renvoyé une erreur d'export après une mise à jour, la cause, un module mis en cache devenu obsolète dans le démon, a été tracée puis effacée en désactivant puis réactivant le plugin. Un fichier de verrou local corrompu faisait planter une mission à chaque nouvelle tentative, il a été ramené à deux fichiers précis, je n'ai eu qu'à les supprimer. Un agent a tenté de créer un dossier de projet dans un emplacement protégé, et au lieu de simplement échouer, il a transmis la demande à un agent de niveau administrateur plutôt que d'abandonner.",
+      "labnote2.p5":
+        "Chacun de ces cas m'aurait coûté un après-midi à lire des journaux seul. Ici, ça m'a coûté quelques minutes : lire un diagnostic clair, approuver un correctif.",
+      "labnote2.stageTakeaway": "Ce que ça donne au final",
+      "labnote2.p6":
+        "Onze projets ont avancé et plus d'un millier de tâches ont été closes en trois semaines, sans que j'aie eu à surveiller un seul d'entre eux en continu. La leçon n'est pas que les agents savent coder, c'est que le même cadre peut mener de front plusieurs chantiers sans rapport entre eux, chacun à son propre rythme, ne me faire remonter que la poignée de décisions qui ont vraiment besoin de moi, et corriger discrètement la plupart de ce qui casse en chemin avant même que je ne le remarque.",
       "about.lead": "Je construis des choses.",
       "about.line1": "Parfois des choses utiles.",
       "about.line2": "Parfois des choses expérimentales.",

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab to Forge - Lab note: Three weeks, eleven projects</title>
+  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
+  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="bg-field" aria-hidden="true"></canvas>
+  <div id="bg-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html#top">
+        <img class="brand-logo" src="logo.png" alt="Lab to Forge logo" />
+        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
+      </a>
+      <div class="nav-right">
+        <nav class="site-nav">
+          <a href="index.html#top" data-i18n="nav.home">Home</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+              <g clip-path="url(#flag-en-t)">
+                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
+              </g>
+            </svg>
+          </button>
+          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <rect width="20" height="30" fill="#0055a4"/>
+              <rect x="20" width="20" height="30" fill="#fff"/>
+              <rect x="40" width="20" height="30" fill="#ef4135"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="container sub-nav-inner">
+      <a href="projects.html" data-i18n="nav2.projects">Projects</a>
+      <a href="lab-notes.html" class="active" data-i18n="nav2.labnotes">Lab notes</a>
+      <a href="team.html" data-i18n="nav2.team">The Team</a>
+      <a href="about.html" data-i18n="nav2.about">About</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="top" class="hero about-hero labnotes-hero">
+      <div class="container">
+        <a class="labnote-back" href="lab-notes.html" data-i18n="labnotes.backToList">← Back to Lab notes</a>
+        <h1 data-i18n="labnote2.title">Three weeks, eleven projects: what actually ran on its own</h1>
+      </div>
+    </section>
+
+    <section class="about-content labnotes-content">
+      <div class="container">
+        <article class="project-card labnote-card">
+          <div class="labnote-meta">
+            <span class="labnote-date" data-i18n="labnote2.date">Oct 23, 2026</span>
+            <span class="project-stack" data-i18n="labnote2.tags">Multi-project portfolio · Kanban pipelines · Concurrent missions · Self-healing agents</span>
+          </div>
+          <h3 class="labnote-stage" data-i18n="labnote2.stageScope">What got built</h3>
+          <p data-i18n="labnote2.p1">Over the last three weeks I stopped feeding Timon one project at a time and let it loose on eleven of them at once: a small invoicing app, a stock-tracking analyst, Timon's own plugin platform, and eight others running in parallel. I didn't sit over any of them full-time. Most of them didn't ask me to.</p>
+          <ul class="labnote-list">
+            <li><strong data-i18n="labnote2.list1Lead">An invoicing app for a care professional.</strong> <span data-i18n="labnote2.list1">I had it build a model-driven app that logs client sessions and turns each one into a PDF invoice, sized by session type and length, routed to the professional for a look before it ever reaches the customer. It built the thing, reviewed its own work, fixed what needed fixing, and only stopped me once: a single blocked task where it genuinely needed my call instead of guessing.</span></li>
+            <li><strong data-i18n="labnote2.list2Lead">A home-automation hub and dashboard.</strong> <span data-i18n="labnote2.list2">This one started from an empty repository and grew into a working integration across two home-automation protocols, shipped in steady version bumps. At one point it wasn't sure whether its agents were allowed to touch another project's work, so it stopped and asked me instead of assuming.</span></li>
+            <li><strong data-i18n="labnote2.list3Lead">A stock-tracking analyst.</strong> <span data-i18n="labnote2.list3">I described the idea in a single sentence and watched a team of six agents, an orchestrator, an analyst, a coder, a reviewer, a writer, assemble itself, wire in a daily scheduled run, and bring me the open questions, a missing second price source, an ambiguous ticker, as explicit choices instead of silent guesses.</span></li>
+            <li><strong data-i18n="labnote2.list4Lead">A platform migration for the professional project I audited in my first lab note.</strong> <span data-i18n="labnote2.list4">Four stages to retire a legacy component, each one a dependent task that only started once the previous one had actually closed. No skipping ahead.</span></li>
+            <li><strong data-i18n="labnote2.list5Lead">A personal knowledge base.</strong> <span data-i18n="labnote2.list5">Turning a pile of voice notes, transcribed to markdown, into a structured set of notes I can actually explore and connect.</span></li>
+            <li><strong data-i18n="labnote2.list6Lead">A companion device app.</strong> <span data-i18n="labnote2.list6">This one hit an open research question mid-build. Rather than guess at an answer, it paused and waited for a real one before picking the build back up.</span></li>
+            <li><strong data-i18n="labnote2.list7Lead">An onboarding tour and an onboarding wizard plugin.</strong> <span data-i18n="labnote2.list7">One teaches newcomers how Timon works, the other automates setting up a brand-new project, objectives, roadmap, agent team, Kanban seeding, in one pass, so the next project I start will move faster than this one did.</span></li>
+            <li><strong data-i18n="labnote2.list8Lead">Timon's own plugin platform.</strong> <span data-i18n="labnote2.list8">Started from a folder that was genuinely empty, not even a git repo. It created the repository, shipped a first plugin, then several more in parallel, one of them held back behind a go or no-go call I made myself before it shipped.</span></li>
+            <li><strong data-i18n="labnote2.list9Lead">A small API module for an existing platform.</strong> <span data-i18n="labnote2.list9">This one was thinner: a single scoped coding task, a set of data-contract classes for an existing platform's API. No team assembled, no back and forth, just a clean, bounded piece of work done and merged.</span></li>
+            <li><strong data-i18n="labnote2.list10Lead">This website.</strong> <span data-i18n="labnote2.list10">The one hosting this very note, kept current as the other ten evolve.</span></li>
+          </ul>
+          <h3 class="labnote-stage" data-i18n="labnote2.stageHow">How it ran</h3>
+          <p data-i18n="labnote2.p2">Each project lives on its own Kanban board. Tasks are typed, code, research, doc, chore, review, merge, and chained through dependencies, so a merge task only fires once everything it depends on has closed. I watched work move from code to review to merge without ever pushing it forward myself. Across the eleven projects, over a thousand tasks closed that way in three weeks.</p>
+          <p data-i18n="labnote2.p3">A few boards ran concurrent missions on the same afternoon: separate agents working the invoicing app, the home hub and the plugin platform at once, each in its own worktree so one project's work never blocked another's. Scheduling showed up as recurring workflows, the analyst's daily run among them, firing themselves on a clock instead of waiting on me. Prioritization showed up as blocked tasks with an explicit reason attached, sitting there until I made a call, never silently dropped or guessed at.</p>
+          <h3 class="labnote-stage" data-i18n="labnote2.stageSelfHeal">Keeping itself on the rails</h3>
+          <p data-i18n="labnote2.p4">A good part of what made this scale possible wasn't the code the agents wrote, it was how much of their own trouble they sorted out without me. One agent got assigned a model its provider no longer supported and started crash-looping, I found the fix already diagnosed and swapped in, I only had to confirm it. A plugin threw an export error after an update, traced to a stale cached module inside the daemon, cleared by disabling and re-enabling it. A corrupted local lock file kept crashing a mission on every retry, it got narrowed down to two exact files, I only had to delete them. One agent tried to create a project folder in a protected location, and instead of just failing, it escalated the request to an admin-level agent rather than give up.</p>
+          <p data-i18n="labnote2.p5">Each of these would have cost me an afternoon of log-reading on my own. Here, it cost me a few minutes: read a clear diagnosis, approve a fix.</p>
+          <h3 class="labnote-stage" data-i18n="labnote2.stageTakeaway">What this adds up to</h3>
+          <p data-i18n="labnote2.p6">Eleven projects moved forward and more than a thousand tasks closed in three weeks, and I never had to babysit any single one of them. The lesson isn't that the agents can code, it's that the same framework can run many unrelated efforts at once, each at its own pace, bring me only the handful of decisions that genuinely need me, and quietly fix most of what breaks along the way before I even notice.</p>
+          <a class="labnote-back labnote-back-bottom" href="lab-notes.html" data-i18n="labnotes.backToList">← Back to Lab notes</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
+      <p class="powered-by">
+        <span data-i18n="footer.poweredBy">Powered by</span>
+        <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
+          <img class="timon-logo" src="timon-logo.png" alt="Timon - Agentic Workstation" />
+        </a>
+        <span data-i18n="footer.agentic">Agentic Workstation</span>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
