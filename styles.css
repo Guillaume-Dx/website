@@ -1175,6 +1175,34 @@ html[data-theme="dark"] .timon-logo {
   opacity: 1;
 }
 
+/* Generic page layout (home, about, lab notes, etc.): the body is a
+   fixed-height app shell on desktop so a single screen's worth of content
+   fits without scrolling. On narrow/short viewports that same fixed height
+   clips content instead of scrolling it, so switch to a normal, scrollable
+   document flow. team-page/projects-page have their own, more specific
+   overrides below and are unaffected by this block. */
+@media (max-width: 900px), (max-height: 640px) {
+  body {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  main {
+    display: block;
+  }
+
+  .hero {
+    display: block;
+    padding: 2.5rem 0;
+  }
+
+  .about-content {
+    flex: 0 0 auto;
+    overflow-y: visible;
+  }
+}
+
 /* Team page */
 body.team-page {
   height: 100vh;
