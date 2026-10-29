@@ -863,6 +863,16 @@ html[lang="fr"] .about-hero h1 {
   width: auto;
 }
 
+/* Mobile-only compact tile grid (shown instead of the sidebar + excerpt
+   feed below the 760px breakpoint, see media query further down). */
+.labnotes-tile-grid {
+  display: none;
+}
+
+.labnotes-tile-grid .project-tile {
+  width: 100%;
+}
+
 .labnote-excerpt {
   max-width: none;
 }
@@ -2008,22 +2018,21 @@ html[lang="fr"] .project-header .project-intro {
     flex-direction: column;
   }
 
-  .labnotes-dates {
+  /* Below this breakpoint, show only the compact tile grid: the full
+     excerpt feed and the anchor-list sidebar duplicate the same titles
+     and make the page very long on mobile. */
+  .labnotes-dates,
+  .labnotes-feed {
+    display: none;
+  }
+
+  .labnotes-tile-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
     width: 100%;
-    flex: 0 0 auto;
-    position: static;
   }
 
-  .labnotes-date-list {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .labnotes-date-list li a {
-    flex: 1 1 calc(50% - 0.3rem);
-  }
-
-  .labnotes-feed,
   .labnote-card {
     max-width: 100%;
   }
@@ -2035,10 +2044,6 @@ html[lang="fr"] .project-header .project-intro {
   }
 
   .project-filter {
-    flex: 1 1 100%;
-  }
-
-  .labnotes-date-list li a {
     flex: 1 1 100%;
   }
 }
