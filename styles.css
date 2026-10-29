@@ -1127,21 +1127,6 @@ html[lang="fr"] .about-hero h1 {
   .footer-inner {
     row-gap: 0.45rem;
   }
-
-  .site-footer .powered-by {
-    margin-top: 0.25rem;
-    font-size: 0.72rem;
-  }
-
-  .social-link {
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-
-  .social-link svg {
-    width: 0.9rem;
-    height: 0.9rem;
-  }
 }
 
 .site-footer::before {
@@ -1192,6 +1177,23 @@ html[lang="fr"] .about-hero h1 {
 .social-link svg {
   width: 1.05rem;
   height: 1.05rem;
+}
+
+@media (max-width: 480px) {
+  .site-footer .powered-by {
+    margin-top: 0.25rem;
+    font-size: 0.72rem;
+  }
+
+  .social-link {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .social-link svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
 }
 
 a.social-link:hover {
