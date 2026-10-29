@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab to Forge - Lab note: Groups and access policies: enrolling bigdude and the iPhone</title>
+  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <script>
+    // Applied before paint to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        const stored = localStorage.getItem("lf-theme");
+        const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-field" aria-hidden="true"></canvas>
+  <div id="bg-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/#top">
+        <img class="brand-logo" src="/logo.png" alt="Lab to Forge logo" />
+        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
+      </a>
+      <div class="nav-right">
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
+          </svg>
+        </button>
+        <nav class="site-nav">
+          <a href="/#top" data-i18n="nav.home">Home</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+              <g clip-path="url(#flag-en-t)">
+                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
+              </g>
+            </svg>
+          </button>
+          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <rect width="20" height="30" fill="#0055a4"/>
+              <rect x="20" width="20" height="30" fill="#fff"/>
+              <rect x="40" width="20" height="30" fill="#ef4135"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="container sub-nav-inner">
+      <a href="/k2vdxr/" data-i18n="nav2.projects">Projects</a>
+      <a href="/n4tylb/" class="active" data-i18n="nav2.labnotes">Lab notes</a>
+      <a href="/p9hswc/" data-i18n="nav2.team">The Team</a>
+      <a href="/q8fmzk/" data-i18n="nav2.about">About</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="top" class="hero about-hero labnotes-hero">
+      <div class="container">
+        <a class="labnote-back" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        <h1><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 3/5</span><span data-i18n="labnote5.title">Groups and access policies: enrolling bigdude and the iPhone</span></h1>
+      </div>
+    </section>
+
+    <section class="about-content labnotes-content">
+      <div class="container">
+        <article class="project-card labnote-card">
+          <div class="labnote-meta">
+            <span class="labnote-date" data-i18n="labnote5.date">Oct 27, 2026</span>
+            <span class="project-stack" data-i18n="labnote5.tags">Groups · Access policies · Peer-to-peer · Windows client · iPhone client · Custom DNS Zone</span>
+          </div>
+          <nav class="labnote-toc" aria-label="Table of contents"><h2 class="labnote-toc-title" data-i18n="labnotes.toc">On this page</h2><ol class="labnote-toc-list"><li><a href="#labnote5-stageIntro" data-i18n="labnote5.stageIntro">What this note covers</a></li><li><a href="#labnote5-stageP2p" data-i18n="labnote5.stageP2p">Peer-to-peer, not routing-peer</a></li><li><a href="#labnote5-stageConcepts" data-i18n="labnote5.stageConcepts">Groups, policies, and the Default policy</a></li><li><a href="#labnote5-stageApproach" data-i18n="labnote5.stageApproach">Building groups and policies in the right order</a></li><li><a href="#labnote5-stageWindows" data-i18n="labnote5.stageWindows">Enrolling the Windows/Timon host</a></li><li><a href="#labnote5-stageIphone" data-i18n="labnote5.stageIphone">Enrolling the iPhone</a></li><li><a href="#labnote5-stageDnsZone" data-i18n="labnote5.stageDnsZone">The Custom DNS Zone</a></li><li><a href="#labnote5-stageTakeaway" data-i18n="labnote5.stageTakeaway">What's next</a></li></ol></nav>
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/w4plkd/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+            <a class="labnote-series-link labnote-series-next" href="/y9tkzb/" data-i18n="labnotes.nextNote">Next note &rarr;</a>
+          </nav>
+          <h3 class="labnote-stage" id="labnote5-stageIntro" data-i18n="labnote5.stageIntro">What this note covers</h3>
+          <p>The previous lab note, &ldquo;Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu,&rdquo; left the mesh fail-closed right after the first login: the Default policy was gone, and no peer could reach any other peer yet because nothing had been enrolled or granted anything. This note covers the rest of the access-control model - why peers reach each other directly instead of through a routing gateway, what groups and policies actually do, the order to build them in, enrolling the Windows/Timon host and the iPhone as real peers, and scoping a private DNS zone to only the people who need it.</p>
+          <h3 class="labnote-stage" id="labnote5-stageP2p" data-i18n="labnote5.stageP2p">Peer-to-peer, not routing-peer</h3>
+          <p>NetBird offers two distinct ways to reach a device:</p><div class="labnote-table-wrap"><table class="labnote-table"><thead><tr><th>Model</th><th>How it works</th></tr></thead><tbody><tr><td>Direct peer-to-peer</td><td>The target device itself runs the NetBird client and becomes a full mesh peer - reachable directly (or via relay/STUN if direct UDP fails), with its own identity, groups, and policies</td></tr><tr><td>Networks / routing-peer model</td><td>Used for devices that can't run a NetBird client (embedded devices, IoT, legacy boxes) - another peer on the same LAN acts as a routing gateway, advertising a Resource (an IP/CIDR/domain) on their behalf. Traffic is routed through that gateway peer rather than reaching the target's own WireGuard identity directly</td></tr></tbody></table></div><p><strong>Why direct peer-to-peer was chosen for <code>bigdude</code> (the Timon host) and the home-automation hub:</strong></p><ul class="labnote-list"><li><span><strong>Both can run a full NetBird client directly</strong> - no embedded or legacy constraint forcing the routing-peer workaround.</span></li><li><span><strong>Smaller trust surface.</strong> A routing peer becomes a single chokepoint that can see/relay traffic for every resource behind it; direct P2P means each device enforces its own policy independently, with no intermediary peer to compromise.</span></li><li><span><strong>Simpler policy model.</strong> P2P groups/policies target the device itself - one group membership, one set of rules. The Networks model adds an extra layer (resource definition, routing-peer assignment, and a policy on the resource) for no benefit here, since there's no non-client-capable device requiring it.</span></li><li><span><strong>No extra hop.</strong> Direct (or relay-assisted) P2P is one WireGuard hop; routing-peer traffic adds a second hop through the gateway peer's LAN.</span></li></ul><p><strong>When the routing-peer model would be the right call instead:</strong> a smart-home device that truly cannot install a NetBird client (a sensor, a proprietary hub with no package support). Then a single <code>/32</code> Resource pointed at just that device's LAN IP, routed through one trusted gateway peer and scoped to the narrowest possible policy, is the appropriate tool - reserved for that case only, not used as the default.</p>
+          <h3 class="labnote-stage" id="labnote5-stageConcepts" data-i18n="labnote5.stageConcepts">Groups, policies, and the Default policy</h3>
+          <p>Three concepts explain how NetBird access control works end to end:</p><div class="labnote-table-wrap"><table class="labnote-table"><thead><tr><th>Concept</th><th>What it means</th></tr></thead><tbody><tr><td>Groups</td><td>Named sets of peers (and optionally resources), similar to tags. A peer can belong to multiple groups. A built-in <code>All</code> group auto-contains every peer - it cannot be deleted or renamed</td></tr><tr><td>Policies</td><td>ALLOW rules only - no explicit deny/priority system. A connection is permitted only if some policy's Source/Destination groups match both ends; everything else is denied by default. Each policy is bidirectional or unidirectional (only the source side can initiate)</td></tr><tr><td>Default policy</td><td>Auto-created on account creation, using <code>All</code> &rarr; <code>All</code>, bidirectional - i.e. full mesh, everyone can reach everyone. Intentionally permissive to make initial setup painless</td></tr></tbody></table></div><p>Official reference: <a href="https://docs.netbird.io/manage/access-control/manage-network-access" target="_blank" rel="noopener">Managing Access with NetBird: Groups and Access Policies</a>.</p>
+          <h3 class="labnote-stage" id="labnote5-stageApproach" data-i18n="labnote5.stageApproach">Building groups and policies in the right order</h3>
+          <ol class="labnote-list"><li><strong>Enroll first.</strong> Add the core devices as peers before touching policies - <code>bigdude</code> (Timon host), the home-automation hub, and the iPhone. With the Default policy still active they can all already reach each other, which is fine for initial verification.</li><li><strong>Create custom groups</strong>, e.g. <code>timon-hosts</code> (any machine running Timon), <code>hub</code> (the home-automation hub), <code>iphone</code> (the personal phone), and <code>timon-admins</code> (devices allowed to browse/administer Timon remotely - likely just <code>iphone</code> plus any other personal device).</li><li><strong>Delete (or disable) the Default <code>All</code>&rarr;<code>All</code> policy</strong> once the core devices are enrolled and grouped - do this before adding any further or future device, so nothing new is implicitly granted full access.</li><li><strong>Create narrow policies, one per real need</strong>, e.g. <code>iphone</code> &rarr; <code>timon-hosts</code> on TCP 443 only, unidirectional (the phone initiates, the host doesn't need to reach back), and <code>iphone</code> &rarr; <code>hub</code> on whatever port(s) the hub's own UI/API needs, also unidirectional. Avoid any <code>All</code>-group policy going forward - always name explicit source/destination groups.</li><li><strong>Scope any private DNS name (Custom Zone) to the specific Distribution Group that needs it</strong> (e.g. <code>timon-admins</code>), never to <code>All</code>.</li></ol><p><strong>Why this order, not groups-then-policies-then-enroll:</strong> enrolling first while the Default policy is still active keeps initial verification simple - every peer can reach every other peer while confirming the client install itself works, before any policy logic is in play. Deleting the Default policy only after enrollment, but strictly before any future device joins, closes the exposure window without blocking the setup work in progress.</p><p><strong>A natural next hardening step:</strong> the policies above control which groups can reach each other, but NetBird can also condition access on the state of the connecting device via <a href="https://docs.netbird.io/manage/access-control/posture-checks" target="_blank" rel="noopener">Posture Checks</a> - e.g. requiring a minimum NetBird client version, restricting by country/region, allow/deny-listing peer network ranges, requiring specific running processes, or an OS-issued certificate. Attaching a posture check to the <code>iphone</code> &rarr; <code>timon-hosts</code> policy (for example, a minimum client version) is a reasonable follow-up once the base groups/policies above are working - not done in this pass.</p>
+          <h3 class="labnote-stage" id="labnote5-stageWindows" data-i18n="labnote5.stageWindows">Enrolling the Windows/Timon host</h3>
+          <ol class="labnote-list"><li><span>Download the NetBird <strong>EXE</strong> or <strong>MSI</strong> installer from <code>https://pkgs.netbird.io/windows/x64</code> (or <code>/windows/msi/x64</code>). Official docs: <a href="https://docs.netbird.io/get-started/install/windows" target="_blank" rel="noopener">docs.netbird.io/get-started/install/windows</a>.</span></li><li><span>Run it - installs to <code>C:\Program Files\NetBird</code> and registers the NetBird daemon as its own Windows service automatically.</span></li><li><span>Open a <strong>new</strong> terminal (PATH only updates for new terminals):</span><span class="labnote-code-label">PowerShell</span><pre><code>netbird up --management-url https://netbird.mydomain.cloud</code></pre><span>Follow the browser SSO link to authorize the peer. If the device code expires (a few minutes), re-run <code>netbird down</code> then <code>netbird up ...</code> again to get a fresh one.</span></li><li><span>Confirm the assigned private IP:</span><span class="labnote-code-label">PowerShell</span><pre><code>netbird status</code></pre><span>Example used throughout for the <code>bigdude</code> machine: NetBird IP <code>100.64.108.163</code>.</span></li><li><span>In the NetBird Dashboard, add this peer to the <code>timon-hosts</code> group created earlier in this note.</span></li><li><span>Test reachability over cellular (Wi-Fi off, NetBird toggled on in the app): browse to <code>https://bigdude.mydomain.cloud</code> - should load Timon's sign-in page exactly as from a laptop on the mesh. (The reverse proxy serving that page is set up in the next lab note, covering making Timon and Windows reachable - the mesh reachability tested here is independent of it.)</span></li></ol>
+          <h3 class="labnote-stage" id="labnote5-stageIphone" data-i18n="labnote5.stageIphone">Enrolling the iPhone</h3>
+          <ol class="labnote-list"><li><span>Install <strong>NetBird</strong> from the App Store (official app, published by <code>netbird.io</code>).</span></li><li><span>Open the app &rarr; tap <strong>Add Profile</strong> (or the equivalent first-run prompt) &rarr; enter the management URL: <code>https://netbird.mydomain.cloud</code> (same self-hosted controller as the Windows peer).</span></li><li><span>Tap <strong>Connect</strong> / <strong>Sign in</strong> - this opens the same browser-based SSO login used for every other peer. Log in with the NetBird account and approve the authorization request.</span></li><li><span>iOS shows a system prompt to <strong>Add VPN Configurations</strong> - tap <strong>Allow</strong> (iOS implements NetBird's WireGuard tunnel as a standard VPN profile; this is expected and required for the tunnel to work).</span></li><li><span>Once connected, the app shows <strong>Connected</strong> with the phone's assigned NetBird IP - confirm it in the NetBird Dashboard's Peers list as well.</span></li><li><span>In the NetBird Dashboard, add this peer to the <code>iphone</code> group created earlier in this note - this is what the <code>iphone</code> &rarr; <code>timon-hosts</code> / <code>iphone</code> &rarr; <code>hub</code> policies target.</span></li><li><span>Test reachability over cellular (Wi-Fi off, NetBird toggled on in the app): browse to <code>https://bigdude.mydomain.cloud</code> - should load Timon's sign-in page exactly as from a laptop on the mesh.</span></li></ol>
+          <h3 class="labnote-stage" id="labnote5-stageDnsZone" data-i18n="labnote5.stageDnsZone">The Custom DNS Zone</h3>
+          <p>Create the zone, add the hosts, and scope distribution - the steps followed in this setup:</p><ol class="labnote-list"><li><span>NetBird Dashboard &rarr; <strong>DNS</strong> &rarr; <strong>Nameservers/Zones</strong> (naming varies by dashboard version) &rarr; <strong>Add Zone</strong>.</span></li><li><span><strong>Zone name/domain:</strong> the base domain used for every entry in this zone, e.g. <code>mydomain.cloud</code> - must match the OVH-hosted domain used for the controller's own DNS record.</span></li><li><span><strong>Add Record</strong>, one per hostname, target set to the peer's NetBird IP (found via <code>netbird status</code> on that machine, or the Dashboard's Peers list):</span><div class="labnote-table-wrap"><table class="labnote-table"><thead><tr><th>Hostname</th><th>Target</th><th>Purpose</th></tr></thead><tbody><tr><td><code>bigdude.mydomain.cloud</code></td><td><code>bigdude</code>'s NetBird IP, e.g. <code>100.64.108.163</code></td><td>Web UI (human browsing)</td></tr><tr><td><code>bigdude-daemon.mydomain.cloud</code></td><td>same NetBird IP - same peer, different reverse-proxy site block</td><td>Daemon API (device pairing / Machines plugin)</td></tr></tbody></table></div></li><li><span><strong>Distribution group(s):</strong> on the zone (or per record, depending on dashboard version), set this to <code>timon-admins</code> - never <code>All</code>. Only peers whose group is listed here receive this DNS record at all; everyone else gets no resolution for it, by design.</span></li><li><span>Save, then from an already-enrolled peer in that distribution group, confirm resolution: <code>nslookup bigdude.mydomain.cloud</code> (or <code>ping</code>) should return the expected NetBird IP within a minute or two of saving.</span></li><li><span>Whenever a group is renamed or restructured (splitting a group, adding new admin devices), revisit this zone's distribution group list - it does not update automatically, and a stale list silently breaks resolution only for the newly affected peers (see the troubleshooting note below).</span></li></ol><p>Both hostnames reuse the same OVH DNS-01 credentials - the reverse proxy set up in the next lab note requests and renews a separate certificate per hostname automatically. Confirmed working end to end: the reverse proxy's logs show <code>challenge_type: dns-01</code>, <code>authz_status: valid</code>, and <code>certificate obtained successfully</code> for <code>bigdude.mydomain.cloud</code> with no errors (first-run "cannot find path" messages are benign - just the proxy creating its local ACME account file).</p><p><strong>TLS summary:</strong> browser/iPhone &harr; reverse proxy is HTTPS with a real, publicly-trusted Let's Encrypt certificate (no warnings); reverse proxy &harr; Timon (<code>127.0.0.1:3110</code> / <code>127.0.0.1:3010</code>) is plain HTTP over loopback only, which never leaves the machine.</p><p><strong>Troubleshooting <code>ERR_NAME_NOT_RESOLVED</code> on the custom zone hostname:</strong> unlike the automatic per-peer name, a Custom Zone record is only pushed to peers whose group is listed in that zone entry's Distribution group field - it is not a mesh-wide DNS record. If a peer (e.g. the iPhone) can resolve its own automatic peer name but gets <code>ERR_NAME_NOT_RESOLVED</code> specifically on <code>bigdude.mydomain.cloud</code>, the fix is: NetBird Dashboard &rarr; DNS &rarr; Zones &rarr; the zone entry &rarr; confirm the peer's actual group (e.g. <code>Admins</code>) is listed under Distribution group - not just the group(s) the zone was originally scoped to. A group rename or restructuring can leave the zone's distribution list stale, silently breaking resolution for the affected peer only (toggling the NetBird connection off/on forces a fresh config pull once the group is fixed).</p><p>Official reference: <a href="https://docs.netbird.io/manage/dns" target="_blank" rel="noopener">DNS in NetBird</a> (Nameservers, Custom Zones, Match/Search Domains).</p>
+          <h3 class="labnote-stage" id="labnote5-stageTakeaway" data-i18n="labnote5.stageTakeaway">What's next</h3>
+          <p>This closes groups and access policies: peer-to-peer over the routing-peer model, a fail-closed mesh with narrow, explicit policies instead of the Default <code>All</code>&rarr;<code>All</code> grant, the Windows/Timon host and the iPhone enrolled and grouped, and a Custom DNS Zone scoped to just the admins who need it. The next lab note covers making Timon and Windows reachable: the reverse proxy, the OVH DNS-01 credentials behind it, and keeping Timon's own listeners on loopback only.</p>
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/w4plkd/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+            <a class="labnote-series-link labnote-series-next" href="/y9tkzb/" data-i18n="labnotes.nextNote">Next note &rarr;</a>
+          </nav>
+          <a class="labnote-back labnote-back-bottom" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text">
+        <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
+        <p class="powered-by">
+          <span data-i18n="footer.poweredBy">Powered by</span>
+          <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
+            <img class="timon-logo" src="/timon-logo.png" alt="Timon - Agentic Workstation" />
+          </a>
+          <span data-i18n="footer.agentic">Agentic Workstation</span>
+        </p>
+      </div>
+      <div class="social-links">
+        <a class="social-link" href="https://x.com/GdX_O_O" target="_blank" rel="noopener" title="X" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.6l-5.2-6.8L5.3 22H2l8.1-9.3L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/gducroix/?locale=en-US" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a class="social-link" href="https://github.com/Guillaume-Dx" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.07 11.07 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.26 5.69.42.36.78 1.07.78 2.17v3.21c0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

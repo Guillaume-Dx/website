@@ -1,6 +1,24 @@
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// Light/dark mode toggle. Pre-paint theme detection happens inline in
+// <head> (see every page) to avoid a flash of the wrong theme; this handler
+// just wires up the button click and persists the choice.
+(function () {
+  const toggle = document.getElementById("theme-toggle");
+  if (!toggle) return;
+  toggle.addEventListener("click", function () {
+    const root = document.documentElement;
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("lf-theme", next);
+    } catch (e) {
+      /* storage unavailable, theme choice just won't persist */
+    }
+  });
+})();
+
 // Language switcher (English / French)
 (function () {
   const translations = {
@@ -9,9 +27,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "meta.description":
         "Lab to Forge - turning experiments into production-ready tools.",
       "hero.title":
-        "From the lab to the forge, where ideas become reality.",
+        'From the lab to the <span class="accent">forge</span>, where ideas become reality.',
       "hero.text":
         'Lab to Forge is a space for building and testing ideas in a kind of lab, deliberately aiming for a sustained pace, then making the ones that work robust, reliable, and able to scale in the forge. Every project moves from raw prototyping to a concrete application.',
+      "hero.ctaProjects": "Explore projects",
+      "hero.ctaAbout": "About this lab",
       "footer.rights": "Lab to Forge. All rights reserved.",
       "footer.poweredBy": "Powered by",
       "footer.agentic": "Agentic Workstation",
@@ -55,6 +75,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "project.placeholder1": "These projects run on very different platforms, languages and built for different audiences, a public website, a home-automation dashboard, invoicing software, browser extensions, onboarding tooling, a personal knowledge base, and more.",
       "project.placeholder2": "What they share is how they came to be: a human sets the direction, and a small team of Timon agents designs, codes, reviews and documents the result together - moving fast enough to keep up with an idea, careful enough to leave solid, tested, documented work behind.",
       "project.placeholder3": "Pick a project on the left to see its purpose, stack, current status, build timeline, and how Timon's agents helped make it happen.",
+      "project.wip": "The forge is hot right now. We're reshaping this project list at the anvil, and fresh work will be unveiled once it has cooled.",
       "project.filter.language": "Language",
       "project.filter.platform": "Platform",
       "project.filter.status": "Status",
@@ -168,9 +189,14 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Run by a full Timon agent team - orchestrator, analyst, coder, reviewer, merger and writer.",
       "labnotes.title": "Lab notes",
       "labnotes.intro":
-        "Field notes from real engagements, what actually changes when Timon leads the work.",
+        "Field notes from real engagements, what actually changes when AI is your wingman when doing the work.",
       "labnotes.readMore": "Read the full note →",
       "labnotes.backToList": "← Back to Lab notes",
+      "labnotes.prevNote": "← Previous note",
+      "labnotes.nextNote": "Next note →",
+      "labnotes.seriesName": "Remote to LAN",
+      "labnotes.seriesLabel": "Remote to LAN:",
+      "labnotes.toc": "On this page",
       "labnote1.date": "Oct 18, 2025",
       "labnote1.tags": "Multi-agent review · Full codebase access · Risk assessment · Roadmap",
       "labnote1.title":
@@ -237,6 +263,70 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnote2.stageTakeaway": "What this adds up to",
       "labnote2.p6":
         "Eleven projects moved forward and more than a thousand tasks closed in three weeks, and I never had to babysit any single one of them. The lesson isn't that the agents can code, it's that the same framework can run many unrelated efforts at once, each at its own pace, bring me only the handful of decisions that genuinely need me, and quietly fix most of what breaks along the way before I even notice.",
+      "labnote3.date": "Oct 25, 2026",
+      "labnote3.title": "Remote access to the LAN: inventory, requirements, and why NetBird won",
+      "labnote3.tags": "Home LAN · NetBird · Tailscale · Headscale · WireGuard · Requirements · Decision rationale · Freebox VM",
+      "labnote3.excerpt": "Before touching a single config file: what's actually on the home network, what remote access has to achieve, and the full case for NetBird - four VPN-mesh candidates compared, three ruled out, and where the self-hosted controller will live.",
+      "labnote3.stageIntention": "Why I'm writing this down",
+      "labnote3.stageInventory": "What's actually on the network",
+      "labnote3.stageRequirements": "What remote access has to achieve",
+      "labnote3.stageCandidates": "Four candidates, one ring",
+      "labnote3.stageComparison": "Side by side",
+      "labnote3.stageDecision": "Where this came out",
+      "labnote3.stageWireguard": "Ruled out first: plain WireGuard",
+      "labnote3.stageTailscale": "Best UX, wrong trust model: Tailscale",
+      "labnote3.stageHeadscale": "Tempting, but reverse-engineered: Headscale",
+      "labnote3.stageNetbird": "The one that didn't force a trade-off: NetBird",
+      "labnote3.stageHosting": "Controller on the Freebox itself",
+      "labnote3.stageTakeaway": "What's next",
+      "labnote4.date": "Oct 26, 2026",
+      "labnote4.title": "Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu",
+      "labnote4.tags": "Ubuntu VM · Freebox · Port forwarding · OVH DNS · ufw · Docker · NetBird quickstart · Default policy",
+      "labnote4.excerpt": "Standing up the NetBird controller, step by step: a 2GB Ubuntu VM on the Freebox, the three public ports it needs, an OVH DNS record, unattended updates, SSH locked to the LAN, a default-deny firewall, the quickstart script itself, and why the fail-open Default policy had to die on sight.",
+      "labnote4.stageRoadmap": "Where this is going",
+      "labnote4.stageInfra": "What the controller needs",
+      "labnote4.stageVm": "Creating the VM on the Freebox",
+      "labnote4.stageNetworking": "Port-forwarding, and the CGNAT check",
+      "labnote4.stageDns": "The DNS record",
+      "labnote4.stageHardening1": "Hardening Ubuntu: updates, SSH, firewall",
+      "labnote4.stageHardening2": "Preparing for NetBird: Docker, time, swap, backups",
+      "labnote4.stageQuickstart": "NetBird quickstart script",
+      "labnote4.stageFirstLogin": "First login",
+      "labnote4.stageTakeaway": "What's next",
+      "labnote5.date": "Oct 27, 2026",
+      "labnote5.title": "Groups and access policies: enrolling bigdude and the iPhone",
+      "labnote5.tags": "Groups · Access policies · Peer-to-peer · Windows client · iPhone client · Custom DNS Zone",
+      "labnote5.excerpt": "Peer-to-peer versus routing-peer, groups and policies instead of one flat mesh, deleting the fail-open Default policy, enrolling the Windows/Timon host and the iPhone, and a Custom DNS Zone scoped to the people who actually need it.",
+      "labnote5.stageIntro": "What this note covers",
+      "labnote5.stageP2p": "Peer-to-peer, not routing-peer",
+      "labnote5.stageConcepts": "Groups, policies, and the Default policy",
+      "labnote5.stageApproach": "Building groups and policies in the right order",
+      "labnote5.stageWindows": "Enrolling the Windows/Timon host",
+      "labnote5.stageIphone": "Enrolling the iPhone",
+      "labnote5.stageDnsZone": "The Custom DNS Zone",
+      "labnote5.stageTakeaway": "What's next",
+      "labnote6.date": "Oct 28, 2026",
+      "labnote6.title": "Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split",
+      "labnote6.tags": "Caddy · xcaddy · OVH DNS-01 · Windows service · Reverse proxy · Device pairing",
+      "labnote6.excerpt": "Timon's non-negotiables (loopback only, auth always on), Windows background-run quirks, OVH API credentials for DNS-01, building a custom Caddy with xcaddy, registering it as a Windows service, and why app and daemon need two separate hostnames or pairing breaks.",
+      "labnote6.stageIntro": "What this note covers, and Timon's non-negotiables",
+      "labnote6.stageWinRun": "Windows background-run notes",
+      "labnote6.stageLoopback": "Keeping Timon's listeners on loopback",
+      "labnote6.stageOvh": "OVH API credentials for DNS-01",
+      "labnote6.stageXcaddy": "Building a custom Caddy with xcaddy",
+      "labnote6.stageService": "Registering Caddy as a Windows service",
+      "labnote6.stageTwoHost": "Why app and daemon need separate hostnames",
+      "labnote6.stageApplyVerify": "Apply, use, verify, and the access-control reminder",
+      "labnote6.stageTakeaway": "What this closes",
+      "labnote7.date": "Oct 29, 2026",
+      "labnote7.title": "Architecture overview: how traffic actually reaches bigdude",
+      "labnote7.tags": "Architecture · Control plane vs data plane · Flowchart · Sequence diagram · NAT traversal · Hole punching",
+      "labnote7.excerpt": "A visual close to the series: the full mesh architecture as one diagram, why a Freebox blocking inbound traffic doesn't stop a direct tunnel from forming, and the exact message flow from opening bigdude.mydomain.cloud to traffic flowing peer-to-peer.",
+      "labnote7.stageIntro": "What this note covers",
+      "labnote7.stageArchitecture": "The architecture, end to end",
+      "labnote7.stageNat": "Why the Freebox blocking inbound traffic doesn't stop any of this",
+      "labnote7.stageFlow": "Connection flow, step by step",
+      "labnote7.stageTakeaway": "What this series actually proves",
       "about.lead": "I build things.",
       "about.line1": "Sometimes useful things.",
       "about.line2": "Sometimes experimental things.",
@@ -258,9 +348,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "meta.description":
         "Lab to Forge - transformer les expérimentations en outils prêts pour la production.",
       "hero.title":
-        "Du laboratoire à la forge, là où les idées deviennent réalité.",
+        'Du laboratoire à la <span class="accent">forge</span>, là où les idées deviennent réalité.',
       "hero.text":
         "Lab to Forge est un espace pour construire et tester des idées dans le « labo », ciblant volontairement une cadence soutenue, puis rendre celles qui fonctionnent robustes, fiables et pouvant être adaptées à grande échelle dans la forge. Chaque projet passe du prototypage brut à une application concrète.",
+      "hero.ctaProjects": "Explorer les projets",
+      "hero.ctaAbout": "À propos de ce labo",
       "footer.rights": "Lab to Forge. Tous droits réservés.",
       "footer.poweredBy": "Propulsé par",
       "footer.agentic": "Station de travail agentique",
@@ -304,6 +396,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "project.placeholder1": "Ces projets tournent sur des plateformes et des langages très différents, et sont conçus pour des publics différents, un site web public, un tableau de bord domotique, un logiciel de facturation, des extensions de navigateur, des outils d'onboarding, un second cerveau personnel, et plus encore.",
       "project.placeholder2": "Ce qu'ils ont en commun, c'est leur façon de naître : un humain donne le cap, et une petite équipe d'agents Timon conçoit, code, relit et documente le résultat ensemble - assez vite pour suivre une idée, assez soigneusement pour laisser un travail solide, testé et documenté.",
       "project.placeholder3": "Choisissez un projet à gauche pour voir son objectif, sa stack, son état actuel, sa frise de développement, et comment les agents Timon ont aidé à le construire.",
+      "project.wip": "La forge est chaude en ce moment. Nous reforgeons la liste des projets sur l'enclume, et un nouveau contenu sera dévoilé une fois qu'il aura refroidi.",
       "project.filter.language": "Langage",
       "project.filter.platform": "Plateforme",
       "project.filter.status": "Statut",
@@ -420,6 +513,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Des notes de terrain tirées de vraies missions, ce qui change réellement quand Timon prend les commandes.",
       "labnotes.readMore": "Lire la note complète →",
       "labnotes.backToList": "← Retour aux notes de labo",
+      "labnotes.prevNote": "← Note précédente",
+      "labnotes.nextNote": "Note suivante →",
+      "labnotes.seriesName": "Accès au LAN",
+      "labnotes.seriesLabel": "Accès au LAN :",
+      "labnotes.toc": "Au sommaire",
       "labnote1.date": "18 oct. 2025",
       "labnote1.tags": "Revue multi-agents · Accès complet au code · Analyse de risques · Feuille de route",
       "labnote1.title":
@@ -486,6 +584,70 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnote2.stageTakeaway": "Ce que ça donne au final",
       "labnote2.p6":
         "Onze projets ont avancé et plus d'un millier de tâches ont été closes en trois semaines, sans que j'aie eu à surveiller un seul d'entre eux en continu. La leçon n'est pas que les agents savent coder, c'est que le même cadre peut mener de front plusieurs chantiers sans rapport entre eux, chacun à son propre rythme, ne me faire remonter que la poignée de décisions qui ont vraiment besoin de moi, et corriger discrètement la plupart de ce qui casse en chemin avant même que je ne le remarque.",
+      "labnote3.date": "25 oct. 2026",
+      "labnote3.title": "Accès distant au LAN : inventaire, exigences, et pourquoi NetBird l'a emporté",
+      "labnote3.tags": "LAN maison · NetBird · Tailscale · Headscale · WireGuard · Exigences · Rationale de décision · VM Freebox",
+      "labnote3.excerpt": "Avant de toucher le moindre fichier de config : ce qu'il y a vraiment sur le réseau de la maison, ce que l'accès distant doit accomplir, et le dossier complet pour NetBird - quatre candidats VPN maillé comparés, trois écartés, et où vivra le contrôleur auto-hébergé.",
+      "labnote3.stageIntention": "Pourquoi je mets ça par écrit",
+      "labnote3.stageInventory": "Ce qu'il y a vraiment sur le réseau",
+      "labnote3.stageRequirements": "Ce que l'accès distant doit accomplir",
+      "labnote3.stageCandidates": "Quatre candidats, un seul anneau",
+      "labnote3.stageComparison": "Côte à côte",
+      "labnote3.stageDecision": "Où ça a abouti",
+      "labnote3.stageWireguard": "Écarté en premier : le WireGuard nu",
+      "labnote3.stageTailscale": "Meilleure UX, mauvais modèle de confiance : Tailscale",
+      "labnote3.stageHeadscale": "Tentant, mais reverse-engineered : Headscale",
+      "labnote3.stageNetbird": "Celui qui n'a pas forcé de compromis : NetBird",
+      "labnote3.stageHosting": "Le contrôleur sur la Freebox elle-même",
+      "labnote3.stageTakeaway": "La suite",
+      "labnote4.date": "26 oct. 2026",
+      "labnote4.title": "Monter le contrôleur NetBird : la VM, les ports, l'enregistrement DNS, et le durcissement d'Ubuntu",
+      "labnote4.tags": "VM Ubuntu · Freebox · Redirection de ports · DNS OVH · ufw · Docker · Quickstart NetBird · Policy par défaut",
+      "labnote4.excerpt": "Monter le contrôleur NetBird, étape par étape : une VM Ubuntu de 2 Go sur la Freebox, les trois ports publics dont elle a besoin, un enregistrement DNS OVH, des mises à jour automatiques, SSH verrouillé sur le LAN, un pare-feu en default-deny, le script quickstart lui-même, et pourquoi la policy par défaut, fail-open, devait mourir tout de suite.",
+      "labnote4.stageRoadmap": "Où ça mène",
+      "labnote4.stageInfra": "Ce dont le contrôleur a besoin",
+      "labnote4.stageVm": "Créer la VM sur la Freebox",
+      "labnote4.stageNetworking": "Redirection de ports, et le check CGNAT",
+      "labnote4.stageDns": "L'enregistrement DNS",
+      "labnote4.stageHardening1": "Durcir Ubuntu : mises à jour, SSH, pare-feu",
+      "labnote4.stageHardening2": "Préparer NetBird : Docker, horloge, swap, sauvegardes",
+      "labnote4.stageQuickstart": "Script quickstart NetBird",
+      "labnote4.stageFirstLogin": "Première connexion",
+      "labnote4.stageTakeaway": "La suite",
+      "labnote5.date": "27 oct. 2026",
+      "labnote5.title": "Groupes et policies d'accès : enrôler bigdude et l'iPhone",
+      "labnote5.tags": "Groupes · Policies d'accès · Peer-to-peer · Client Windows · Client iPhone · Custom DNS Zone",
+      "labnote5.excerpt": "Peer-to-peer contre routing-peer, des groupes et des policies plutôt qu'un maillage plat, suppression de la policy par défaut fail-open, enrôlement du poste Windows/Timon et de l'iPhone, et une Custom DNS Zone limitée à ceux qui en ont réellement besoin.",
+      "labnote5.stageIntro": "Ce que couvre cette note",
+      "labnote5.stageP2p": "Peer-to-peer, pas routing-peer",
+      "labnote5.stageConcepts": "Groupes, policies, et la policy par défaut",
+      "labnote5.stageApproach": "Construire groupes et policies dans le bon ordre",
+      "labnote5.stageWindows": "Enrôler le poste Windows/Timon",
+      "labnote5.stageIphone": "Enrôler l'iPhone",
+      "labnote5.stageDnsZone": "La Custom DNS Zone",
+      "labnote5.stageTakeaway": "La suite",
+      "labnote6.date": "28 oct. 2026",
+      "labnote6.title": "Rendre Timon et Windows joignables : Caddy, DNS-01, et la séparation app/daemon",
+      "labnote6.tags": "Caddy · xcaddy · DNS-01 OVH · Service Windows · Reverse proxy · Appairage d'appareils",
+      "labnote6.excerpt": "Les non-négociables de Timon (loopback uniquement, auth toujours active), les particularités de Timon en arrière-plan sous Windows, les identifiants API OVH pour DNS-01, la construction d'un Caddy personnalisé avec xcaddy, son enregistrement en service Windows, et pourquoi app et daemon ont besoin de deux noms d'hôte distincts, sous peine de casser l'appairage.",
+      "labnote6.stageIntro": "Ce que couvre cette note, et les non-négociables de Timon",
+      "labnote6.stageWinRun": "Particularités de Timon en arrière-plan sous Windows",
+      "labnote6.stageLoopback": "Garder les écouteurs de Timon sur loopback",
+      "labnote6.stageOvh": "Identifiants API OVH pour DNS-01",
+      "labnote6.stageXcaddy": "Construire un Caddy personnalisé avec xcaddy",
+      "labnote6.stageService": "Enregistrer Caddy en service Windows",
+      "labnote6.stageTwoHost": "Pourquoi app et daemon ont besoin de noms d'hôte séparés",
+      "labnote6.stageApplyVerify": "Appliquer, utiliser, vérifier, et le rappel contrôle d'accès",
+      "labnote6.stageTakeaway": "Ce que ça boucle",
+      "labnote7.date": "29 oct. 2026",
+      "labnote7.title": "Vue d'ensemble de l'architecture : comment le trafic atteint vraiment bigdude",
+      "labnote7.tags": "Architecture · Control plane contre data plane · Flowchart · Diagramme de séquence · NAT traversal · Hole punching",
+      "labnote7.excerpt": "Clôture visuelle de la série : l'architecture complète du maillage en un seul diagramme, pourquoi une Freebox qui bloque le trafic entrant n'empêche pas un tunnel direct de se former, et le flux exact des messages depuis l'ouverture de bigdude.mydomain.cloud jusqu'au trafic peer-to-peer.",
+      "labnote7.stageIntro": "Ce que couvre cette note",
+      "labnote7.stageArchitecture": "L'architecture, de bout en bout",
+      "labnote7.stageNat": "Pourquoi le blocage du trafic entrant par la Freebox n'empêche rien de tout ça",
+      "labnote7.stageFlow": "Le flux de connexion, étape par étape",
+      "labnote7.stageTakeaway": "Ce que cette série démontre vraiment",
       "about.lead": "Je construis des choses.",
       "about.line1": "Parfois des choses utiles.",
       "about.line2": "Parfois des choses expérimentales.",
@@ -522,6 +684,15 @@ document.getElementById("year").textContent = new Date().getFullYear();
       const key = el.getAttribute("data-i18n");
       if (strings[key] !== undefined) {
         el.textContent = strings[key];
+      }
+    });
+
+    // Same as above, but for strings that embed markup (e.g. the accent
+    // span in the hero title) and must be set via innerHTML.
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-html");
+      if (strings[key] !== undefined) {
+        el.innerHTML = strings[key];
       }
     });
 
@@ -743,6 +914,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const alphaBase = isDark ? 0.5 : 0.42;
+    const alphaAmp = isDark ? 0.35 : 0.26;
+    const alphaFloor = isDark ? 0.18 : 0.2;
+    const glowAlpha = isDark ? 0.9 : 0.7;
+    const blurMult = isDark ? 3 : 2.6;
 
     particles.forEach((p) => {
       p.y -= p.speed;
@@ -764,12 +941,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
         Object.assign(p, randomParticle(true));
       }
 
-      const alpha = 0.5 + Math.sin(p.flicker) * 0.35;
+      const alpha = alphaBase + Math.sin(p.flicker) * alphaAmp;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${p.color}, ${Math.max(alpha, 0.18)})`;
-      ctx.shadowColor = `rgba(${p.color}, 0.9)`;
-      ctx.shadowBlur = p.radius * 3;
+      ctx.fillStyle = `rgba(${p.color}, ${Math.max(alpha, alphaFloor)})`;
+      ctx.shadowColor = `rgba(${p.color}, ${glowAlpha})`;
+      ctx.shadowBlur = p.radius * blurMult;
       ctx.fill();
       ctx.shadowBlur = 0;
     });

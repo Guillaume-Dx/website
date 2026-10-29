@@ -3,117 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab to Forge - Lab notes</title>
-  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
-  <link rel="icon" href="logo.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Lab to Forge</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="/n4tylb/" />
+  <meta http-equiv="refresh" content="0; url=/n4tylb/" />
+  <script>location.replace('/n4tylb/');</script>
 </head>
 <body>
-  <canvas id="bg-field" aria-hidden="true"></canvas>
-  <div id="bg-overlay" aria-hidden="true"></div>
-
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="index.html#top">
-        <img class="brand-logo" src="logo.png" alt="Lab to Forge logo" />
-        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
-      </a>
-      <div class="nav-right">
-        <nav class="site-nav">
-          <a href="index.html#top" data-i18n="nav.home">Home</a>
-        </nav>
-        <div class="lang-switch" role="group" aria-label="Language selector">
-          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
-            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
-              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-              <g clip-path="url(#flag-en-t)">
-                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
-                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
-              </g>
-            </svg>
-          </button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
-            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
-              <rect width="20" height="30" fill="#0055a4"/>
-              <rect x="20" width="20" height="30" fill="#fff"/>
-              <rect x="40" width="20" height="30" fill="#ef4135"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="sub-nav">
-    <div class="container sub-nav-inner">
-      <a href="projects.html" data-i18n="nav2.projects">Projects</a>
-      <a href="lab-notes.html" class="active" data-i18n="nav2.labnotes">Lab notes</a>
-      <a href="team.html" data-i18n="nav2.team">The Team</a>
-      <a href="about.html" data-i18n="nav2.about">About</a>
-    </div>
-  </nav>
-
-  <main>
-    <section id="top" class="hero about-hero labnotes-hero">
-      <div class="container">
-        <h1 data-i18n="labnotes.title">Lab notes</h1>
-        <p class="project-intro" data-i18n="labnotes.intro">Field notes from real engagements, what actually changes when Timon leads the work.</p>
-      </div>
-    </section>
-
-    <section class="about-content labnotes-content">
-      <div class="container labnotes-layout">
-        <aside class="labnotes-dates" aria-label="Lab notes by date">
-          <ul class="labnotes-date-list">
-            <li><a href="#labnote-2"><span class="labnote-date" data-i18n="labnote2.date">Oct 23, 2026</span><span data-i18n="labnote2.title">Three weeks, eleven projects: what actually ran on its own</span></a></li>
-            <li><a href="#labnote-1"><span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span><span data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</span></a></li>
-          </ul>
-        </aside>
-
-        <div class="labnotes-feed">
-          <article class="project-card labnote-excerpt" id="labnote-2">
-            <div class="labnote-meta">
-              <span class="labnote-date" data-i18n="labnote2.date">Oct 23, 2026</span>
-              <span class="project-stack" data-i18n="labnote2.tags">Multi-project portfolio · Kanban pipelines · Concurrent missions · Self-healing agents</span>
-            </div>
-            <h2 data-i18n="labnote2.title">Three weeks, eleven projects: what actually ran on its own</h2>
-            <p data-i18n="labnote2.excerpt">Eleven live projects, from an invoicing app to Timon's own plugin platform, that I carried at once over three weeks. What shipped, how Kanban pipelines and concurrent missions kept it all moving, and how much of its own trouble the framework fixed along the way, without me.</p>
-            <a class="labnote-readmore" href="lab-note-2.html" data-i18n="labnotes.readMore">Read the full note →</a>
-          </article>
-
-          <article class="project-card labnote-excerpt" id="labnote-1">
-            <div class="labnote-meta">
-              <span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span>
-              <span class="project-stack" data-i18n="labnote1.tags">Multi-agent review · Full codebase access · Risk assessment · Roadmap</span>
-            </div>
-            <h2 data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</h2>
-            <p data-i18n="labnote1.excerpt">A professional project built to strengthen our up-skilling capabilities, submitted to our technical assessment cycles ahead of a pilot. A single prompt was enough for Timon to assemble the right team of agents, parallelize the review, catch a significant gap between the docs and the code, and hand back a risk list and a trustworthy roadmap.</p>
-            <a class="labnote-readmore" href="lab-note-1.html" data-i18n="labnotes.readMore">Read the full note →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
-      <p class="powered-by">
-        <span data-i18n="footer.poweredBy">Powered by</span>
-        <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
-          <img class="timon-logo" src="timon-logo.png" alt="Timon - Agentic Workstation" />
-        </a>
-        <span data-i18n="footer.agentic">Agentic Workstation</span>
-      </p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <!-- Moved: lab-notes.html now lives at /n4tylb/ -->
+  <p>This page has moved. If you are not redirected automatically, <a href="/n4tylb/">click here</a>.</p>
 </body>
 </html>

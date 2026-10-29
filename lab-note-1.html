@@ -3,106 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab to Forge - Lab note: Auditing my own project with Timon</title>
-  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
-  <link rel="icon" href="logo.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>Lab to Forge</title>
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="/r8kqwn/" />
+  <meta http-equiv="refresh" content="0; url=/r8kqwn/" />
+  <script>location.replace('/r8kqwn/');</script>
 </head>
 <body>
-  <canvas id="bg-field" aria-hidden="true"></canvas>
-  <div id="bg-overlay" aria-hidden="true"></div>
-
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="index.html#top">
-        <img class="brand-logo" src="logo.png" alt="Lab to Forge logo" />
-        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
-      </a>
-      <div class="nav-right">
-        <nav class="site-nav">
-          <a href="index.html#top" data-i18n="nav.home">Home</a>
-        </nav>
-        <div class="lang-switch" role="group" aria-label="Language selector">
-          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
-            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
-              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
-              <g clip-path="url(#flag-en-t)">
-                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
-                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
-                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
-                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
-              </g>
-            </svg>
-          </button>
-          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
-            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
-              <rect width="20" height="30" fill="#0055a4"/>
-              <rect x="20" width="20" height="30" fill="#fff"/>
-              <rect x="40" width="20" height="30" fill="#ef4135"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <nav class="sub-nav">
-    <div class="container sub-nav-inner">
-      <a href="projects.html" data-i18n="nav2.projects">Projects</a>
-      <a href="lab-notes.html" class="active" data-i18n="nav2.labnotes">Lab notes</a>
-      <a href="team.html" data-i18n="nav2.team">The Team</a>
-      <a href="about.html" data-i18n="nav2.about">About</a>
-    </div>
-  </nav>
-
-  <main>
-    <section id="top" class="hero about-hero labnotes-hero">
-      <div class="container">
-        <a class="labnote-back" href="lab-notes.html" data-i18n="labnotes.backToList">← Back to Lab notes</a>
-        <h1 data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</h1>
-      </div>
-    </section>
-
-    <section class="about-content labnotes-content">
-      <div class="container">
-        <article class="project-card labnote-card">
-          <div class="labnote-meta">
-            <span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span>
-            <span class="project-stack" data-i18n="labnote1.tags">Multi-agent review · Full codebase access · Risk assessment · Roadmap</span>
-          </div>
-          <h3 class="labnote-stage" data-i18n="labnote1.stagePurpose">Purpose</h3>
-          <p data-i18n="labnote1.p1">This project is a professional project, built to improve our up-skilling capabilities and iterated for a few weeks with the regular help of GitHub Copilot in Visual Studio. It's a modern web platform (Blazor), backed by a data layer (Azure Data Explorer) and cloud processing (Function Apps), running a multi-step approval workflow. Before submitting it to our technical assessment cycles (security, privacy, accessibility) ahead of a pilot, I needed a clear-eyed status: where are the risks, what gaps still need fixing, and what should the roadmap to a finished product look like?</p>
-          <h3 class="labnote-stage" data-i18n="labnote1.stageHow">How</h3>
-          <p data-i18n="labnote1.p2">I handed this task to Timon both to evaluate this harness and in the hope of moving faster than with my current development context. A single prompt describing the brief was enough for Timon to work out which roles were needed, a researcher, a writer, a reviewer, which skills to attach to each one, and which MCP connections to wire in, then spin up the whole crew and start the assessment within minutes. No configuration, no team to assemble by hand.</p>
-          <p data-i18n="labnote1.p3">The agents split the work in parallel, one combing through the existing documentation and project history, the other exploring the code module by module, and the gap showed up immediately. The architecture docs described a scaffold reduced to a simple health check, while the code already shipped a working MVP with real endpoints, authorization rules, data ingestion pipelines and background jobs. They then rebuilt the documentation in layers, business logic, architecture, sequence diagrams, and a roadmap document rating every item as done, partial or not started, with supporting evidence.</p>
-          <p data-i18n="labnote1.p4">The risk assessment is where the code review really paid off. The agents confirmed the authorization model, database queries and data ingestion were sound, but still found two concrete issues to fix before any pilot: an endpoint reachable by non-admin roles that exposed a fraction of a table's records, and request models missing length validation. Both came with a precise, complete remediation plan, not a vague category.</p>
-          <p data-i18n="labnote1.p5">Midway through, I introduced a real scope change touching the domain model, the schema, the API, the background job and the UI all at once. Timon produced a proposal and executed six dependent workstreams, each tracked with explicit dependencies so development progressed consistently.</p>
-          <p data-i18n="labnote1.p6">The other side of autonomy also showed up: an irreversible task, wiping the data store for the new schema, was correctly blocked pending my approval. It only resumed once I had logged an explicit decision. That's the behaviour I expect from a system I'll trust with development, UAT or pre-production data: fast and parallel on review work, slow and blocking on anything that can't be undone.</p>
-          <h3 class="labnote-stage" data-i18n="labnote1.stageResult">Result</h3>
-          <p data-i18n="labnote1.p7">The real win isn't that the agents were clever, it's that I got up-to-date, reliable documentation, a defensible risk assessment and a roadmap I could hand straight to the reviewer, in a fraction of the time a review would have taken me, even with AI assistance in an IDE, all starting from a single prompt. That's the shift Timon brings: a small team that assembles itself for the task, goes and checks before it speaks, and knows when to stop and ask.</p>
-          <a class="labnote-back labnote-back-bottom" href="lab-notes.html" data-i18n="labnotes.backToList">← Back to Lab notes</a>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
-      <p class="powered-by">
-        <span data-i18n="footer.poweredBy">Powered by</span>
-        <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
-          <img class="timon-logo" src="timon-logo.png" alt="Timon - Agentic Workstation" />
-        </a>
-        <span data-i18n="footer.agentic">Agentic Workstation</span>
-      </p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <!-- Moved: lab-note-1.html now lives at /r8kqwn/ -->
+  <p>This page has moved. If you are not redirected automatically, <a href="/r8kqwn/">click here</a>.</p>
 </body>
 </html>

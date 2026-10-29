@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab to Forge - Lab note: Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</title>
+  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <script>
+    // Applied before paint to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        const stored = localStorage.getItem("lf-theme");
+        const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-field" aria-hidden="true"></canvas>
+  <div id="bg-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/#top">
+        <img class="brand-logo" src="/logo.png" alt="Lab to Forge logo" />
+        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
+      </a>
+      <div class="nav-right">
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
+          </svg>
+        </button>
+        <nav class="site-nav">
+          <a href="/#top" data-i18n="nav.home">Home</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+              <g clip-path="url(#flag-en-t)">
+                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
+              </g>
+            </svg>
+          </button>
+          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <rect width="20" height="30" fill="#0055a4"/>
+              <rect x="20" width="20" height="30" fill="#fff"/>
+              <rect x="40" width="20" height="30" fill="#ef4135"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="container sub-nav-inner">
+      <a href="/k2vdxr/" data-i18n="nav2.projects">Projects</a>
+      <a href="/n4tylb/" class="active" data-i18n="nav2.labnotes">Lab notes</a>
+      <a href="/p9hswc/" data-i18n="nav2.team">The Team</a>
+      <a href="/q8fmzk/" data-i18n="nav2.about">About</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="top" class="hero about-hero labnotes-hero">
+      <div class="container">
+        <a class="labnote-back" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        <h1><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 4/5</span><span data-i18n="labnote6.title">Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</span></h1>
+      </div>
+    </section>
+
+    <section class="about-content labnotes-content">
+      <div class="container">
+        <article class="project-card labnote-card">
+          <div class="labnote-meta">
+            <span class="labnote-date" data-i18n="labnote6.date">Oct 28, 2026</span>
+            <span class="project-stack" data-i18n="labnote6.tags">Caddy · xcaddy · OVH DNS-01 · Windows service · Reverse proxy · Device pairing</span>
+          </div>
+          <nav class="labnote-toc" aria-label="Table of contents"><h2 class="labnote-toc-title" data-i18n="labnotes.toc">On this page</h2><ol class="labnote-toc-list"><li><a href="#labnote6-stageIntro" data-i18n="labnote6.stageIntro">What this note covers, and Timon's non-negotiables</a></li><li><a href="#labnote6-stageWinRun" data-i18n="labnote6.stageWinRun">Windows background-run notes</a></li><li><a href="#labnote6-stageLoopback" data-i18n="labnote6.stageLoopback">Keeping Timon's listeners on loopback</a></li><li><a href="#labnote6-stageOvh" data-i18n="labnote6.stageOvh">OVH API credentials for DNS-01</a></li><li><a href="#labnote6-stageXcaddy" data-i18n="labnote6.stageXcaddy">Building a custom Caddy with xcaddy</a></li><li><a href="#labnote6-stageService" data-i18n="labnote6.stageService">Registering Caddy as a Windows service</a></li><li><a href="#labnote6-stageTwoHost" data-i18n="labnote6.stageTwoHost">Why app and daemon need separate hostnames</a></li><li><a href="#labnote6-stageApplyVerify" data-i18n="labnote6.stageApplyVerify">Apply, use, verify, and the access-control reminder</a></li><li><a href="#labnote6-stageTakeaway" data-i18n="labnote6.stageTakeaway">What this closes</a></li></ol></nav>
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/x5qjrn/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+            <a class="labnote-series-link labnote-series-next" href="/vbvup1/" data-i18n="labnotes.nextNote">Next note &rarr;</a>
+          </nav>
+          <h3 class="labnote-stage" id="labnote6-stageIntro" data-i18n="labnote6.stageIntro">What this note covers, and Timon's non-negotiables</h3>
+          <p>The previous lab note, &ldquo;Groups and access policies: enrolling bigdude and the iPhone,&rdquo; left <code>bigdude</code> and the iPhone enrolled, grouped, and scoped by narrow policies. This note covers the last piece: making Timon itself reachable over the mesh and from Windows - the non-negotiables, the reverse proxy, the certificate automation behind it, and why the web app and the daemon need two separate hostnames.</p><p>Five rules apply throughout, non-negotiable because getting any of them wrong either breaks pairing or exposes Timon directly to the internet:</p><div class="labnote-table-wrap"><table class="labnote-table"><thead><tr><th>Rule</th><th>Detail</th></tr></thead><tbody><tr><td>Loopback only</td><td>Timon's two listeners - web app (<code>app.listen</code>, default <code>127.0.0.1:3100</code>) and daemon API (<code>daemon.listen</code>, default <code>127.0.0.1:3000</code>) - stay on <code>127.0.0.1</code> forever. Never bind to <code>0.0.0.0</code> or a network interface IP directly</td></tr><tr><td>Admin account first</td><td>Create the administrator account (local access or SSH tunnel) before opening anything else to the mesh</td></tr><tr><td><code>behindTlsProxy</code></td><td>Once a reverse proxy sits in front, set <code>daemon.behindTlsProxy: true</code> and restart</td></tr><tr><td>Auth stays on</td><td>Never set <code>daemon.auth</code> to <code>"off"</code></td></tr><tr><td>No automatic HTTPS</td><td>Unlike Tailscale's <code>tailscale serve</code>, NetBird has no built-in HTTPS - a manual reverse proxy (Caddy) with a real certificate is required</td></tr></tbody></table></div>
+          <h3 class="labnote-stage" id="labnote6-stageWinRun" data-i18n="labnote6.stageWinRun">Windows background-run notes</h3>
+          <ul class="labnote-list"><li><span>Timon runs via the <strong><code>TimonOrchestrator</code> scheduled task</strong> (not a true service), started at boot and surviving sign-out - but <strong>waiting for the first sign-in after every restart</strong>. For an always-reachable machine: enable automatic sign-in (<code>netplwiz</code> &rarr; uncheck &ldquo;Users must enter a user name and password&rdquo;), or sign in manually after each reboot. Also disable sleep: Settings &rarr; System &rarr; Power &rarr; &ldquo;When plugged in, put my device to sleep after&rdquo; &rarr; <strong>Never</strong> - a sleeping machine answers nothing, scheduled task or not.</span></li><li><span>Config file: <code>%USERPROFILE%\.timon\timon.config.json</code>.</span></li><li><span>Service control: <code>timon service status</code> / <code>timon service stop</code> / <code>timon service start</code>.</span></li><li><span>Health/restart events, port status, and startup warnings show in the desktop log (<code>%USERPROFILE%\.timon\tmp\daemon-&lt;date&gt;.log</code>) - a &ldquo;did not answer within 120s&rdquo; or <code>ERR_CONNECTION_REFUSED</code> warning simply means the daemon/app hadn't finished starting yet. Wait for the health check to report OK before troubleshooting further - it can take up to ~180s after a service restart, and chasing the warning as if it were a real failure wastes time on a condition that resolves itself.</span></li></ul>
+          <h3 class="labnote-stage" id="labnote6-stageLoopback" data-i18n="labnote6.stageLoopback">Keeping Timon's listeners on loopback</h3>
+          <p>Confirm in <code>%USERPROFILE%\.timon\timon.config.json</code> (actual values on <code>bigdude</code>: app on <code>3110</code>, daemon on <code>3010</code> - non-default ports, confirm against your own install):</p><span class="labnote-code-label">timon.config.json</span><pre><code>{
+  "app": { "listen": { "host": "127.0.0.1", "port": 3110 } },
+  "daemon": { "listen": { "host": "127.0.0.1", "port": 3010 }, "behindTlsProxy": true }
+}</code></pre>
+          <h3 class="labnote-stage" id="labnote6-stageOvh" data-i18n="labnote6.stageOvh">OVH API credentials for DNS-01</h3>
+          <p>The <code>caddy-dns/ovh</code> plugin needs four values: an <strong>endpoint</strong> name and three secrets (<strong>application key</strong>, <strong>application secret</strong>, <strong>consumer key</strong>).</p><p><strong>These credentials are scoped to the OVH zone/account, not to any one machine.</strong> The same <code>application_key</code>/<code>application_secret</code>/<code>consumer_key</code> can (and should, for simplicity) be reused in every machine's Caddyfile <code>dns ovh</code> block - what they authorize is &ldquo;permission to edit DNS records in this zone,&rdquo; which any Caddy instance needs regardless of which machine it runs on. Each machine still gets its own certificate for its own hostname; only the credential is shared. A separate token per machine is optional, only useful for easier per-machine revocation later. If a machine's Caddyfile is missing these values (or has placeholders), Caddy's log shows <code>missing authentication information, you need to provide one of the following: application_key/application_secret, client_id/client_secret, or access_token</code> - that error means the credentials below were never actually set on that machine.</p><ol class="labnote-list"><li><span>Go to OVH's API credential creation page for your account's region - for most European <code>.cloud</code>/<code>.com</code> domains managed under the EU dashboard, this is <code>https://eu.api.ovh.com/createToken/</code> (use <code>ca.api.ovh.com</code> or <code>us.api.ovh.com</code> instead if the OVH account is Canada/US-based - this also determines the <code>endpoint</code> value in the Caddyfile: <code>ovh-eu</code>, <code>ovh-ca</code>, or <code>ovh-us</code>).</span></li><li><span>Fill in: <strong>Application name</strong> (e.g. <code>caddy-dns-mydomain</code>), <strong>Application description</strong> (e.g. <code>Caddy DNS-01 for mydomain.cloud</code>), <strong>Validity</strong> (unlimited, or set a renewal reminder to time-box it).</span></li><li><span>Grant exactly these API rights, scoped to the zone (replace <code>mydomain.cloud</code> with the real domain - narrower is better than the wildcard <code>*</code> scope):</span><span class="labnote-code-label">OVH API rights</span><pre><code>GET    /domain/zone/mydomain.cloud/record
+POST   /domain/zone/mydomain.cloud/record
+GET    /domain/zone/mydomain.cloud/record/*
+PUT    /domain/zone/mydomain.cloud/record/*
+DELETE /domain/zone/mydomain.cloud/record/*
+GET    /domain/zone/mydomain.cloud/soa
+POST   /domain/zone/mydomain.cloud/refresh</code></pre></li><li><span>Submit - OVH immediately returns an <strong>Application Key</strong> and <strong>Application Secret</strong>. Save both now; the secret is shown only once. Generating the <strong>Consumer Key</strong> (binds the application key to the account with the rights above) requires one authenticated call to OVH's API - the create-token web form above typically already returns all three values together; if using the raw API flow instead, use <code>ovh/go-ovh</code>'s helper or OVH's own &ldquo;Create consumer key&rdquo; quickstart with the same endpoint and application key.</span></li><li><span>Store all three values (<code>application_key</code>, <code>application_secret</code>, <code>consumer_key</code>) plus the <code>endpoint</code> (<code>ovh-eu</code>) securely - e.g. as Windows environment variables referenced from the Caddyfile instead of hardcoding them in plaintext:</span><span class="labnote-code-label">PowerShell</span><pre><code>[System.Environment]::SetEnvironmentVariable("OVH_ENDPOINT", "ovh-eu", "Machine")
+[System.Environment]::SetEnvironmentVariable("OVH_APPLICATION_KEY", "...", "Machine")
+[System.Environment]::SetEnvironmentVariable("OVH_APPLICATION_SECRET", "...", "Machine")
+[System.Environment]::SetEnvironmentVariable("OVH_CONSUMER_KEY", "...", "Machine")</code></pre></li></ol><p>The variables are referenced in the Caddyfile with <code>{$OVH_ENDPOINT}</code>, <code>{$OVH_APPLICATION_KEY}</code>, etc. instead of inline strings - keeps secrets out of the Caddyfile itself (restart the <code>Caddy</code> service after setting machine-level env vars so it picks them up).</p>
+          <h3 class="labnote-stage" id="labnote6-stageXcaddy" data-i18n="labnote6.stageXcaddy">Building a custom Caddy with xcaddy</h3>
+          <p>Stock Caddy binaries (from caddyserver.com/download) don't include third-party DNS provider plugins like <code>caddy-dns/ovh</code> - they must be compiled in via <code>xcaddy</code>. This is built <strong>directly on the Windows machine</strong>, in PowerShell, with no Linux/WSL step needed.</p><ol class="labnote-list"><li><span>Install Go for Windows (one-time): download and run the installer from <a href="https://go.dev/dl/" target="_blank" rel="noopener">go.dev/dl</a> (pick the <code>.msi</code> for <code>windows-amd64</code>), then open a <strong>new</strong> PowerShell window so <code>PATH</code> picks up <code>go.exe</code>. Confirm:</span><span class="labnote-code-label">PowerShell</span><pre><code>go version</code></pre></li><li><span>Install <code>xcaddy</code>:</span><span class="labnote-code-label">PowerShell</span><pre><code>go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+$env:PATH += ";$(go env GOPATH)\bin"</code></pre><span>Add <code>$(go env GOPATH)\bin</code> to the permanent <code>PATH</code> via System Properties &rarr; Environment Variables, so this doesn't need repeating in every new session.</span></li><li><span>Build <code>caddy.exe</code> with the OVH plugin:</span><span class="labnote-code-label">PowerShell</span><pre><code>xcaddy build --with github.com/caddy-dns/ovh</code></pre><span>This produces <code>caddy.exe</code> in the current directory - <code>xcaddy</code> fetches Caddy's source plus the named plugin module and compiles them together; no manual Go coding needed.</span></li><li><span>Verify the plugin is present before shipping it:</span><span class="labnote-code-label">PowerShell</span><pre><code>.\caddy.exe list-modules | Select-String ovh</code></pre><span>Expect to see <code>dns.providers.ovh</code> in the output.</span></li><li><span>Move the built binary into place:</span><span class="labnote-code-label">PowerShell</span><pre><code>New-Item -ItemType Directory -Force -Path C:\Tools\caddy | Out-Null
+Move-Item -Force .\caddy.exe C:\Tools\caddy\caddy.exe</code></pre></li><li><span>Whenever Caddy itself needs a version bump later, repeat the build/verify/move steps with the newer Caddy/plugin versions - <code>xcaddy build</code> always pulls latest unless a version is pinned (e.g. <code>xcaddy build v2.8.4 --with github.com/caddy-dns/ovh</code>); then stop and start the Caddy service (covered next in this note) so the already-registered service picks up the new binary.</span></li></ol><p>Caddyfile sample (split app/daemon, using env vars):</p><span class="labnote-code-label">Caddyfile</span><pre><code>bigdude.mydomain.cloud {
+	bind 101.63.99.123
+	tls {
+		dns ovh {
+			endpoint {$OVH_ENDPOINT}
+			application_key {$OVH_APPLICATION_KEY}
+			application_secret {$OVH_APPLICATION_SECRET}
+			consumer_key {$OVH_CONSUMER_KEY}
+		}
+	}
+	log {
+		output file C:\Tools\caddy\logs\app.log
+	}
+	reverse_proxy 127.0.0.1:3110
+}
+
+bigdude-daemon.mydomain.cloud {
+	bind 101.63.99.123
+	tls {
+		dns ovh {
+			endpoint {$OVH_ENDPOINT}
+			application_key {$OVH_APPLICATION_KEY}
+			application_secret {$OVH_APPLICATION_SECRET}
+			consumer_key {$OVH_CONSUMER_KEY}
+		}
+	}
+	log {
+		output file C:\Tools\caddy\logs\daemon.log
+	}
+	reverse_proxy 127.0.0.1:3010
+}</code></pre><p><strong>Test the Caddyfile before applying it</strong> (from <code>C:\Tools\caddy</code>):</p><span class="labnote-code-label">PowerShell</span><pre><code>.\caddy.exe validate .\Caddyfile
+.\caddy.exe fmt --overwrite .\Caddyfile</code></pre><p><code>validate</code> catches syntax/config errors without starting the server; <code>fmt --overwrite</code> reformats the file to Caddy's canonical style in place (useful after manual edits, and safe to run before every service restart cycle).</p>
+          <h3 class="labnote-stage" id="labnote6-stageService" data-i18n="labnote6.stageService">Registering Caddy as a Windows service</h3>
+          <ol class="labnote-list"><li><span>Confirm the custom-built <code>caddy.exe</code> is at <code>C:\Tools\caddy\caddy.exe</code>, and the OVH environment variables are set.</span></li><li><span>Register and start the service:</span><span class="labnote-code-label">PowerShell</span><pre><code>sc.exe create Caddy start= auto binPath= "C:\Tools\caddy\caddy.exe run --config C:\Tools\caddy\Caddyfile"
+sc.exe start Caddy</code></pre><span>Stop / remove if ever needed:</span><span class="labnote-code-label">PowerShell</span><pre><code>sc.exe stop Caddy
+sc.exe delete Caddy</code></pre></li><li><span>Optional: auto-restart on crash (<code>sc.exe</code> doesn't do this by default):</span><span class="labnote-code-label">PowerShell</span><pre><code>sc.exe failure Caddy reset= 0 actions= restart/5000</code></pre></li><li><span>Config changes need a manual restart - <code>sc.exe</code>-registered services can't be signaled to reload gracefully:</span><span class="labnote-code-label">PowerShell</span><pre><code>sc.exe stop Caddy
+sc.exe start Caddy</code></pre></li><li><span><strong>Firewall:</strong> scope the Windows Defender Firewall allow rule to the NetBird virtual adapter/category (set that adapter's network category to <strong>Private</strong> when Windows first prompts), not Public/Private broadly. Caddy's <code>bind</code> directive already prevents listening on the public adapter at all - the firewall scoping is a second, independent layer, not a substitute for it.</span></li><li><span><strong>Logs:</strong> Caddy run via <code>sc.exe</code> writes to stdout/stderr by default, which goes nowhere without a console attached - add an explicit <code>log</code> directive per site block to persist logs to a file (see the Caddyfile above), or check Event Viewer &rarr; Windows Logs &rarr; Application as a fallback.</span></li></ol><p>Running <code>caddy.exe run --config ...</code> interactively in a terminal also shows live output for troubleshooting - but <strong>stop the service first</strong> (<code>sc.exe stop Caddy</code>). Caddy's own admin API binds <code>127.0.0.1:2019</code> by default, and only one Caddy process can hold that port at a time; running the interactive command while the service is still up fails with <code>listen tcp 127.0.0.1:2019: bind: Only one usage of each socket address...</code>. Restart the service (<code>sc.exe start Caddy</code>) once done debugging.</p><p><strong>Staging vs production ACME CA:</strong> while debugging TLS issuance, Caddy's log may show requests going to <code>acme-staging-v02.api.letsencrypt.org</code> (Let's Encrypt's staging environment - issues untrusted test certificates, used to avoid production rate limits while troubleshooting). Once DNS-01 issuance succeeds cleanly against staging, remove/adjust any <code>acme_ca</code> staging override in the Caddyfile so it issues from the real production CA (<code>acme-v02.api.letsencrypt.org</code>) - otherwise browsers keep showing an untrusted-certificate warning indefinitely.</p>
+          <h3 class="labnote-stage" id="labnote6-stageTwoHost" data-i18n="labnote6.stageTwoHost">Why app and daemon need separate hostnames</h3>
+          <p><strong>Rule: pairing always targets the daemon hostname.</strong> In the Machines plugin, enter <code>https://&lt;host&gt;-daemon.mydomain.cloud</code> (Caddy &rarr; <code>127.0.0.1:3010</code>), never the bare <code>https://&lt;host&gt;.mydomain.cloud</code> (Caddy &rarr; web app <code>127.0.0.1:3110</code>). The bare hostname is for browsing only.</p><p>Device pairing (Settings &rarr; Access &amp; network &rarr; Devices, used by the Machines plugin) calls the <strong>daemon's</strong> API (<code>/api/devices/redeem</code>), not the web app. If the reverse proxy points at the web app port instead, the web app answers <strong>401 Unauthorized</strong>, and Timon surfaces this as a misleading <strong>&ldquo;wrong, expired or already used&rdquo;</strong> pairing-code error - even though the code itself is still valid. Tell-tale sign: the code is still shown with time remaining when the error appears, proving the request never reached the daemon.</p><p>Two situations both produce this exact misleading message:</p><ol class="labnote-list"><li><span>Proxy points to the <strong>web app</strong> (3110) instead of the <strong>daemon</strong> (3010).</span></li><li><span>The proxy itself requires its own authentication (basic auth, Authelia, Authentik, etc.) in front of <code>/api/*</code> - its 401 is returned before Timon is ever reached.</span></li></ol><p>Also: self-signed certs (<code>tls internal</code>) are <strong>rejected outright</strong> for pairing - only a real, CA-trusted certificate works (which is exactly what the DNS-01/OVH setup above provides). The <strong>&ldquo;Make this machine reachable&rdquo;</strong> button in Timon's UI only works with Tailscale; it's a no-op for NetBird.</p><p><strong>Diagnostic command</strong> - from any machine, using the exact HTTPS address entered in Machines:</p><span class="labnote-code-label">PowerShell</span><pre><code>curl.exe -s -X POST https://YOUR-ADDRESS/api/devices/redeem -H "content-type: application/json" -d "{}"</code></pre><div class="labnote-table-wrap"><table class="labnote-table"><thead><tr><th>Response</th><th>Means</th></tr></thead><tbody><tr><td><code>{"error":"unauthorized"}</code></td><td>The web app answered, not the daemon &rarr; fix the proxy target</td></tr><tr><td>A login page / proxy-branded response</td><td>The proxy's own auth is in the way &rarr; remove auth on <code>/api/*</code></td></tr><tr><td><code>{"error":"invalid_request"}</code> or <code>device_requires_tls</code></td><td>Request reached the daemon correctly &rarr; look elsewhere</td></tr></tbody></table></div><p><strong>Conclusion:</strong> the web app and the daemon must be served on <strong>separate hostnames</strong>, each with its own clean <code>reverse_proxy</code> target - not combined on one hostname, and not split by path (fragile, risks misrouting).</p>
+          <h3 class="labnote-stage" id="labnote6-stageApplyVerify" data-i18n="labnote6.stageApplyVerify">Apply, use, verify, and the access-control reminder</h3>
+          <p>Apply any Caddyfile change:</p><span class="labnote-code-label">PowerShell</span><pre><code>sc.exe stop Caddy
+sc.exe start Caddy</code></pre><ul class="labnote-list"><li><span><strong>Day-to-day browsing:</strong> <code>https://bigdude.mydomain.cloud</code>.</span></li><li><span><strong>Pairing a new device / Machines plugin remote address:</strong> <code>https://bigdude-daemon.mydomain.cloud</code> (the daemon hostname, never the bare app hostname). Steps:</span><ol class="labnote-list"><li><span>On the machine to add (<code>bigdude</code>), generate a fresh pairing code: Settings &rarr; Access &amp; network &rarr; Devices. The code must come from this machine, not from the one pairing from.</span></li><li><span>On the machine pairing from, open Machines and enter the address <code>https://bigdude-daemon.mydomain.cloud</code> and the code.</span></li><li><span>Do it right away. Generate a new code after any restart of <code>bigdude</code>'s Timon service, and after any failed attempt.</span></li><li><span>If &ldquo;wrong, expired or already used&rdquo; appears, run the diagnostic command from the previous section against the daemon hostname before trying a new code.</span></li></ol></li></ul><p><strong>Verify:</strong></p><ul class="labnote-list"><li><span><code>curl.exe -s https://bigdude.mydomain.cloud</code> from an enrolled remote peer - should return a redirect to <code>/login</code>. (Do not add <code>-UseBasicParsing</code>: it is a PowerShell <code>Invoke-WebRequest</code> parameter, and <code>curl.exe</code> reads it as <code>-U</code>, a proxy user.)</span></li><li><span>Confirm the hostnames are not swapped, from an enrolled remote peer:</span><span class="labnote-code-label">PowerShell</span><pre><code>curl.exe -s -D - -o NUL https://bigdude.mydomain.cloud
+curl.exe -s -D - -o NUL https://bigdude-daemon.mydomain.cloud</code></pre><span>The bare hostname must return <code>307</code> to <code>/login</code> (web app). The <code>-daemon</code> hostname must return <code>401</code> with <code>X-Powered-By: Express</code> (daemon). If they are the other way round, swap the <code>reverse_proxy</code> targets in the Caddyfile and restart Caddy.</span></li><li><span><code>sc.exe query Caddy</code> &rarr; <code>RUNNING</code> after reboot (service is <code>start= auto</code>).</span></li><li><span>Confirm both hostnames are unreachable from a device not enrolled in NetBird.</span></li><li><span>Confirm <code>127.0.0.1:3110</code> and <code>127.0.0.1:3010</code> both answer locally before attempting remote pairing (avoids the false &ldquo;code refused&rdquo; symptom caused by the app/daemon still starting up).</span></li></ul><p><strong>Access control reminder:</strong> both hostnames resolve to the same NetBird peer IP and port 443 - scope the NetBird access policy once, as set up in the previous lab note: source group <code>timon-admins</code> &rarr; this peer, port 443 only. No separate policy is needed per hostname, since routing between them is handled by Caddy's SNI-based site blocks, not by NetBird.</p>
+          <h3 class="labnote-stage" id="labnote6-stageTakeaway" data-i18n="labnote6.stageTakeaway">What this closes</h3>
+          <p>This closes the build: a self-hosted NetBird controller on the Freebox, groups and narrow access policies instead of a flat fail-open mesh, and Timon itself reachable from anywhere over the mesh through a reverse proxy that keeps its listeners on loopback and only answers to a CA-trusted certificate. The whole chain, end to end, now mirrors the decision made at the very start of this series: self-host everything, trust the mesh explicitly, and never expose a raw port to the internet.</p>
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/x5qjrn/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+            <a class="labnote-series-link labnote-series-next" href="/vbvup1/" data-i18n="labnotes.nextNote">Next note &rarr;</a>
+          </nav>
+          <a class="labnote-back labnote-back-bottom" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text">
+        <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
+        <p class="powered-by">
+          <span data-i18n="footer.poweredBy">Powered by</span>
+          <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
+            <img class="timon-logo" src="/timon-logo.png" alt="Timon - Agentic Workstation" />
+          </a>
+          <span data-i18n="footer.agentic">Agentic Workstation</span>
+        </p>
+      </div>
+      <div class="social-links">
+        <a class="social-link" href="https://x.com/GdX_O_O" target="_blank" rel="noopener" title="X" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.6l-5.2-6.8L5.3 22H2l8.1-9.3L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/gducroix/?locale=en-US" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a class="social-link" href="https://github.com/Guillaume-Dx" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.07 11.07 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.26 5.69.42.36.78 1.07.78 2.17v3.21c0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>

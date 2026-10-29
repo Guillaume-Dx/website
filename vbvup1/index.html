@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab to Forge - Lab note: Architecture overview: how traffic actually reaches bigdude</title>
+  <meta name="description" content="Lab to Forge lab notes." data-i18n-attr="meta.description" />
+  <link rel="icon" href="/logo.png" type="image/png" />
+  <script>
+    // Applied before paint to avoid a flash of the wrong theme.
+    (function () {
+      try {
+        const stored = localStorage.getItem("lf-theme");
+        const theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .labnote-diagram-wrap {
+      position: relative;
+      margin: 1.1rem 0 1.6rem;
+    }
+    .labnote-mermaid {
+      align-self: stretch;
+      width: 100%;
+      background-color: #060a1a;
+      background-image:
+        linear-gradient(135deg, rgba(53, 224, 201, 0.07) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(53, 224, 201, 0.07) 1px, transparent 1px);
+      background-size: 32px 32px;
+      border: 1px solid rgba(53, 224, 201, 0.35);
+      border-radius: 12px;
+      padding: 1.7rem;
+      margin: 0;
+      overflow-x: auto;
+      box-shadow: inset 0 0 70px rgba(53, 224, 201, 0.08);
+    }
+    .labnote-mermaid svg {
+      display: block;
+      margin: 0 auto;
+      min-width: 760px;
+      width: 100%;
+      max-width: none !important;
+      height: auto;
+    }
+    @media (min-width: 900px) {
+      .labnote-mermaid svg {
+        min-width: 960px;
+      }
+    }
+    .labnote-diagram-legend {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: rgba(6, 10, 26, 0.94);
+      border: 1px solid rgba(53, 224, 201, 0.45);
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem 0.7rem;
+      min-width: 185px;
+      font-size: 0.7rem;
+      line-height: 1.55;
+      color: #cfe8ff;
+      z-index: 5;
+      box-shadow: 0 0 20px rgba(53, 224, 201, 0.15);
+    }
+    .labnote-diagram-legend strong {
+      display: block;
+      text-align: center;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #35e0c9;
+      font-size: 0.64rem;
+      margin-bottom: 0.4rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid rgba(53, 224, 201, 0.25);
+    }
+    .labnote-diagram-legend .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0.2rem 0;
+      white-space: nowrap;
+    }
+    .labnote-diagram-legend .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex: none;
+      box-shadow: 0 0 6px currentColor;
+    }
+    @media (max-width: 640px) {
+      .labnote-diagram-legend {
+        position: static;
+        margin: 0 0 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg-field" aria-hidden="true"></canvas>
+  <div id="bg-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/#top">
+        <img class="brand-logo" src="/logo.png" alt="Lab to Forge logo" />
+        From&nbsp;the&nbsp;lab&nbsp;to&nbsp;the&nbsp;forge
+      </a>
+      <div class="nav-right">
+        <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
+          </svg>
+        </button>
+        <nav class="site-nav">
+          <a href="/#top" data-i18n="nav.home">Home</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language selector">
+          <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <clipPath id="flag-en-t"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+              <g clip-path="url(#flag-en-t)">
+                <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                <path d="M0,0 L60,30 M60,0 L0,30" stroke="#cf142b" stroke-width="2"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+                <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" stroke-width="6"/>
+              </g>
+            </svg>
+          </button>
+          <button class="lang-btn" type="button" data-lang="fr" aria-label="Français" title="Français">
+            <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
+              <rect width="20" height="30" fill="#0055a4"/>
+              <rect x="20" width="20" height="30" fill="#fff"/>
+              <rect x="40" width="20" height="30" fill="#ef4135"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sub-nav">
+    <div class="container sub-nav-inner">
+      <a href="/k2vdxr/" data-i18n="nav2.projects">Projects</a>
+      <a href="/n4tylb/" class="active" data-i18n="nav2.labnotes">Lab notes</a>
+      <a href="/p9hswc/" data-i18n="nav2.team">The Team</a>
+      <a href="/q8fmzk/" data-i18n="nav2.about">About</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="top" class="hero about-hero labnotes-hero">
+      <div class="container">
+        <a class="labnote-back" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        <h1><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 5/5</span><span data-i18n="labnote7.title">Architecture overview: how traffic actually reaches bigdude</span></h1>
+      </div>
+    </section>
+
+    <section class="about-content labnotes-content">
+      <div class="container">
+        <article class="project-card labnote-card">
+          <div class="labnote-meta">
+            <span class="labnote-date" data-i18n="labnote7.date">Oct 29, 2026</span>
+            <span class="project-stack" data-i18n="labnote7.tags">Architecture · Control plane vs data plane · Flowchart · Sequence diagram · NAT traversal · Hole punching</span>
+          </div>
+          <nav class="labnote-toc" aria-label="Table of contents"><h2 class="labnote-toc-title" data-i18n="labnotes.toc">On this page</h2><ol class="labnote-toc-list"><li><a href="#labnote7-stageIntro" data-i18n="labnote7.stageIntro">What this note covers</a></li><li><a href="#labnote7-stageArchitecture" data-i18n="labnote7.stageArchitecture">The architecture, end to end</a></li><li><a href="#labnote7-stageNat" data-i18n="labnote7.stageNat">Why the Freebox blocking inbound traffic doesn't stop any of this</a></li><li><a href="#labnote7-stageFlow" data-i18n="labnote7.stageFlow">Connection flow, step by step</a></li><li><a href="#labnote7-stageTakeaway" data-i18n="labnote7.stageTakeaway">What this series actually proves</a></li></ol></nav>
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/y9tkzb/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+          </nav>
+          <h3 class="labnote-stage" id="labnote7-stageIntro" data-i18n="labnote7.stageIntro">What this note covers</h3>
+          <p>The previous lab note, &ldquo;Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split,&rdquo; closed the last piece of the build: a reverse proxy in front of Timon, a CA-trusted certificate, and two hostnames that never get confused. Every individual decision in this series - the self-hosted controller, groups and policies instead of a flat mesh, the Custom DNS Zone, Caddy - now needs to be seen as one picture instead of six separate ones.</p>
+          <p>This closing note is that picture: the full architecture end to end, then the exact mechanics of why a laptop on a café network can reach <code>bigdude</code> sitting behind a home router that blocks every unsolicited inbound connection it receives.</p>
+
+          <h3 class="labnote-stage" id="labnote7-stageArchitecture" data-i18n="labnote7.stageArchitecture">The architecture, end to end</h3>
+          <p>Four zones, two kinds of traffic. The thin arrows below are control-plane traffic (authentication, peer discovery, policy decisions); the thick and dashed arrows are the actual data plane (application traffic, peer-to-peer):</p>
+          <div class="labnote-diagram-wrap">
+          <pre class="mermaid labnote-mermaid">flowchart TB
+    subgraph EXT["🌐 Outside the LAN (anywhere, internet)"]
+        laptop["💻 Laptop\n(NetBird client)"]
+        phone["📱 iPhone\n(NetBird app, cellular)"]
+    end
+
+    subgraph FREEBOX["📡 Freebox (home gateway)"]
+        direction TB
+        ctrl["🖥️ NetBird Controller VM (Ubuntu)\nmanagement + signal + relay + dashboard\nnetbird.mydomain.cloud\nports 80/443 tcp, 3478 udp forwarded"]
+    end
+
+    subgraph LAN["🏠 Home LAN"]
+        direction TB
+        subgraph ONBOARDED["✅ Devices onboarded in NetBird (mesh peers)"]
+            bigdude["🖥️ bigdude\n(Timon host)\nCaddy + Timon\nbigdude.mydomain.cloud\nbigdude-daemon.mydomain.cloud"]
+            hub["🏠 Home-automation hub\n(NetBird client)"]
+        end
+        subgraph OUTSIDE["⛔ Devices NOT onboarded in NetBird"]
+            nas["🗄️ NAS / printer / other LAN gear\n(LAN-only, unreachable remotely)"]
+            iot["🔌 Legacy/embedded IoT device\n(no NetBird client possible)"]
+        end
+    end
+
+    laptop -- "🔑 1 - SSO auth + peer/route info" --> ctrl
+    phone -- "🔑 1 - SSO auth + peer/route info" --> ctrl
+    bigdude -- "🔑 1 - SSO auth + peer/route info" --> ctrl
+    hub -- "🔑 1 - SSO auth + peer/route info" --> ctrl
+
+    laptop == "🔗 2 - direct WireGuard P2P\n(relayed via ctrl only if NAT blocks direct)" ==> bigdude
+    phone == "🔗 2 - direct WireGuard P2P\n(relayed via ctrl only if NAT blocks direct)" ==> bigdude
+    laptop -. "🔗 2 - direct WireGuard P2P" .-> hub
+    phone -. "🔗 2 - direct WireGuard P2P" .-> hub
+
+    bigdude -. "🏠 plain LAN traffic\n(no policy, no tunnel)" .-> nas
+    hub -. "🏠 plain LAN traffic\n(no policy, no tunnel)" .-> iot
+
+    classDef extClass fill:#241b06,stroke:#d9a441,stroke-width:2.5px,color:#f5e2b8;
+    classDef gatewayClass fill:#071a2e,stroke:#3d9bdb,stroke-width:2.5px,color:#cfe8ff;
+    classDef onboardedClass fill:#042b26,stroke:#35e0c9,stroke-width:2.5px,color:#d7fff7;
+    classDef offlineClass fill:#2b1507,stroke:#e07a2c,stroke-width:2.5px,color:#ffd9b0;
+    class laptop,phone extClass;
+    class ctrl gatewayClass;
+    class bigdude,hub onboardedClass;
+    class nas,iot offlineClass;
+
+    style ONBOARDED fill:#06211d,stroke:#35e0c9,stroke-width:2px,color:#e8eaed
+    style OUTSIDE fill:#2a1709,stroke:#e07a2c,stroke-width:2px,color:#e8eaed
+    style FREEBOX fill:#0a1522,stroke:#3d9bdb,stroke-width:2px,color:#e8eaed
+    style EXT fill:#201808,stroke:#d9a441,stroke-width:2px,color:#e8eaed
+    style LAN fill:none,stroke:#4a5568,stroke-width:1.5px,stroke-dasharray: 4 3,color:#e8eaed</pre>
+          <div class="labnote-diagram-legend">
+            <strong>Legend</strong>
+            <div class="legend-row"><span class="swatch" style="background:#d9a441;color:#d9a441;"></span>External device (internet)</div>
+            <div class="legend-row"><span class="swatch" style="background:#3d9bdb;color:#3d9bdb;"></span>Controller VM (Freebox)</div>
+            <div class="legend-row"><span class="swatch" style="background:#35e0c9;color:#35e0c9;"></span>Onboarded LAN peer</div>
+            <div class="legend-row"><span class="swatch" style="background:#e07a2c;color:#e07a2c;"></span>Not onboarded (LAN-only)</div>
+            <div class="legend-row"><span class="swatch" style="background:#8a93a6;color:#8a93a6;"></span>🔑 control-plane / 🔗 data-plane</div>
+          </div>
+          </div>
+          <p>Reading the diagram:</p>
+          <ul class="labnote-list">
+            <li><span><strong>Step 1, thin arrows, to the controller:</strong> every mesh peer - laptop, iPhone, <code>bigdude</code>, the hub - authenticates to the self-hosted NetBird controller VM on the Freebox via SSO, and receives the current peer list, routes, and access policy from it. The controller never sits in the actual data path once peers know how to reach each other.</span></li>
+            <li><span><strong>Step 2, thick/dashed arrows, peer-to-peer:</strong> actual traffic between an external device and a LAN peer flows as a direct WireGuard tunnel between the two peers, NAT-traversed, only relayed through the controller's relay/TURN component as a fallback when direct UDP fails - this is the peer-to-peer model chosen over a routing-gateway model.</span></li>
+            <li><span><strong>Green box, onboarded:</strong> <code>bigdude</code> and the hub run the NetBird client themselves, so they're reachable individually, each governed by its own group and policy - nothing is reachable by default.</span></li>
+            <li><span><strong>Orange box, not onboarded:</strong> any LAN device without a NetBird client (NAS, printer, legacy IoT) is only reachable from other devices already on the LAN - remote peers have no path to them at all unless a routing peer is deliberately configured for that specific device, which this build does not do by default.</span></li>
+            <li><span>The Freebox itself only does port-forwarding (80/443/3478) to the controller VM - it is not in the data path for peer-to-peer traffic once peers have connected directly.</span></li>
+          </ul>
+
+          <h3 class="labnote-stage" id="labnote7-stageNat" data-i18n="labnote7.stageNat">Why the Freebox blocking inbound traffic doesn't stop any of this</h3>
+          <p>The Freebox blocks unsolicited <em>incoming</em> traffic by default, and nothing in this build changes that. The WireGuard tunnel still forms, because of how NAT traversal (UDP hole punching) works: the connection is always initiated from inside the LAN outward, never accepted as an unsolicited inbound connection.</p>
+          <ol class="labnote-list">
+            <li><span><strong>The LAN device dials out first.</strong> <code>bigdude</code> (or the hub), running the NetBird client, opens an outbound UDP connection to the controller/signal server. The Freebox's NAT/firewall always allows outbound traffic and the return replies on that same connection - this is normal, expected NAT behavior, not a port-forward.</span></li>
+            <li><span><strong>The signal server introduces both sides.</strong> The external laptop or phone also connects outbound to the controller. The controller, via its signal component, exchanges each side's public IP:port (as seen from the outside, after NAT) and WireGuard public keys - it's matchmaking, not routing the data.</span></li>
+            <li><span><strong>Hole punching.</strong> Both peers then send UDP packets toward the other's observed public address, simultaneously, from the connections they already have open outbound. Because the Freebox's NAT table now has an &ldquo;expected return traffic&rdquo; mapping for that external address:port, the incoming WireGuard packets from the external peer are seen by the Freebox as replies to a connection it opened itself - so they're let through, with no port-forward rule needed at all.</span></li>
+            <li><span><strong>If hole punching fails</strong> (strict/symmetric NAT, some mobile carriers), NetBird falls back to the relay/TURN component - which both sides are already connected to outbound, so again no inbound port is needed; traffic is relayed through a connection both sides initiated.</span></li>
+          </ol>
+          <p>So the only port-forward actually configured on the Freebox (80/443/3478) is for the controller VM itself to be reachable - dashboard, ACME, STUN - not for <code>bigdude</code> or the hub. Those LAN devices are reached purely via connections they themselves opened outward, which is exactly why no incoming-traffic rule is needed for them specifically.</p>
+
+          <h3 class="labnote-stage" id="labnote7-stageFlow" data-i18n="labnote7.stageFlow">Connection flow, step by step</h3>
+          <p>The diagram below walks through the exact message flow when an external device (laptop or iPhone) tries to reach <code>bigdude</code> on the LAN, from the moment both clients are idle/connected to the moment traffic flows directly:</p>
+          <pre class="mermaid labnote-mermaid">sequenceDiagram
+    participant Ext as External device<br/>(laptop/iPhone, NetBird client)
+    participant Ctrl as NetBird Controller VM<br/>(management + signal + relay)
+    participant LAN as bigdude<br/>(LAN, NetBird client)
+
+    Note over Ext,LAN: Both clients already hold an outbound session to the controller (opened at NetBird startup)
+    LAN->>Ctrl: Outbound UDP/TLS session (always open)<br/>Freebox NAT allows this, no port-forward needed
+    Ext->>Ctrl: Outbound UDP/TLS session (always open)
+
+    Note over Ext: User opens bigdude.mydomain.cloud
+    Ext->>Ctrl: 1 - "I want to reach peer bigdude"<br/>(SSO-authenticated session)
+    Ctrl->>Ctrl: Check access policy/groups<br/>(is Ext allowed to reach bigdude?)
+    Ctrl-->>Ext: 2 - bigdude's WireGuard pubkey + observed public IP:port
+    Ctrl-->>LAN: 2 - Ext's WireGuard pubkey + observed public IP:port
+
+    Note over Ext,LAN: 3 - Hole punching: both sides send UDP simultaneously<br/>toward each other's observed address
+    Ext->>LAN: UDP packet to LAN's observed address
+    LAN->>Ext: UDP packet to Ext's observed address
+    Note over Ext,LAN: Freebox NAT sees each incoming packet as a "reply"<br/>to the outbound session already open on that mapping
+
+    alt Direct hole punching succeeds (typical case)
+        Ext->>LAN: 4a - Direct WireGuard tunnel established<br/>(all further traffic bypasses the controller)
+        LAN->>Ext: Encrypted app/daemon traffic flows directly
+    else Hole punching fails (symmetric NAT / strict carrier)
+        Ext->>Ctrl: 4b - Relay traffic via controller's TURN/relay component
+        Ctrl->>LAN: Relayed WireGuard traffic (still outbound-initiated on both sides)
+    end</pre>
+          <p>Key takeaway: the controller is only ever involved in steps 1-2 - authenticate, authorize, exchange addresses. From step 3 onward, the controller either steps out of the path entirely (direct P2P) or stays only as a passive relay (fallback) - it never initiates or accepts an inbound connection to the LAN on <code>bigdude</code>'s behalf, which is why no Freebox port-forward is required for <code>bigdude</code> itself.</p>
+
+          <h3 class="labnote-stage" id="labnote7-stageTakeaway" data-i18n="labnote7.stageTakeaway">What this series actually proves</h3>
+          <p>Six notes to get here, and the architecture diagram above is the whole point condensed into one picture: self-host the control plane, trust nothing by default, and never expose a raw port to the internet - yet still reach a home machine from anywhere, over a direct encrypted tunnel, without a single inbound firewall rule on the devices that matter. The Freebox never has to let anything in; the LAN devices always dial out first, and that one property is what makes the rest of this build safe to leave running unattended.</p>
+
+          <nav class="labnote-series-nav" aria-label="Lab note series navigation">
+            <a class="labnote-series-link labnote-series-prev" href="/y9tkzb/" data-i18n="labnotes.prevNote">&larr; Previous note</a>
+          </nav>
+          <a class="labnote-back labnote-back-bottom" href="/n4tylb/" data-i18n="labnotes.backToList">&larr; Back to Lab notes</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-text">
+        <p>&copy; <span id="year"></span> <span data-i18n="footer.rights">Lab to Forge. All rights reserved.</span></p>
+        <p class="powered-by">
+          <span data-i18n="footer.poweredBy">Powered by</span>
+          <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
+            <img class="timon-logo" src="/timon-logo.png" alt="Timon - Agentic Workstation" />
+          </a>
+          <span data-i18n="footer.agentic">Agentic Workstation</span>
+        </p>
+      </div>
+      <div class="social-links">
+        <a class="social-link" href="https://x.com/GdX_O_O" target="_blank" rel="noopener" title="X" aria-label="X">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.6l-5.2-6.8L5.3 22H2l8.1-9.3L1.5 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.linkedin.com/in/gducroix/?locale=en-US" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+        <a class="social-link" href="https://github.com/Guillaume-Dx" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.38 7.86 10.9.57.1.78-.25.78-.55v-2.1c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.07 11.07 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.26 5.69.42.36.78 1.07.78 2.17v3.21c0 .3.2.66.79.55A10.51 10.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+    function mermaidThemeVariables() {
+      const css = getComputedStyle(document.documentElement);
+      const v = (name, fallback) => (css.getPropertyValue(name).trim() || fallback);
+      return {
+        background: v("--color-bg", "#0f1115"),
+        primaryColor: v("--color-surface", "#1a1d24"),
+        primaryTextColor: v("--color-text", "#e8eaed"),
+        primaryBorderColor: v("--color-accent", "#e07a2c"),
+        lineColor: v("--color-circuit", "#35e0c9"),
+        secondaryColor: v("--color-accent", "#e07a2c"),
+        tertiaryColor: v("--color-bg", "#0f1115"),
+        noteBkgColor: v("--color-surface", "#1a1d24"),
+        noteTextColor: v("--color-text", "#e8eaed"),
+        actorBkg: v("--color-surface", "#1a1d24"),
+        actorTextColor: v("--color-text", "#e8eaed"),
+        actorBorder: v("--color-accent", "#e07a2c"),
+        signalColor: v("--color-text", "#e8eaed"),
+        signalTextColor: v("--color-text", "#e8eaed"),
+        edgeLabelBackground: "#0a1020",
+        fontFamily: "Inter, \"Segoe UI\", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif",
+        fontSize: "16px",
+      };
+    }
+
+    const sources = new Map();
+    document.querySelectorAll("pre.mermaid").forEach((el) => {
+      sources.set(el, el.textContent);
+    });
+
+    async function renderAll() {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "base",
+        securityLevel: "strict",
+        themeVariables: mermaidThemeVariables(),
+        flowchart: { useMaxWidth: false, htmlLabels: true, nodeSpacing: 55, rankSpacing: 65 },
+        sequence: { useMaxWidth: false, width: 170, height: 55, boxMargin: 12, messageFontSize: 15, noteFontSize: 14, actorFontSize: 15 }
+      });
+      for (const [el, src] of sources.entries()) {
+        el.removeAttribute("data-processed");
+        el.innerHTML = src;
+      }
+      await mermaid.run({ nodes: Array.from(sources.keys()) });
+    }
+
+    renderAll();
+
+    new MutationObserver((mutations) => {
+      if (mutations.some((m) => m.attributeName === "data-theme")) {
+        renderAll();
+      }
+    }).observe(document.documentElement, { attributes: true });
+  </script>
+</body>
+</html>
