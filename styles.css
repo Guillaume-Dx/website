@@ -621,7 +621,7 @@ html[lang="fr"] .about-hero h1 {
 }
 
 .about-closing {
-  color: var(--color-highlight);
+  color: var(--color-accent);
   font-style: italic;
   font-weight: 600;
   font-size: clamp(1rem, 2vw, 1.2rem) !important;
@@ -1292,7 +1292,8 @@ body.team-page main {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin: auto 0;
+  height: 100%;
+  margin: 0;
 }
 
 .team-section h1 {
@@ -1435,6 +1436,166 @@ html[lang="fr"] .team-section h1 {
 
   .team-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Team page — spiral layout: Zeus at the hub, each agent at the extremity of a
+   curved spiral branch. Scoped under .spiral-page/.spiral-section so it only
+   applies to the team page's diagram, reusing .team-card/.team-medallion-frame
+   for identical visual presentation. The title/intro keep the default
+   .team-section sizing (same as every other page). The diagram sits in a
+   container-query sized wrapper so it fills whichever of the remaining
+   width/height is the tighter constraint, instead of guessing a fixed vh
+   ratio — it scales to use all the available space on any viewport. */
+.spiral-stage-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  container-type: size;
+  container-name: spiral;
+  /* 1% of whichever available dimension (width/height) is smaller */
+  --su: min(1cqi, 1cqb);
+}
+
+.spiral-stage {
+  position: relative;
+  width: min(calc(94 * var(--su)), 1040px);
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.spiral-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 900px;
+  transform: translate(-50%, -50%);
+  opacity: 0.045;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+html[data-theme="light"] .spiral-watermark {
+  opacity: 0.07;
+}
+
+.spiral-stage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 1;
+}
+
+.spiral-ring {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-dasharray: 2 6;
+  opacity: 0.6;
+}
+
+.spiral-branch {
+  fill: none;
+  stroke: var(--color-circuit);
+  stroke-width: 1.4;
+  stroke-dasharray: 1.5 6;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+
+.spiral-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.2rem;
+}
+
+.spiral-node--hub.team-card {
+  position: absolute;
+  z-index: 3;
+  width: clamp(102px, calc(29.86 * var(--su)), 190px);
+  padding: clamp(0.3rem, calc(1.58 * var(--su)), 0.72rem) 0.6rem clamp(0.34rem, calc(1.78 * var(--su)), 0.78rem);
+  cursor: default;
+}
+
+.spiral-node--hub .team-medallion-frame {
+  width: clamp(40px, calc(13.96 * var(--su)), 86px);
+  height: clamp(40px, calc(13.96 * var(--su)), 86px);
+  margin-bottom: 0.2rem;
+  box-shadow: 0 0 24px var(--color-circuit-soft);
+}
+
+.spiral-node--hub h2 {
+  font-size: clamp(0.76rem, calc(2.98 * var(--su)), 1.2rem);
+  margin: 0 0 0.15rem;
+}
+
+.spiral-node--hub p {
+  font-size: clamp(0.58rem, calc(2.01 * var(--su)), 0.86rem);
+  line-height: 1.15;
+}
+
+.spiral-node--hub:hover {
+  transform: translate(-50%, -50%) translateY(-6px);
+}
+
+.spiral-node--leaf.team-card {
+  position: absolute;
+  z-index: 2;
+  width: clamp(90px, calc(25.85 * var(--su)), 165px);
+  padding: clamp(0.26rem, calc(1.39 * var(--su)), 0.66rem) 0.54rem clamp(0.32rem, calc(1.58 * var(--su)), 0.72rem);
+  cursor: default;
+}
+
+.spiral-node--leaf .team-medallion-frame {
+  width: clamp(32px, calc(11.15 * var(--su)), 68px);
+  height: clamp(32px, calc(11.15 * var(--su)), 68px);
+  margin-bottom: 0.2rem;
+}
+
+.spiral-node--leaf h2 {
+  font-size: clamp(0.66rem, calc(2.4 * var(--su)), 1rem);
+  margin: 0 0 0.12rem;
+}
+
+.spiral-node--leaf p {
+  font-size: clamp(0.5rem, calc(1.78 * var(--su)), 0.78rem);
+  line-height: 1.15;
+}
+
+.spiral-node--leaf:hover {
+  transform: translate(-50%, -50%) translateY(-6px);
+}
+
+.team-grid--mobile {
+  display: none;
+}
+
+/* Below this width the curved branches can no longer keep cards from overlapping
+   (their positions are percentages of the stage, but card size doesn't shrink
+   proportionally) — show the plain grid instead of the spiral. */
+@media (max-width: 900px), (max-height: 640px) {
+  .spiral-stage--desktop {
+    display: none;
+  }
+
+  .team-grid--mobile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1rem;
   }
 }
 

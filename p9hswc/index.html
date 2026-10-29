@@ -78,85 +78,133 @@
   </nav>
 
   <main>
-    <section id="team" class="team-section">
+    <section id="team" class="team-section spiral-section">
       <div class="container">
         <h1 data-i18n-html="team.title">The <span class="accent">Team</span></h1>
         <p class="team-intro" data-i18n="team.intro">
           A pantheon of agents, each bringing a different grace to the forge.
         </p>
 
-        <div class="team-grid">
+        <div class="spiral-stage-wrap">
+        <div class="spiral-stage spiral-stage--desktop" id="spiral-stage">
+          <img class="spiral-watermark" src="/timon.webp" alt="" aria-hidden="true" />
+          <svg viewBox="0 0 1080 1080" preserveAspectRatio="xMidYMid meet">
+            <circle class="spiral-ring" cx="540" cy="540" r="170" />
+            <circle class="spiral-ring" cx="540" cy="540" r="230" />
+            <g>
+              <path class="spiral-branch" d="M 540 540 C 558.100 384.594 647.335 254.855 772.703 200.342" />
+              <path class="spiral-branch" d="M 540 540 C 685.268 451.853 858.340 449.711 987.130 535.029" />
+              <path class="spiral-branch" d="M 540 540 C 693.021 590.750 812.140 696.536 858.705 820.034" />
+              <path class="spiral-branch" d="M 540 540 C 597.063 697.145 584.399 862.528 508.461 978.827" />
+              <path class="spiral-branch" d="M 540 540 C 453.826 672.332 309.465 743.528 167.027 723.276" />
+              <path class="spiral-branch" d="M 540 540 C 358.598 562.797 185.225 510.062 79.023 402.211" />
+              <path class="spiral-branch" d="M 540 540 C 436.554 434.344 397.825 289.599 439.365 164.118" />
+            </g>
+          </svg>
+
+          <div class="spiral-node spiral-node--hub team-card" style="left: 50%; top: 50%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-zeus.png" alt="Zeus" /></div>
+            <h2 data-i18n="team.zeus.name">Zeus</h2>
+            <p data-i18n="team.zeus.role">Sovereign of the pantheon, commands the gods and keeps the grand design on its course.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 71.547%; top: 18.550%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-athena.png" alt="Athena" /></div>
+            <h2 data-i18n="team.athena.name">Athena</h2>
+            <p data-i18n="team.athena.role">Goddess of craft and strategy, forges ideas into working code with a steady, deliberate hand.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 91.401%; top: 49.540%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-aphrodite.png" alt="Aphrodite" /></div>
+            <h2 data-i18n="team.aphrodite.name">Aphrodite</h2>
+            <p data-i18n="team.aphrodite.role">Keeper of the sacred archive, gathers and arranges the pantheon's knowledge with grace.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 79.510%; top: 75.929%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-hermes.png" alt="Hermes" /></div>
+            <h2 data-i18n="team.hermes.name">Hermes</h2>
+            <p data-i18n="team.hermes.role">Swift messenger of the gods, roams far and wide to gather intelligence and bring it back to the forge.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 47.080%; top: 90.632%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-ares.png" alt="Ares" /></div>
+            <h2 data-i18n="team.ares.name">Ares</h2>
+            <p data-i18n="team.ares.role">God of war, stands guard over the archive and defends its order with unyielding discipline.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 15.465%; top: 66.970%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-artemis.png" alt="Artemis" /></div>
+            <h2 data-i18n="team.artemis.name">Artemis</h2>
+            <p data-i18n="team.artemis.role">Huntress of the wild, tracks every flaw with an unerring eye before a work is loosed into the world.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 7.317%; top: 37.242%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-demeter.png" alt="Demeter" /></div>
+            <h2 data-i18n="team.demeter.name">Demeter</h2>
+            <p data-i18n="team.demeter.role">Goddess of the harvest, tends each work until it ripens and judges it worthy before it is reaped.</p>
+          </div>
+
+          <div class="spiral-node spiral-node--leaf team-card" style="left: 40.682%; top: 15.196%;">
+            <div class="team-medallion-frame"><img class="team-medallion" src="/team-hephaistos.png" alt="Hephaistos" /></div>
+            <h2 data-i18n="team.hephaistos.name">Hephaistos</h2>
+            <p data-i18n="team.hephaistos.role">God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.</p>
+          </div>
+        </div>
+        </div>
+
+        <!-- Narrow screens: the curved spiral can't keep cards from overlapping, so
+             fall back to the same simple grid the page used before the spiral layout. -->
+        <div class="team-grid team-grid--mobile">
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-zeus.png" alt="Zeus" /></div>
             <h2 data-i18n="team.zeus.name">Zeus</h2>
-            <p data-i18n="team.zeus.role">
-              Sovereign of the pantheon, commands the gods and keeps the grand design on its course.
-            </p>
+            <p data-i18n="team.zeus.role">Sovereign of the pantheon, commands the gods and keeps the grand design on its course.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-athena.png" alt="Athena" /></div>
             <h2 data-i18n="team.athena.name">Athena</h2>
-            <p data-i18n="team.athena.role">
-              Goddess of craft and strategy, forges ideas into working code with a steady, deliberate hand.
-            </p>
+            <p data-i18n="team.athena.role">Goddess of craft and strategy, forges ideas into working code with a steady, deliberate hand.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-aphrodite.png" alt="Aphrodite" /></div>
             <h2 data-i18n="team.aphrodite.name">Aphrodite</h2>
-            <p data-i18n="team.aphrodite.role">
-              Keeper of the sacred archive, gathers and arranges the pantheon's knowledge with grace.
-            </p>
+            <p data-i18n="team.aphrodite.role">Keeper of the sacred archive, gathers and arranges the pantheon's knowledge with grace.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-hermes.png" alt="Hermes" /></div>
             <h2 data-i18n="team.hermes.name">Hermes</h2>
-            <p data-i18n="team.hermes.role">
-              Swift messenger of the gods, roams far and wide to gather intelligence and bring it back to the forge.
-            </p>
+            <p data-i18n="team.hermes.role">Swift messenger of the gods, roams far and wide to gather intelligence and bring it back to the forge.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-ares.png" alt="Ares" /></div>
             <h2 data-i18n="team.ares.name">Ares</h2>
-            <p data-i18n="team.ares.role">
-              God of war, stands guard over the archive and defends its order with unyielding discipline.
-            </p>
+            <p data-i18n="team.ares.role">God of war, stands guard over the archive and defends its order with unyielding discipline.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-artemis.png" alt="Artemis" /></div>
             <h2 data-i18n="team.artemis.name">Artemis</h2>
-            <p data-i18n="team.artemis.role">
-              Huntress of the wild, tracks every flaw with an unerring eye before a work is loosed into the world.
-            </p>
+            <p data-i18n="team.artemis.role">Huntress of the wild, tracks every flaw with an unerring eye before a work is loosed into the world.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-demeter.png" alt="Demeter" /></div>
             <h2 data-i18n="team.demeter.name">Demeter</h2>
-            <p data-i18n="team.demeter.role">
-              Goddess of the harvest, tends each work until it ripens and judges it worthy before it is reaped.
-            </p>
+            <p data-i18n="team.demeter.role">Goddess of the harvest, tends each work until it ripens and judges it worthy before it is reaped.</p>
           </article>
 
           <article class="team-card">
             <div class="team-medallion-frame"><img class="team-medallion" src="/team-hephaistos.png" alt="Hephaistos" /></div>
             <h2 data-i18n="team.hephaistos.name">Hephaistos</h2>
-            <p data-i18n="team.hephaistos.role">
-              God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.
-            </p>
+            <p data-i18n="team.hephaistos.role">God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.</p>
           </article>
 
-          <article class="team-card team-card--timon">
-            <a href="https://timon-ai.com/" target="_blank" rel="noopener" title="Timon - Agentic Workstation" aria-label="Timon - Agentic Workstation">
-              <div class="team-medallion-frame"><img class="team-medallion" src="/timon.webp" alt="Timon" /></div>
-            </a>
-            <h2 data-i18n="team.timon.name">Timon</h2>
-          </article>
         </div>
+
       </div>
     </section>
   </main>

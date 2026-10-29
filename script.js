@@ -343,7 +343,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "It's not meant to show that I have all the answers. Quite the opposite. It's about curiosity, experimentation, learning and making.",
       "about.p5":
         "Because the best way I know to understand technology is simple:",
-      "about.closing": "Build something with it."
+      "about.closing": "build something with it."
     },
     fr: {
       "meta.title": "Lab to Forge",
@@ -666,7 +666,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
         "Il n'est pas censé montrer que j'ai toutes les réponses. Bien au contraire. Il s'agit de curiosité, d'expérimentation, d'apprentissage et de fabrication.",
       "about.p5":
         "Parce que la meilleure façon que je connaisse de comprendre une technologie est simple :",
-      "about.closing": "Construire quelque chose avec."
+      "about.closing": "construire quelque chose avec."
     }
   };
 
