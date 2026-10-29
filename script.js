@@ -197,6 +197,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnotes.seriesName": "Remote to LAN",
       "labnotes.seriesLabel": "Remote to LAN:",
       "labnotes.toc": "On this page",
+      "labnotes.downloadSource": "Full source document:",
+      "labnotes.downloadPdf": "Download the complete NetBird setup notes (PDF)",
       "labnote1.date": "Oct 18, 2025",
       "labnote1.tags": "Multi-agent review · Full codebase access · Risk assessment · Roadmap",
       "labnote1.title":
@@ -518,6 +520,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnotes.seriesName": "Accès au LAN",
       "labnotes.seriesLabel": "Accès au LAN :",
       "labnotes.toc": "Au sommaire",
+      "labnotes.downloadSource": "Document source complet :",
+      "labnotes.downloadPdf": "Télécharger les notes complètes NetBird (PDF)",
       "labnote1.date": "18 oct. 2025",
       "labnote1.tags": "Revue multi-agents · Accès complet au code · Analyse de risques · Feuille de route",
       "labnote1.title":
