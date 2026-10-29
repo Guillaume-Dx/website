@@ -42,7 +42,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "nav2.team": "The Team",
       "nav2.about": "About",
       "placeholder.forging": "It's forging, the metal is heating up, come back soon.",
-      "team.title": "The Team",
+      "team.title": 'The <span class="accent">Team</span>',
       "team.intro": "A pantheon of agents, each bringing a different grace to the forge.",
       "team.zeus.name": "Zeus",
       "team.zeus.role":
@@ -69,13 +69,13 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.hephaistos.role":
         "God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.",
       "team.timon.name": "Timon",
-      "project.title": "The Projects",
+      "project.title": 'The <span class="accent">Projects</span>',
       "project.intro":
         "A forge humming with many works at once, from quiet experiments to tools already carrying real weight.",
       "project.placeholder1": "These projects run on very different platforms, languages and built for different audiences, a public website, a home-automation dashboard, invoicing software, browser extensions, onboarding tooling, a personal knowledge base, and more.",
       "project.placeholder2": "What they share is how they came to be: a human sets the direction, and a small team of Timon agents designs, codes, reviews and documents the result together - moving fast enough to keep up with an idea, careful enough to leave solid, tested, documented work behind.",
       "project.placeholder3": "Pick a project on the left to see its purpose, stack, current status, build timeline, and how Timon's agents helped make it happen.",
-      "project.wip": "The forge is hot right now. We're reshaping this project list at the anvil, and fresh work will be unveiled once it has cooled.",
+      "project.wip": 'The <span class="accent">forge</span> is hot right now. We\'re reshaping this project list at the anvil, and fresh work will be unveiled once it has cooled.',
       "project.filter.language": "Language",
       "project.filter.platform": "Platform",
       "project.filter.status": "Status",
@@ -187,7 +187,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "project.wallstreet.timeline1": "Full pipeline stood up and first watchlist reports generated (last touched).",
       "project.wallstreet.timonrole":
         "Run by a full Timon agent team - orchestrator, analyst, coder, reviewer, merger and writer.",
-      "labnotes.title": "Lab notes",
+      "labnotes.title": 'Lab <span class="accent">notes</span>',
       "labnotes.intro":
         "Field notes from real engagements, what actually changes when AI is your wingman when doing the work.",
       "labnotes.readMore": "Read the full note →",
@@ -329,7 +329,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnote7.stageNat": "Why the Freebox blocking inbound traffic doesn't stop any of this",
       "labnote7.stageFlow": "Connection flow, step by step",
       "labnote7.stageTakeaway": "What this series actually proves",
-      "about.lead": "I build things.",
+      "about.lead": 'I build <span class="accent">things</span>.',
       "about.line1": "Sometimes useful things.",
       "about.line2": "Sometimes experimental things.",
       "about.line3":
@@ -365,7 +365,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "nav2.team": "L'équipe",
       "nav2.about": "À propos",
       "placeholder.forging": "Ça forge et le métal chauffe, revenez bientôt.",
-      "team.title": "L'équipe",
+      "team.title": 'L\'<span class="accent">équipe</span>',
       "team.intro": "Un panthéon d'agents, chacun apportant sa grâce particulière à la forge.",
       "team.zeus.name": "Zeus",
       "team.zeus.role":
@@ -392,13 +392,13 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.hephaistos.role":
         "Dieu de la forge, il plonge au plus profond pour extraire le savoir comme il extrayait jadis le minerai pour son art.",
       "team.timon.name": "Timon",
-      "project.title": "Les Projets",
+      "project.title": 'Les <span class="accent">Projets</span>',
       "project.intro":
         "Une forge qui bourdonne de plusieurs chantiers à la fois, des expérimentations discrètes aux outils qui portent déjà du poids.",
       "project.placeholder1": "Ces projets tournent sur des plateformes et des langages très différents, et sont conçus pour des publics différents, un site web public, un tableau de bord domotique, un logiciel de facturation, des extensions de navigateur, des outils d'onboarding, un second cerveau personnel, et plus encore.",
       "project.placeholder2": "Ce qu'ils ont en commun, c'est leur façon de naître : un humain donne le cap, et une petite équipe d'agents Timon conçoit, code, relit et documente le résultat ensemble - assez vite pour suivre une idée, assez soigneusement pour laisser un travail solide, testé et documenté.",
       "project.placeholder3": "Choisissez un projet à gauche pour voir son objectif, sa stack, son état actuel, sa frise de développement, et comment les agents Timon ont aidé à le construire.",
-      "project.wip": "La forge est chaude en ce moment. Nous reforgeons la liste des projets sur l'enclume, et un nouveau contenu sera dévoilé une fois qu'il aura refroidi.",
+      "project.wip": 'La <span class="accent">forge</span> est chaude en ce moment. Nous reforgeons la liste des projets sur l\'enclume, et un nouveau contenu sera dévoilé une fois qu\'il aura refroidi.',
       "project.filter.language": "Langage",
       "project.filter.platform": "Plateforme",
       "project.filter.status": "Statut",
@@ -510,7 +510,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "project.wallstreet.timeline1": "Pipeline complet mis en service et premiers rapports de watchlist générés (dernière activité).",
       "project.wallstreet.timonrole":
         "Animé par une équipe Timon complète - orchestrateur, analyste, codeur, relecteur, fusionneur et rédacteur.",
-      "labnotes.title": "Notes de labo",
+      "labnotes.title": '<span class="accent">Notes</span> de labo',
       "labnotes.intro":
         "Des notes de terrain tirées de vraies missions, ce qui change réellement quand Timon prend les commandes.",
       "labnotes.readMore": "Lire la note complète →",
@@ -652,7 +652,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "labnote7.stageNat": "Pourquoi le blocage du trafic entrant par la Freebox n'empêche rien de tout ça",
       "labnote7.stageFlow": "Le flux de connexion, étape par étape",
       "labnote7.stageTakeaway": "Ce que cette série démontre vraiment",
-      "about.lead": "Je construis des choses.",
+      "about.lead": 'Je construis des <span class="accent">choses</span>.',
       "about.line1": "Parfois des choses utiles.",
       "about.line2": "Parfois des choses expérimentales.",
       "about.line3":

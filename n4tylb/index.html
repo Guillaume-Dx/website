@@ -43,9 +43,6 @@
             <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
           </svg>
         </button>
-        <nav class="site-nav">
-          <a href="/#top" data-i18n="nav.home">Home</a>
-        </nav>
         <div class="lang-switch" role="group" aria-label="Language selector">
           <button class="lang-btn" type="button" data-lang="en" aria-label="English" title="English">
             <svg viewBox="0 0 60 30" class="flag-icon" aria-hidden="true">
@@ -83,7 +80,7 @@
   <main>
     <section id="top" class="hero about-hero labnotes-hero">
       <div class="container">
-        <h1 data-i18n="labnotes.title">Lab notes</h1>
+        <h1 data-i18n-html="labnotes.title">Lab <span class="accent">notes</span></h1>
         <p class="project-intro" data-i18n="labnotes.intro">Field notes from real engagements, what actually changes when AI is your wingman when doing the work.</p>
       </div>
     </section>
@@ -92,11 +89,11 @@
       <div class="container labnotes-layout">
         <aside class="labnotes-dates" aria-label="Lab notes by date">
           <ul class="labnotes-date-list">
-            <li><a href="#labnote-7"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote7.date">Oct 29, 2026</span><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 5/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote7.title">Architecture overview: how traffic actually reaches bigdude</span></a></li>
-            <li><a href="#labnote-6"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote6.date">Oct 28, 2026</span><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 4/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote6.title">Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</span></a></li>
-            <li><a href="#labnote-5"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote5.date">Oct 27, 2026</span><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 3/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote5.title">Groups and access policies: enrolling bigdude and the iPhone</span></a></li>
-            <li><a href="#labnote-4"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote4.date">Oct 26, 2026</span><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 2/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote4.title">Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu</span></a></li>
-            <li><a href="#labnote-3"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote3.date">Oct 25, 2026</span><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 1/5</span></span><span data-i18n="labnote3.title">Remote access to the LAN: inventory, requirements, and why NetBird won</span></a></li>
+            <li><a href="#labnote-7"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote7.date">Oct 29, 2026</span><span class="labnote-series-badge">5/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote7.title">Architecture overview: how traffic actually reaches bigdude</span></a></li>
+            <li><a href="#labnote-6"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote6.date">Oct 28, 2026</span><span class="labnote-series-badge">4/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote6.title">Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</span></a></li>
+            <li><a href="#labnote-5"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote5.date">Oct 27, 2026</span><span class="labnote-series-badge">3/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote5.title">Groups and access policies: enrolling bigdude and the iPhone</span></a></li>
+            <li><a href="#labnote-4"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote4.date">Oct 26, 2026</span><span class="labnote-series-badge">2/5</span></span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote4.title">Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu</span></a></li>
+            <li><a href="#labnote-3"><span class="labnote-list-meta"><span class="labnote-date" data-i18n="labnote3.date">Oct 25, 2026</span><span class="labnote-series-badge">1/5</span></span><span data-i18n="labnote3.title">Remote access to the LAN: inventory, requirements, and why NetBird won</span></a></li>
             <li><a href="#labnote-2"><span class="labnote-date" data-i18n="labnote2.date">Oct 23, 2026</span><span data-i18n="labnote2.title">Three weeks, eleven projects: what actually ran on its own</span></a></li>
             <li><a href="#labnote-1"><span class="labnote-date" data-i18n="labnote1.date">Oct 18, 2025</span><span data-i18n="labnote1.title">Auditing my own project with Timon: a doc-versus-code gap caught in minutes, real risks found, a roadmap I could trust</span></a></li>
           </ul>
@@ -108,7 +105,7 @@
               <span class="labnote-date" data-i18n="labnote7.date">Oct 29, 2026</span>
               <span class="project-stack" data-i18n="labnote7.tags">Architecture · Control plane vs data plane · Flowchart · Sequence diagram · NAT traversal · Hole punching</span>
             </div>
-            <h2><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 5/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote7.title">Architecture overview: how traffic actually reaches bigdude</span></h2>
+            <h2><span class="labnote-series-badge">5/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote7.title">Architecture overview: how traffic actually reaches bigdude</span></h2>
             <p data-i18n="labnote7.excerpt">A visual close to the series: the full mesh architecture as one diagram, why a Freebox blocking inbound traffic doesn't stop a direct tunnel from forming, and the exact message flow from opening bigdude.mydomain.cloud to traffic flowing peer-to-peer.</p>
             <a class="labnote-readmore" href="/vbvup1/" data-i18n="labnotes.readMore">Read the full note &rarr;</a>
           </article>
@@ -118,7 +115,7 @@
               <span class="labnote-date" data-i18n="labnote6.date">Oct 28, 2026</span>
               <span class="project-stack" data-i18n="labnote6.tags">Caddy · xcaddy · OVH DNS-01 · Windows service · Reverse proxy · Device pairing</span>
             </div>
-            <h2><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 4/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote6.title">Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</span></h2>
+            <h2><span class="labnote-series-badge">4/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote6.title">Making Timon and Windows reachable: Caddy, DNS-01, and the app/daemon split</span></h2>
             <p data-i18n="labnote6.excerpt">Timon's non-negotiables (loopback only, auth always on), Windows background-run quirks, OVH API credentials for DNS-01, building a custom Caddy with xcaddy, registering it as a Windows service, and why app and daemon need two separate hostnames or pairing breaks.</p>
             <a class="labnote-readmore" href="/y9tkzb/" data-i18n="labnotes.readMore">Read the full note &rarr;</a>
           </article>
@@ -128,7 +125,7 @@
               <span class="labnote-date" data-i18n="labnote5.date">Oct 27, 2026</span>
               <span class="project-stack" data-i18n="labnote5.tags">Groups · Access policies · Peer-to-peer · Windows client · iPhone client · Custom DNS Zone</span>
             </div>
-            <h2><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 3/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote5.title">Groups and access policies: enrolling bigdude and the iPhone</span></h2>
+            <h2><span class="labnote-series-badge">3/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote5.title">Groups and access policies: enrolling bigdude and the iPhone</span></h2>
             <p data-i18n="labnote5.excerpt">Peer-to-peer versus routing-peer, groups and policies instead of one flat mesh, deleting the fail-open Default policy, enrolling the Windows/Timon host and the iPhone, and a Custom DNS Zone scoped to the people who actually need it.</p>
             <a class="labnote-readmore" href="/x5qjrn/" data-i18n="labnotes.readMore">Read the full note &rarr;</a>
           </article>
@@ -138,7 +135,7 @@
               <span class="labnote-date" data-i18n="labnote4.date">Oct 26, 2026</span>
               <span class="project-stack" data-i18n="labnote4.tags">Ubuntu VM · Freebox · Port forwarding · OVH DNS · ufw · Docker · NetBird quickstart · Default policy</span>
             </div>
-            <h2><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 2/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote4.title">Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu</span></h2>
+            <h2><span class="labnote-series-badge">2/5</span><span data-i18n="labnotes.seriesLabel">Remote to LAN:</span> <span data-i18n="labnote4.title">Standing up the NetBird controller: the VM, the ports, the DNS record, and hardening Ubuntu</span></h2>
             <p data-i18n="labnote4.excerpt">Standing up the NetBird controller, step by step: a 2GB Ubuntu VM on the Freebox, the three public ports it needs, an OVH DNS record, unattended updates, SSH locked to the LAN, a default-deny firewall, the quickstart script itself, and why the fail-open Default policy had to die on sight.</p>
             <a class="labnote-readmore" href="/w4plkd/" data-i18n="labnotes.readMore">Read the full note &rarr;</a>
           </article>
@@ -148,7 +145,7 @@
               <span class="labnote-date" data-i18n="labnote3.date">Oct 25, 2026</span>
               <span class="project-stack" data-i18n="labnote3.tags">Home LAN · NetBird · Tailscale · Headscale · WireGuard · Requirements · Decision rationale · Freebox VM</span>
             </div>
-            <h2><span class="labnote-series-badge"><span data-i18n="labnotes.seriesName">Remote to LAN</span> · 1/5</span><span data-i18n="labnote3.title">Remote access to the LAN: inventory, requirements, and why NetBird won</span></h2>
+            <h2><span class="labnote-series-badge">1/5</span><span data-i18n="labnote3.title">Remote access to the LAN: inventory, requirements, and why NetBird won</span></h2>
             <p data-i18n="labnote3.excerpt">Before touching a single config file: what's actually on the home network, what remote access has to achieve, and the full case for NetBird - four VPN-mesh candidates compared, three ruled out, and where the self-hosted controller will live.</p>
             <a class="labnote-readmore" href="/t8wrnq/" data-i18n="labnotes.readMore">Read the full note &rarr;</a>
           </article>

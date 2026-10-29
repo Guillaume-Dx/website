@@ -431,9 +431,18 @@ html[lang="fr"] .hero h1 {
 }
 
 .labnotes-hero h1 {
-  font-size: 1.7rem;
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
   white-space: normal;
-  line-height: 1.25;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.labnotes-hero h1 .accent {
+  color: var(--color-accent);
+}
+
+html[lang="fr"] .labnotes-hero h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
 }
 
 .labnotes-hero .project-intro {
@@ -521,6 +530,20 @@ html[lang="fr"] .hero.home-hero h1 {
 .about-hero {
   flex: 0 0 auto;
   padding-bottom: 0.5rem;
+}
+
+.about-hero h1 {
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+html[lang="fr"] .about-hero h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+}
+
+.about-hero h1 .accent {
+  color: var(--color-accent);
 }
 
 .about-content {
@@ -1185,9 +1208,18 @@ body.team-page main {
 }
 
 .team-section h1 {
-  font-size: clamp(1rem, 2.6vh, 1.8rem);
-  line-height: 1.2;
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
   margin: 0 0 0.3rem;
+}
+
+html[lang="fr"] .team-section h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+}
+
+.team-section h1 .accent {
+  color: var(--color-accent);
 }
 
 .team-intro {
@@ -1358,25 +1390,47 @@ body.projects-page main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: clamp(140px, 24vh, 220px);
+  text-align: left;
   padding: 0.6rem 0 clamp(1rem, 3vh, 1.6rem);
 }
 
 .project-section h1 {
-  font-size: clamp(1.1rem, 2.8vh, 1.9rem);
-  line-height: 1.2;
-  margin: 0 0 0.3rem;
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.3rem;
+}
+
+html[lang="fr"] .project-section h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+}
+
+.project-section .accent {
+  color: var(--color-accent);
 }
 
 .project-intro {
   color: var(--color-muted);
-  font-size: clamp(0.72rem, 1.6vh, 0.92rem);
-  line-height: 1.4;
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
   max-width: 900px;
   margin: 0;
   text-align: center;
+}
+
+.project-header .project-intro {
+  font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  max-width: none;
+  text-align: left;
+}
+
+html[lang="fr"] .project-header .project-intro {
+  font-size: clamp(1.7rem, 4vw, 3rem);
 }
 
 .project-layout {
@@ -1396,13 +1450,13 @@ body.projects-page main {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: var(--max-width);
   flex: 1 1 auto;
   min-height: 0;
-  text-align: center;
-  padding: 2rem 1rem;
+  text-align: left;
+  padding: 2rem 0;
   overflow: hidden;
   border-radius: var(--radius);
 }
@@ -1428,9 +1482,10 @@ body.projects-page main {
 .project-wip-text {
   position: relative;
   z-index: 1;
-  color: var(--color-muted);
-  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-  max-width: 48ch;
+  color: var(--color-text);
+  text-shadow: 0 0 12px var(--color-bg), 0 1px 3px var(--color-bg);
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  max-width: none;
   margin: 0;
 }
 
