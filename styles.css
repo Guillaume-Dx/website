@@ -1585,8 +1585,8 @@ html[data-theme="light"] .spiral-watermark {
 }
 
 .spiral-node--hub .team-medallion-frame {
-  width: clamp(33.7px, calc(8.66 * var(--su)), 68px);
-  height: clamp(33.7px, calc(8.66 * var(--su)), 68px);
+  width: clamp(44.4px, calc(11.41 * var(--su)), 90px);
+  height: clamp(44.4px, calc(11.41 * var(--su)), 90px);
   margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
@@ -1616,8 +1616,8 @@ html[data-theme="light"] .spiral-watermark {
 }
 
 .spiral-node--leaf .team-medallion-frame {
-  width: clamp(25.9px, calc(6.91 * var(--su)), 55px);
-  height: clamp(25.9px, calc(6.91 * var(--su)), 55px);
+  width: clamp(35.2px, calc(9.414 * var(--su)), 74px);
+  height: clamp(35.2px, calc(9.414 * var(--su)), 74px);
   margin-bottom: 0.15rem;
 }
 
