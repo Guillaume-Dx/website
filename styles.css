@@ -1456,10 +1456,9 @@ html[lang="fr"] .team-section h1 {
    curved spiral branch. Scoped under .spiral-page/.spiral-section so it only
    applies to the team page's diagram, reusing .team-card/.team-medallion-frame
    for identical visual presentation. The title/intro keep the default
-   .team-section sizing (same as every other page). The diagram sits in a
-   container-query sized wrapper so it fills whichever of the remaining
-   width/height is the tighter constraint, instead of guessing a fixed vh
-   ratio — it scales to use all the available space on any viewport. */
+   .team-section sizing (same as every other page). The stage keeps a locked
+   aspect ratio so it scales as one proportional block at any viewport size,
+   filling the full section width whenever the available height allows it. */
 .spiral-stage-wrap {
   flex: 1 1 auto;
   min-height: 0;
@@ -1468,20 +1467,30 @@ html[lang="fr"] .team-section h1 {
   align-items: center;
   justify-content: center;
   container-type: size;
-  container-name: spiral;
-  /* 1% of whichever available dimension (width/height) is smaller */
-  --su: min(1cqi, 1cqb);
+  container-name: spiral-wrap;
 }
 
 .spiral-stage {
   position: relative;
-  width: min(calc(94 * var(--su)), 1040px);
-  aspect-ratio: 1 / 1;
+  /* Locked aspect ratio (matches the tuned spiral geometry) so every node keeps
+     its clearance from its neighbours at any viewport size — it scales as one
+     block instead of stretching unevenly, while still using the full section
+     width whenever the available height allows it. */
+  width: min(100%, calc(100cqb * 1.5755));
+  aspect-ratio: 1.5755 / 1;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  /* A second, nested container sized to the stage's own (locked-ratio) box,
+     not the wrap's: card/medallion/font sizes below read --su from this so
+     they scale with the stage's actual rendered size at any viewport,
+     instead of the wrap's size (which can exceed the stage when the wrap is
+     wider than the locked ratio allows). */
+  container-type: size;
+  container-name: spiral;
+  --su: min(1cqi, 1cqb);
 }
 
 .spiral-watermark {
@@ -1547,25 +1556,32 @@ html[data-theme="light"] .spiral-watermark {
 .spiral-node--hub.team-card {
   position: absolute;
   z-index: 3;
-  width: clamp(72px, calc(18.51 * var(--su)), 128px);
-  padding: clamp(0.22rem, calc(0.98 * var(--su)), 0.48rem) 0.44rem clamp(0.24rem, calc(1.1 * var(--su)), 0.52rem);
+  width: clamp(72px, calc(18.51 * var(--su)), 146px);
+  /* Horizontal padding scales with --su too (not a fixed rem value) so the
+     text-available width stays proportional to the card width at any size —
+     otherwise a fixed padding eats a bigger share of a shrunk card, forces
+     extra text wraps, and breaks the card's height proportionality. All the
+     clamp() min bounds below are tuned to engage at the same --su as this
+     width's min bound (72px / 18.51 ≈ 3.89), so every property keeps
+     scaling together instead of some flooring out earlier than others. */
+  padding: clamp(0.238rem, calc(0.98 * var(--su)), 0.48rem) clamp(3.5px, calc(0.9 * var(--su)), 7.04px) clamp(0.267rem, calc(1.1 * var(--su)), 0.54rem);
   cursor: default;
 }
 
 .spiral-node--hub .team-medallion-frame {
-  width: clamp(28px, calc(8.66 * var(--su)), 56px);
-  height: clamp(28px, calc(8.66 * var(--su)), 56px);
+  width: clamp(33.7px, calc(8.66 * var(--su)), 68px);
+  height: clamp(33.7px, calc(8.66 * var(--su)), 68px);
   margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
 
 .spiral-node--hub h2 {
-  font-size: clamp(0.6rem, calc(1.85 * var(--su)), 0.8rem);
+  font-size: clamp(0.45rem, calc(1.85 * var(--su)), 0.91rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--hub p {
-  font-size: clamp(0.46rem, calc(1.25 * var(--su)), 0.58rem);
+  font-size: clamp(0.304rem, calc(1.25 * var(--su)), 0.62rem);
   line-height: 1.15;
 }
 
@@ -1576,24 +1592,26 @@ html[data-theme="light"] .spiral-watermark {
 .spiral-node--leaf.team-card {
   position: absolute;
   z-index: 2;
-  width: clamp(60px, calc(16.03 * var(--su)), 110px);
-  padding: clamp(0.19rem, calc(0.86 * var(--su)), 0.44rem) 0.38rem clamp(0.21rem, calc(0.98 * var(--su)), 0.48rem);
+  width: clamp(60px, calc(16.03 * var(--su)), 126px);
+  /* Same rationale as the hub card above: min bounds tuned to engage at the
+     su matching this width's min bound (60px / 16.03 ≈ 3.74). */
+  padding: clamp(0.201rem, calc(0.86 * var(--su)), 0.44rem) clamp(2.9px, calc(0.7774 * var(--su)), 6.08px) clamp(0.229rem, calc(0.98 * var(--su)), 0.48rem);
   cursor: default;
 }
 
 .spiral-node--leaf .team-medallion-frame {
-  width: clamp(22px, calc(6.91 * var(--su)), 46px);
-  height: clamp(22px, calc(6.91 * var(--su)), 46px);
+  width: clamp(25.9px, calc(6.91 * var(--su)), 55px);
+  height: clamp(25.9px, calc(6.91 * var(--su)), 55px);
   margin-bottom: 0.15rem;
 }
 
 .spiral-node--leaf h2 {
-  font-size: clamp(0.5rem, calc(1.49 * var(--su)), 0.62rem);
+  font-size: clamp(0.349rem, calc(1.49 * var(--su)), 0.73rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--leaf p {
-  font-size: clamp(0.4rem, calc(1.1 * var(--su)), 0.48rem);
+  font-size: clamp(0.257rem, calc(1.1 * var(--su)), 0.54rem);
   line-height: 1.15;
 }
 
