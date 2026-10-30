@@ -38,7 +38,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "nav.team": "Team",
       "nav.home": "Home",
       "nav2.projects": "Projects",
-      "nav2.labnotes": "Lab notes",
+      "nav2.labnotes": "Lab Notes",
       "nav2.team": "The Team",
       "nav2.about": "About",
       "placeholder.forging": "It's forging, the metal is heating up, come back soon.",
