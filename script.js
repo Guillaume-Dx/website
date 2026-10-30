@@ -68,6 +68,21 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.hephaistos.name": "Hephaistos",
       "team.hephaistos.role":
         "God of the forge, delves deep into the depths to mine knowledge as he once mined ore for his craft.",
+      "team.chiron.name": "Chiron",
+      "team.chiron.role":
+        "Immortal teacher of heroes, gathers wisdom from every corner of the world and shapes it into new understanding.",
+      "team.odysseus.name": "Odysseus",
+      "team.odysseus.role":
+        "The cunning king of Ithaca, untangles the knottiest trials and steers the pantheon safely through uncertainty.",
+      "team.argus.name": "Argus",
+      "team.argus.role":
+        "Ever-watchful guardian, keeps the pantheon's endeavors aligned and ensures the great work never strays from its course.",
+      "team.poseidon.name": "Poseidon",
+      "team.poseidon.role":
+        "Tamer of oceans and earthquakes, commands the tides of knowledge and carves enduring foundations from chaos.",
+      "team.hera.name": "Hera",
+      "team.hera.role":
+        "Guardian of oaths and order, preserves trust throughout the pantheon and protects what must remain inviolate.",
       "team.timon.name": "Timon",
       "project.title": 'The <span class="accent">Projects</span>',
       "project.intro":
@@ -391,6 +406,21 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "team.hephaistos.name": "Héphaïstos",
       "team.hephaistos.role":
         "Dieu de la forge, il plonge au plus profond pour extraire le savoir comme il extrayait jadis le minerai pour son art.",
+      "team.chiron.name": "Chiron",
+      "team.chiron.role":
+        "Précepteur immortel des héros, il rassemble la sagesse des quatre coins du monde et la façonne en savoir nouveau.",
+      "team.odysseus.name": "Ulysse",
+      "team.odysseus.role":
+        "Roi rusé d'Ithaque, il démêle les épreuves les plus retorses et guide le panthéon en sécurité à travers l'incertitude.",
+      "team.argus.name": "Argus",
+      "team.argus.role":
+        "Gardien toujours en éveil, il veille à ce que les entreprises du panthéon restent alignées et que la grande œuvre ne dévie jamais de sa trajectoire.",
+      "team.poseidon.name": "Poséidon",
+      "team.poseidon.role":
+        "Dompteur des océans et des séismes, il commande aux marées du savoir et taille des fondations durables dans le chaos.",
+      "team.hera.name": "Héra",
+      "team.hera.role":
+        "Gardienne des serments et de l'ordre, elle préserve la confiance à travers le panthéon et protège ce qui doit demeurer inviolable.",
       "team.timon.name": "Timon",
       "project.title": 'Les <span class="accent">Projets</span>',
       "project.intro":

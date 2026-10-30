@@ -1539,25 +1539,25 @@ html[data-theme="light"] .spiral-watermark {
 .spiral-node--hub.team-card {
   position: absolute;
   z-index: 3;
-  width: clamp(102px, calc(29.86 * var(--su)), 190px);
-  padding: clamp(0.3rem, calc(1.58 * var(--su)), 0.72rem) 0.6rem clamp(0.34rem, calc(1.78 * var(--su)), 0.78rem);
+  width: clamp(72px, calc(18.51 * var(--su)), 128px);
+  padding: clamp(0.22rem, calc(0.98 * var(--su)), 0.48rem) 0.44rem clamp(0.24rem, calc(1.1 * var(--su)), 0.52rem);
   cursor: default;
 }
 
 .spiral-node--hub .team-medallion-frame {
-  width: clamp(40px, calc(13.96 * var(--su)), 86px);
-  height: clamp(40px, calc(13.96 * var(--su)), 86px);
-  margin-bottom: 0.2rem;
+  width: clamp(28px, calc(8.66 * var(--su)), 56px);
+  height: clamp(28px, calc(8.66 * var(--su)), 56px);
+  margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
 
 .spiral-node--hub h2 {
-  font-size: clamp(0.76rem, calc(2.98 * var(--su)), 1.2rem);
-  margin: 0 0 0.15rem;
+  font-size: clamp(0.6rem, calc(1.85 * var(--su)), 0.8rem);
+  margin: 0 0 0.1rem;
 }
 
 .spiral-node--hub p {
-  font-size: clamp(0.58rem, calc(2.01 * var(--su)), 0.86rem);
+  font-size: clamp(0.46rem, calc(1.25 * var(--su)), 0.58rem);
   line-height: 1.15;
 }
 
@@ -1568,24 +1568,24 @@ html[data-theme="light"] .spiral-watermark {
 .spiral-node--leaf.team-card {
   position: absolute;
   z-index: 2;
-  width: clamp(90px, calc(25.85 * var(--su)), 165px);
-  padding: clamp(0.26rem, calc(1.39 * var(--su)), 0.66rem) 0.54rem clamp(0.32rem, calc(1.58 * var(--su)), 0.72rem);
+  width: clamp(60px, calc(16.03 * var(--su)), 110px);
+  padding: clamp(0.19rem, calc(0.86 * var(--su)), 0.44rem) 0.38rem clamp(0.21rem, calc(0.98 * var(--su)), 0.48rem);
   cursor: default;
 }
 
 .spiral-node--leaf .team-medallion-frame {
-  width: clamp(32px, calc(11.15 * var(--su)), 68px);
-  height: clamp(32px, calc(11.15 * var(--su)), 68px);
-  margin-bottom: 0.2rem;
+  width: clamp(22px, calc(6.91 * var(--su)), 46px);
+  height: clamp(22px, calc(6.91 * var(--su)), 46px);
+  margin-bottom: 0.15rem;
 }
 
 .spiral-node--leaf h2 {
-  font-size: clamp(0.66rem, calc(2.4 * var(--su)), 1rem);
-  margin: 0 0 0.12rem;
+  font-size: clamp(0.5rem, calc(1.49 * var(--su)), 0.62rem);
+  margin: 0 0 0.1rem;
 }
 
 .spiral-node--leaf p {
-  font-size: clamp(0.5rem, calc(1.78 * var(--su)), 0.78rem);
+  font-size: clamp(0.4rem, calc(1.1 * var(--su)), 0.48rem);
   line-height: 1.15;
 }
 
