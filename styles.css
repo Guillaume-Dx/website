@@ -1597,19 +1597,19 @@ html[data-theme="light"] .spiral-watermark {
 }
 
 .spiral-node--hub .team-medallion-frame {
-  width: clamp(51.06px, calc(13.12 * var(--su)), 103.5px);
-  height: clamp(51.06px, calc(13.12 * var(--su)), 103.5px);
+  width: clamp(58.72px, calc(15.088 * var(--su)), 119.03px);
+  height: clamp(58.72px, calc(15.088 * var(--su)), 119.03px);
   margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
 
 .spiral-node--hub h2 {
-  font-size: clamp(0.518rem, calc(2.128 * var(--su)), 1.047rem);
+  font-size: clamp(0.596rem, calc(2.447 * var(--su)), 1.204rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--hub p {
-  font-size: clamp(0.35rem, calc(1.438 * var(--su)), 0.713rem);
+  font-size: clamp(0.403rem, calc(1.654 * var(--su)), 0.82rem);
   line-height: 1.15;
 }
 
@@ -1623,24 +1623,24 @@ html[data-theme="light"] .spiral-watermark {
   width: clamp(60px, calc(16.03 * var(--su)), 126px);
   /* Same rationale as the hub card above: min bounds tuned to engage at the
      su matching this width's min bound (60px / 16.03 ≈ 3.74). */
-  padding: clamp(0.201rem, calc(0.86 * var(--su)), 0.44rem) clamp(2.9px, calc(0.7774 * var(--su)), 6.08px) clamp(0.229rem, calc(0.98 * var(--su)), 0.48rem);
+  padding: clamp(0.185rem, calc(0.79 * var(--su)), 0.4rem) clamp(2.9px, calc(0.7774 * var(--su)), 6.08px) clamp(0.21rem, calc(0.9 * var(--su)), 0.44rem);
   cursor: default;
 }
 
 .spiral-node--leaf .team-medallion-frame {
-  width: clamp(40.48px, calc(10.826 * var(--su)), 85.1px);
-  height: clamp(40.48px, calc(10.826 * var(--su)), 85.1px);
-  margin-bottom: 0.15rem;
+  width: clamp(46.55px, calc(12.45 * var(--su)), 97.87px);
+  height: clamp(46.55px, calc(12.45 * var(--su)), 97.87px);
+  margin-bottom: 0.1rem;
 }
 
 .spiral-node--leaf h2 {
-  font-size: clamp(0.401rem, calc(1.714 * var(--su)), 0.84rem);
-  margin: 0 0 0.1rem;
+  font-size: clamp(0.461rem, calc(1.971 * var(--su)), 0.966rem);
+  margin: 0 0 0.06rem;
 }
 
 .spiral-node--leaf p {
-  font-size: clamp(0.296rem, calc(1.265 * var(--su)), 0.621rem);
-  line-height: 1.1;
+  font-size: clamp(0.34rem, calc(1.455 * var(--su)), 0.714rem);
+  line-height: 1.0;
 }
 
 .spiral-node--leaf:hover {
