@@ -202,11 +202,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
       "project.wallstreet.timeline1": "Full pipeline stood up and first watchlist reports generated (last touched).",
       "project.wallstreet.timonrole":
         "Run by a full Timon agent team - orchestrator, analyst, coder, reviewer, merger and writer.",
-      "labnotes.title": 'Lab <span class="accent">notes</span>',
+      "labnotes.title": 'Lab <span class="accent">Notes</span>',
       "labnotes.intro":
         "Field notes from real engagements, what actually changes when AI is your wingman when doing the work.",
       "labnotes.readMore": "Read the full note →",
-      "labnotes.backToList": "← Back to Lab notes",
+      "labnotes.backToList": "← Back to Lab Notes",
       "labnotes.prevNote": "← Previous note",
       "labnotes.nextNote": "Next note →",
       "labnotes.seriesName": "Remote to LAN",
