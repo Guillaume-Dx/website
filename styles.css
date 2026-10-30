@@ -1526,6 +1526,14 @@ html[data-theme="light"] .spiral-watermark {
   opacity: 0.85;
 }
 
+/* Purely decorative arms with no agent card at their tip: fainter and thinner
+   so they read as background flourish rather than competing with agent branches. */
+.spiral-branch--decor {
+  stroke-width: 1;
+  stroke-dasharray: 1 7;
+  opacity: 0.4;
+}
+
 .spiral-node {
   position: absolute;
   transform: translate(-50%, -50%);
