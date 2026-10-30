@@ -869,6 +869,13 @@ html[lang="fr"] .about-hero h1 {
   gap: 0.5rem;
 }
 
+/* Keeps the series row and the note title as one flex item (one visual
+   line, wrapping normally) instead of each becoming its own row inside
+   the flex-column list-item link. */
+.labnote-list-title {
+  display: block;
+}
+
 .labnotes-date-list li a:hover,
 .labnotes-date-list li a:focus-visible {
   transform: translateY(-2px);
