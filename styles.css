@@ -1405,6 +1405,18 @@ html[lang="fr"] .team-section h1 {
   transition: transform 0.3s ease;
 }
 
+/* Odysseus's source portrait has his head higher up in the frame than the
+   other full-body shots, so the default zoom/pan crops off the top of his
+   head — shift the visible window up (less vertical pan) for this image
+   only so the whole head is in frame. */
+.team-medallion[src*="team-odysseus"] {
+  transform: translate(-13%, 0%);
+}
+
+.team-card:hover .team-medallion[src*="team-odysseus"] {
+  transform: translate(-13%, 0%) scale(1.06);
+}
+
 .team-card:hover .team-medallion-frame {
   box-shadow: 0 0 20px rgba(53, 224, 201, 0.45);
   border-color: rgba(53, 224, 201, 0.7);
@@ -1585,19 +1597,19 @@ html[data-theme="light"] .spiral-watermark {
 }
 
 .spiral-node--hub .team-medallion-frame {
-  width: clamp(44.4px, calc(11.41 * var(--su)), 90px);
-  height: clamp(44.4px, calc(11.41 * var(--su)), 90px);
+  width: clamp(51.06px, calc(13.12 * var(--su)), 103.5px);
+  height: clamp(51.06px, calc(13.12 * var(--su)), 103.5px);
   margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
 
 .spiral-node--hub h2 {
-  font-size: clamp(0.45rem, calc(1.85 * var(--su)), 0.91rem);
+  font-size: clamp(0.518rem, calc(2.128 * var(--su)), 1.047rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--hub p {
-  font-size: clamp(0.304rem, calc(1.25 * var(--su)), 0.62rem);
+  font-size: clamp(0.35rem, calc(1.438 * var(--su)), 0.713rem);
   line-height: 1.15;
 }
 
@@ -1616,19 +1628,19 @@ html[data-theme="light"] .spiral-watermark {
 }
 
 .spiral-node--leaf .team-medallion-frame {
-  width: clamp(35.2px, calc(9.414 * var(--su)), 74px);
-  height: clamp(35.2px, calc(9.414 * var(--su)), 74px);
+  width: clamp(40.48px, calc(10.826 * var(--su)), 85.1px);
+  height: clamp(40.48px, calc(10.826 * var(--su)), 85.1px);
   margin-bottom: 0.15rem;
 }
 
 .spiral-node--leaf h2 {
-  font-size: clamp(0.349rem, calc(1.49 * var(--su)), 0.73rem);
+  font-size: clamp(0.401rem, calc(1.714 * var(--su)), 0.84rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--leaf p {
-  font-size: clamp(0.257rem, calc(1.1 * var(--su)), 0.54rem);
-  line-height: 1.15;
+  font-size: clamp(0.296rem, calc(1.265 * var(--su)), 0.621rem);
+  line-height: 1.1;
 }
 
 .spiral-node--leaf:hover {
