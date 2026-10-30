@@ -1598,18 +1598,18 @@ html[data-theme="light"] .spiral-watermark {
 
 .spiral-node--hub .team-medallion-frame {
   width: clamp(67.53px, calc(17.351 * var(--su)), 136.88px);
-  height: clamp(67.53px, calc(17.351 * var(--su)), 136.88px);
+  height: clamp(50.65px, calc(13.013 * var(--su)), 102.66px);
   margin-bottom: 0.15rem;
   box-shadow: 0 0 24px var(--color-circuit-soft);
 }
 
 .spiral-node--hub h2 {
-  font-size: clamp(0.685rem, calc(2.814 * var(--su)), 1.385rem);
+  font-size: clamp(0.754rem, calc(3.095 * var(--su)), 1.524rem);
   margin: 0 0 0.1rem;
 }
 
 .spiral-node--hub p {
-  font-size: clamp(0.463rem, calc(1.902 * var(--su)), 0.943rem);
+  font-size: clamp(0.509rem, calc(2.092 * var(--su)), 1.037rem);
   line-height: 1.15;
 }
 
@@ -1623,23 +1623,23 @@ html[data-theme="light"] .spiral-watermark {
   width: clamp(69px, calc(18.435 * var(--su)), 144.9px);
   /* Same rationale as the hub card above: min bounds tuned to engage at the
      su matching this width's min bound (60px / 16.03 ≈ 3.74). */
-  padding: clamp(0.16rem, calc(0.69 * var(--su)), 0.35rem) clamp(2.9px, calc(0.7774 * var(--su)), 6.08px) clamp(0.185rem, calc(0.79 * var(--su)), 0.39rem);
+  padding: clamp(0.13rem, calc(0.56 * var(--su)), 0.29rem) clamp(2.9px, calc(0.7774 * var(--su)), 6.08px) clamp(0.15rem, calc(0.65 * var(--su)), 0.32rem);
   cursor: default;
 }
 
 .spiral-node--leaf .team-medallion-frame {
   width: clamp(53.53px, calc(14.318 * var(--su)), 112.55px);
-  height: clamp(53.53px, calc(14.318 * var(--su)), 112.55px);
-  margin-bottom: 0.06rem;
+  height: clamp(40.15px, calc(10.739 * var(--su)), 84.41px);
+  margin-bottom: 0.04rem;
 }
 
 .spiral-node--leaf h2 {
-  font-size: clamp(0.53rem, calc(2.267 * var(--su)), 1.111rem);
-  margin: 0 0 0.03rem;
+  font-size: clamp(0.583rem, calc(2.494 * var(--su)), 1.222rem);
+  margin: 0 0 0.02rem;
 }
 
 .spiral-node--leaf p {
-  font-size: clamp(0.391rem, calc(1.673 * var(--su)), 0.821rem);
+  font-size: clamp(0.430rem, calc(1.840 * var(--su)), 0.903rem);
   line-height: 1.0;
 }
 
